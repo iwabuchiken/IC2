@@ -3,7 +3,7 @@ package ic2.utils;
 import ic2.items.CL;
 import ic2.items.Item;
 import ic2.main.MainActv;
-import ic2.utils.CONS.DBAdmin.AdminLog;
+import ic2.utils.CONS.DB.AdminLog;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -227,8 +227,8 @@ public class Methods_ic {
 		
 		String fpath = StringUtils.join(
 				new String[]{
-						CONS.DBAdmin.dirPath_db,
-						CONS.DBAdmin.dbName
+						CONS.DB.dirPath_db,
+						CONS.DB.dbName
 //						CONS.DB.dPath_db,
 //						CONS.DB.fName_db
 				}, File.separator);
@@ -247,7 +247,7 @@ public class Methods_ic {
 						+ CONS.Admin.appName + "_"
 						+ String.valueOf(
 								Methods.get_TimeLabel(Methods.getMillSeconds_now()))
-						+ CONS.DBAdmin.dbFileExt;
+						+ CONS.DB.dbFileExt;
 //						"./" + "ifm9." + String.valueOf(Methods.getMillSeconds_now())
 //						+ ".db";
 
@@ -500,9 +500,9 @@ public class Methods_ic {
 				
 					new String[]{
 							
-						CONS.DBAdmin.AdminLog.dName_ExternalStorage,
-						CONS.DBAdmin.AdminLog.folName_Data,
-						CONS.DBAdmin.AdminLog.folName_Logs
+						CONS.DB.AdminLog.dName_ExternalStorage,
+						CONS.DB.AdminLog.folName_Data,
+						CONS.DB.AdminLog.folName_Logs
 					},
 					
 					File.separator);
@@ -553,8 +553,8 @@ public class Methods_ic {
 		 * File exists?
 		 *********************************/
 		String fName_Log =
-				CONS.DBAdmin.AdminLog.fname_Log_Trunk
-				+ CONS.DBAdmin.AdminLog.ext_Log;
+				CONS.DB.AdminLog.fname_Log_Trunk
+				+ CONS.DB.AdminLog.ext_Log;
 		
 		fPath_Log = StringUtils.join(
 				
@@ -629,7 +629,7 @@ public class Methods_ic {
 		 *********************************/
 		long fSize = f.length();
 		
-		if (fSize > CONS.DBAdmin.AdminLog.logFile_Limit) {
+		if (fSize > CONS.DB.AdminLog.logFile_Limit) {
 			
 			// Change the name of the current log file
 			String orig = f.getAbsolutePath();
@@ -641,7 +641,7 @@ public class Methods_ic {
 					+ "_"
 					+ Methods.getTimeLabel(Methods.getMillSeconds_now());
 			
-			String new_name = new_trunk + CONS.DBAdmin.AdminLog.ext_Log;
+			String new_name = new_trunk + CONS.DB.AdminLog.ext_Log;
 			
 			//REF rename http://stackoverflow.com/questions/1158777/renaming-a-file-using-java answered Jul 21 '09 at 12:09
 			boolean res = f.renameTo(new File(new_name));
@@ -784,9 +784,9 @@ public class Methods_ic {
 		
 		String dpath_Log = StringUtils.join(
 				new String[]{
-						CONS.DBAdmin.AdminLog.dName_ExternalStorage,
-						CONS.DBAdmin.AdminLog.folName_Data,
-						CONS.DBAdmin.AdminLog.folName_Logs
+						CONS.DB.AdminLog.dName_ExternalStorage,
+						CONS.DB.AdminLog.folName_Data,
+						CONS.DB.AdminLog.folName_Logs
 				},
 				File.separator);
 
@@ -818,9 +818,9 @@ public class Methods_ic {
 		
 		return StringUtils.join(
 				new String[]{
-						CONS.DBAdmin.AdminLog.dName_ExternalStorage,
-						CONS.DBAdmin.AdminLog.folName_Data,
-						CONS.DBAdmin.AdminLog.folName_Logs
+						CONS.DB.AdminLog.dName_ExternalStorage,
+						CONS.DB.AdminLog.folName_Data,
+						CONS.DB.AdminLog.folName_Logs
 				},
 				File.separator);
 		

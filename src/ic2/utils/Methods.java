@@ -514,7 +514,7 @@ public class Methods {
 	}//public static void confirm_quit(Activity actv, int keyCode)
 
 	public static List<String> getTableList(Activity actv) {
-		DBUtils dbu = new DBUtils(actv, MainActv.dbName);
+		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
 		
 		SQLiteDatabase rdb = dbu.getReadableDatabase();
 
@@ -663,7 +663,7 @@ public class Methods {
 //		/*----------------------------
 //		 * 0. Set up db
 //			----------------------------*/
-//		DBUtils dbu = new DBUtils(actv, MainActv.dbName);
+//		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
 //		
 //		SQLiteDatabase wdb = dbu.getWritableDatabase();
 //		
@@ -764,7 +764,7 @@ public class Methods {
 //		/*----------------------------
 //		* 1. Set up db
 //		----------------------------*/
-//		DBUtils dbu = new DBUtils(actv, MainActv.dbName);
+//		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
 //		
 //		SQLiteDatabase wdb = dbu.getWritableDatabase();
 //		
@@ -1399,7 +1399,7 @@ public class Methods {
 		 * 
 		 *********************************/
 		
-		DBUtils dbu = new DBUtils(actv, MainActv.dbName);
+		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
 		
 		SQLiteDatabase rdb = dbu.getReadableDatabase();
 
@@ -1480,7 +1480,7 @@ public class Methods {
 		String genre_name = et.getText().toString();
 		
 		
-		DBUtils dbu = new DBUtils(actv, MainActv.dbName);
+		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
 		
 		SQLiteDatabase wdb = dbu.getWritableDatabase();
 		
@@ -1551,7 +1551,7 @@ public class Methods {
 		/*********************************
 		 * 2. db
 		 *********************************/
-		DBUtils dbu = new DBUtils(actv, MainActv.dbName);
+		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
 		
 		SQLiteDatabase wdb = dbu.getWritableDatabase();
 		
@@ -1622,7 +1622,7 @@ public class Methods {
 		/*********************************
 		 * 3. Setup db
 		 *********************************/
-		DBUtils dbu = new DBUtils(actv, MainActv.dbName);
+		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
 		
 		SQLiteDatabase wdb = dbu.getWritableDatabase();
 		
@@ -1679,13 +1679,13 @@ public class Methods {
 		/*********************************
 		 * memo
 		 *********************************/
-		DBUtils dbu = new DBUtils(actv, MainActv.dbName);
+		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
 		
 		SQLiteDatabase rdb = dbu.getReadableDatabase();
 
 		//=> source: http://stackoverflow.com/questions/4681744/android-get-list-of-tables : "Just had to do the same. This seems to work:"
-		String q = "SELECT * FROM " + MainActv.tableName_items +
-				" WHERE " + MainActv.cols_items[2] + "='" + list_id + "'";;
+		String q = "SELECT * FROM " + CONS.DB.tableName_items +
+				" WHERE " + CONS.DB.cols_items[2] + "='" + list_id + "'";;
 		
 		Cursor c = null;
 		
@@ -1730,7 +1730,7 @@ public class Methods {
 		 * 
 		 * 5. Return
 		 *********************************/
-		DBUtils dbu = new DBUtils(actv, MainActv.dbName);
+		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
 		
 		SQLiteDatabase rdb = dbu.getReadableDatabase();
 		
@@ -1813,7 +1813,7 @@ public class Methods {
 		 * 
 		 * 5. Return
 		 *********************************/
-		DBUtils dbu = new DBUtils(actv, MainActv.dbName);
+		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
 		
 		SQLiteDatabase rdb = dbu.getReadableDatabase();
 		
@@ -1889,14 +1889,14 @@ public class Methods {
 		 * 
 		 * 5. Return
 		 *********************************/
-		DBUtils dbu = new DBUtils(actv, MainActv.dbName);
+		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
 		
 		SQLiteDatabase rdb = dbu.getReadableDatabase();
 		
 		/*********************************
 		 * 2. Query
 		 *********************************/
-		String sql = "SELECT * FROM " + MainActv.tableName_check_lists + 
+		String sql = "SELECT * FROM " + CONS.DB.tname_Check_Lists + 
 					" WHERE " + android.provider.BaseColumns._ID + "='" + list_id + "'";
 		
 		Cursor c = null;
@@ -2014,16 +2014,16 @@ public class Methods {
 		 * 
 		 * 5. Return
 		 *********************************/
-		DBUtils dbu = new DBUtils(actv, MainActv.dbName);
+		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
 		
 		SQLiteDatabase rdb = dbu.getReadableDatabase();
 		
 		/*********************************
 		 * 2. Query
 		 *********************************/
-		String sql = "SELECT * FROM " + MainActv.tableName_items + 
-//					" WHERE " + MainActv.cols_items[5] + "='" + list_id + "'";
-				" WHERE " + MainActv.cols_items[2] + "='" + list_id + "'";
+		String sql = "SELECT * FROM " + CONS.DB.tableName_items + 
+//					" WHERE " + CONS.DB.cols_items[5] + "='" + list_id + "'";
+				" WHERE " + CONS.DB.cols_items[2] + "='" + list_id + "'";
 
 		Cursor c = null;
 		
@@ -2758,7 +2758,7 @@ public class Methods {
 		}//for (int i = 0; i < CheckActv.iList.size(); i++)
 		
 		boolean res = DBUtils.updateData_items(
-							actv, MainActv.dbName, MainActv.tableName_items, data);
+							actv, CONS.DB.dbName, CONS.DB.tableName_items, data);
 		
 		
 	}//public static void checkactv_change_order()
@@ -2772,10 +2772,19 @@ public class Methods {
 			----------------------------*/
 		String time_label = Methods.get_TimeLabel(Methods.getMillSeconds_now());
 		
-		String db_src = StringUtils.join(new String[]{MainActv.dirPath_db, MainActv.dbName}, File.separator);
+		String db_src = StringUtils.join(
+							new String[]{
+								CONS.DB.dirPath_db, 
+								CONS.DB.dbName}, 
+						File.separator);
 		
-		String db_dst = StringUtils.join(new String[]{MainActv.dirPath_db_backup, MainActv.fileName_db_backup_trunk}, File.separator);
-		db_dst = db_dst + "_" + time_label + MainActv.fileName_db_backup_ext;
+		String db_dst = StringUtils.join(
+							new String[]{
+								CONS.DB.dirPath_db_backup, 
+								CONS.DB.fileName_db_backup_trunk}, 
+						File.separator);
+		
+		db_dst = db_dst + "_" + time_label + CONS.DB.fileName_db_backup_ext;
 		
 		// Log
 		Log.d("Methods.java" + "["
@@ -2791,7 +2800,7 @@ public class Methods {
 		/*----------------------------
 		 * 2-2. Folder exists?
 			----------------------------*/
-		File db_backup = new File(MainActv.dirPath_db_backup);
+		File db_backup = new File(CONS.DB.dirPath_db_backup);
 		
 		if (!db_backup.exists()) {
 			
@@ -2996,8 +3005,8 @@ public class Methods {
 		 * 3. Update data
 		 *********************************/
 		boolean res = DBUtils.updateData_items_text(
-									actv, MainActv.dbName, 
-									MainActv.tableName_items, 
+									actv, CONS.DB.dbName, 
+									CONS.DB.tableName_items, 
 									item_id, new_text);
 		
 		if (res == true) {
@@ -3252,7 +3261,7 @@ public class Methods {
 		 * 4. Return value
 		 * 
 		 *********************************/
-		DBUtils dbu = new DBUtils(actv, MainActv.dbName);
+		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
 		
 		SQLiteDatabase rdb = dbu.getReadableDatabase();
 
@@ -3330,7 +3339,7 @@ public class Methods {
 				+ "]", "Starts => clear_items_all_to_zero()");
 		
 		boolean res = DBUtils.update_items_all_to_zero(
-					actv, MainActv.dbName, MainActv.tableName_items, check_list_id);
+					actv, CONS.DB.dbName, CONS.DB.tableName_items, check_list_id);
 		
 		if (res == true) {
 			
@@ -3365,14 +3374,14 @@ public class Methods {
 		 * 
 		 * 6. Set adapter to view
 		 ********************************/
-		DBUtils dbu = new DBUtils(actv, MainActv.dbName);
+		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
 		
 		SQLiteDatabase rdb = dbu.getReadableDatabase();
 		
 		/********************************
 		 * 2. Query
 		 ********************************/
-		String sql = "SELECT * FROM " + MainActv.tableName_check_lists;
+		String sql = "SELECT * FROM " + CONS.DB.tname_Check_Lists;
 		
 		Cursor c = null;
 		
@@ -3588,7 +3597,7 @@ public class Methods {
 		/*********************************
 		 * Setup: Db
 		 *********************************/
-		DBUtils dbu = new DBUtils(actv, MainActv.dbName);
+		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
 		
 		SQLiteDatabase rdb = dbu.getReadableDatabase();
 		
@@ -3640,7 +3649,7 @@ public class Methods {
 	public static void restore_db(Activity actv) {
 		// TODO Auto-generated method stub
 
-		String src_dir = CONS.DBAdmin.dirPath_db_backup;
+		String src_dir = CONS.DB.dirPath_db_backup;
 		
 		File f_dir = new File(src_dir);
 		
@@ -3685,8 +3694,8 @@ public class Methods {
 		
 		String dst = StringUtils.join(
 						new String[]{
-								CONS.DBAdmin.dirPath_db,
-								CONS.DBAdmin.dbName},
+								CONS.DB.dirPath_db,
+								CONS.DB.dbName},
 						File.separator);
 
 		// Log
@@ -3699,7 +3708,7 @@ public class Methods {
 				+ "|"
 				+ "dst=" + dst);
 
-		boolean res = Methods.restore_db(actv, CONS.DBAdmin.dbName, src, dst);
+		boolean res = Methods.restore_db(actv, CONS.DB.dbName, src, dst);
 
 	}//public static void restore_db()
 
@@ -3716,17 +3725,17 @@ public class Methods {
 		
 		String db_src = StringUtils.join(
 					new String[]{
-							CONS.DBAdmin.dirPath_db,
+							CONS.DB.dirPath_db,
 							dbName},
 					File.separator);
 		
 		String db_dst = StringUtils.join(
 					new String[]{
 							dirPathBk,
-							CONS.DBAdmin.fileName_db_backup_trunk},
+							CONS.DB.fileName_db_backup_trunk},
 					File.separator);
 		
-		db_dst = db_dst + "_" + timeLabel + CONS.DBAdmin.fileName_db_backup_ext;
+		db_dst = db_dst + "_" + timeLabel + CONS.DB.fileName_db_backup_ext;
 		
 		// Log
 		Log.d("Methods.java" + "["
@@ -3987,7 +3996,7 @@ public class Methods {
 		/*********************************
 		 * Setup: Db
 		 *********************************/
-		DBUtils dbu = new DBUtils(actv, MainActv.dbName);
+		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
 		
 		SQLiteDatabase wdb = dbu.getWritableDatabase();
 		
@@ -3997,7 +4006,7 @@ public class Methods {
 		boolean result = DBUtils.isInTable(
 				actv,
 				wdb,
-				CONS.DBAdmin.tableNames.items.toString(),
+				CONS.DB.tableNames.items.toString(),
 				android.provider.BaseColumns._ID,
 				item.getDb_id());
 		
@@ -4034,7 +4043,7 @@ public class Methods {
 		 *********************************/
 		String sql = 
 				"DELETE FROM "
-				+ CONS.DBAdmin.tableNames.items.toString()
+				+ CONS.DB.tableNames.items.toString()
 				+ " WHERE "
 				+ android.provider.BaseColumns._ID + " = '"
 				+ String.valueOf(item.getDb_id()) + "'";

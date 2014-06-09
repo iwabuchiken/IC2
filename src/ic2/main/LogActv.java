@@ -121,7 +121,7 @@ public class LogActv  extends ListActivity {
 		// File exists?
 		File f = new File(
 					Methods_ic.get_Dirpath_Log(),
-					CONS.DBAdmin.AdminLog.fname_Log_Full);
+					CONS.DB.AdminLog.fname_Log_Full);
 		
 		if (!f.exists()) {
 			

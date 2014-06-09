@@ -11,6 +11,7 @@ import ic2.listeners.CustomOnItemLongClickListener;
 import ic2.listeners.button.BO_CL;
 import ic2.listeners.button.BO_TL;
 import ic2.main.R;
+import ic2.utils.CONS;
 import ic2.utils.DBUtils;
 import ic2.utils.Methods;
 import android.app.ListActivity;
@@ -407,8 +408,8 @@ public class CheckActv extends ListActivity {
 		
 		boolean result = Methods.update_item_all_status(
 									this, 
-									MainActv.dbName,
-									MainActv.tableName_items);
+									CONS.DB.dbName,
+									CONS.DB.tableName_items);
 		
 		if (result == true) {
 			
@@ -430,7 +431,7 @@ public class CheckActv extends ListActivity {
 		 * memo
 		 *********************************/
 		Methods.add_column_to_table(this, 
-						MainActv.dbName, MainActv.tableName_items, "status", "INTEGER");
+						CONS.DB.dbName, CONS.DB.tableName_items, "status", "INTEGER");
 		
 //		DBUtils dbu = new DBUtils(actv, dbName);
 //		

@@ -366,7 +366,7 @@ public class DOI_CL implements OnItemClickListener {
 		 * 
 		 * 5. Dismiss dlg
 		 *********************************/
-		DBUtils dbu = new DBUtils(actv, MainActv.dbName);
+		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
 		
 		SQLiteDatabase rdb = dbu.getReadableDatabase();
 
@@ -377,18 +377,18 @@ public class DOI_CL implements OnItemClickListener {
 		
 		if (item.equals(actv.getString(R.string.generic_label_all))) {
 			
-			q = "SELECT * FROM " + MainActv.tableName_check_lists;
+			q = "SELECT * FROM " + CONS.DB.tname_Check_Lists;
 			
 		} else {//if (item.equals(actv.getString(R.string.generic_label_all))
 			
-			q = "SELECT * FROM " + MainActv.tableName_check_lists
-					+ " WHERE " + MainActv.cols_check_lists[1] + "="
+			q = "SELECT * FROM " + CONS.DB.tname_Check_Lists
+					+ " WHERE " + CONS.DB.cols_check_lists[1] + "="
 					+ Methods.get_genre_id_from_genre_name(actv, item);
 			
 		}//if (item.equals(actv.getString(R.string.generic_label_all))
 		
 		
-//		String q = "SELECT * FROM " + MainActv.tableName_check_lists+
+//		String q = "SELECT * FROM " + CONS.DB.tname_Check_Lists+
 //				" WHERE " + MainActv.cols_check_lists[1] + "=" + Methods.get_genre_id_from_genre_name(actv, item);
 
 		Cursor c = null;
@@ -539,7 +539,7 @@ public class DOI_CL implements OnItemClickListener {
 	private void dlg_db_admin_lv_backupDb() {
 		// TODO Auto-generated method stub
 		int res = Methods.backupDb(
-				actv, CONS.DBAdmin.dbName, CONS.DBAdmin.dirPath_db_backup);
+				actv, CONS.DB.dbName, CONS.DB.dirPath_db_backup);
 
 		if (res == CONS.RetVal.DB_DOESNT_EXIST) {
 			

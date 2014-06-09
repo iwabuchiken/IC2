@@ -539,11 +539,11 @@ public class DBUtils extends SQLiteOpenHelper{
 			val.put("created_at", created_at);		// 
 			val.put("modified_at", modified_at);		//
 			
-			val.put(MainActv.cols_check_lists[0], list_name);		// 
-			val.put(MainActv.cols_check_lists[1], genre_id);		//
+			val.put(CONS.DB.cols_check_lists[0], list_name);		// 
+			val.put(CONS.DB.cols_check_lists[1], genre_id);		//
 			
 			// Insert data
-			wdb.insert(MainActv.tableName_check_lists, null, val);
+			wdb.insert(CONS.DB.tname_Check_Lists, null, val);
 			
 			// Set as successful
 			wdb.setTransactionSuccessful();
@@ -593,12 +593,12 @@ public class DBUtils extends SQLiteOpenHelper{
 			val.put("created_at", created_at);		// 
 			val.put("modified_at", modified_at);		//
 			
-			val.put(MainActv.cols_items[0], (String) data[0]);	// 
-			val.put(MainActv.cols_items[1], (Integer) data[1]);	//
-			val.put(MainActv.cols_items[2], (Long) data[2]);	//
+			val.put(CONS.DB.cols_items[0], (String) data[0]);	// 
+			val.put(CONS.DB.cols_items[1], (Integer) data[1]);	//
+			val.put(CONS.DB.cols_items[2], (Long) data[2]);	//
 			
 			// Insert data
-			wdb.insert(MainActv.tableName_items, null, val);
+			wdb.insert(CONS.DB.tableName_items, null, val);
 			
 			// Set as successful
 			wdb.setTransactionSuccessful();
@@ -882,7 +882,7 @@ public class DBUtils extends SQLiteOpenHelper{
 			
 			sb.append("UPDATE " + tableName + " SET ");
 			
-			sb.append(MainActv.cols_items[1] + "='" + data.get(k) + "'");
+			sb.append(CONS.DB.cols_items[1] + "='" + data.get(k) + "'");
 			
 			sb.append(" WHERE " + android.provider.BaseColumns._ID + "='" + k + "'");
 			
@@ -926,7 +926,7 @@ public class DBUtils extends SQLiteOpenHelper{
 		
 //		for (int i = 0; i < data.size(); i++) {
 //			
-//			sb.append(MainActv.cols_items[1] + "='" + )
+//			sb.append(CONS.DB.cols_items[1] + "='" + )
 //			
 ////			sb.append(android.provider.BaseColumns._ID + "='")
 //			
@@ -987,7 +987,7 @@ public class DBUtils extends SQLiteOpenHelper{
 		
 		sb.append("UPDATE " + tableName + " SET ");
 		
-		sb.append(MainActv.cols_items[0] + "='" + new_text + "'");
+		sb.append(CONS.DB.cols_items[0] + "='" + new_text + "'");
 		
 		sb.append(" WHERE " + android.provider.BaseColumns._ID + "='" + item_id + "'");
 		
@@ -1052,7 +1052,7 @@ public class DBUtils extends SQLiteOpenHelper{
 		
 		sb.append("UPDATE " + tableName + " SET ");
 		
-		sb.append(MainActv.cols_items[3] + "='" + status_num + "'");
+		sb.append(CONS.DB.cols_items[3] + "='" + status_num + "'");
 		
 		sb.append(" WHERE " + android.provider.BaseColumns._ID + "='" + db_id + "'");
 		
@@ -1098,9 +1098,9 @@ public class DBUtils extends SQLiteOpenHelper{
 		
 		sb.append("UPDATE " + tableName + " SET ");
 		
-		sb.append(MainActv.cols_items[3] + "='" + 0 + "'");
+		sb.append(CONS.DB.cols_items[3] + "='" + 0 + "'");
 		
-		sb.append(" WHERE " + MainActv.cols_items[2] + "='" + check_list_id + "'");
+		sb.append(" WHERE " + CONS.DB.cols_items[2] + "='" + check_list_id + "'");
 		
 		String sql = sb.toString();
 		
@@ -1146,7 +1146,7 @@ public class DBUtils extends SQLiteOpenHelper{
 		/*********************************
 		 * Setup: Db
 		 *********************************/
-		DBUtils dbu = new DBUtils(actv, MainActv.dbName);
+		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
 		
 		SQLiteDatabase wdb = dbu.getWritableDatabase();
 		
@@ -1225,8 +1225,8 @@ public class DBUtils extends SQLiteOpenHelper{
 		 * Delete: Items
 		 *********************************/
 		String sql = 
-				"DELETE FROM " + MainActv.tableName_items + 
-				" WHERE " + MainActv.cols_items[2] + " = '"
+				"DELETE FROM " + CONS.DB.tableName_items + 
+				" WHERE " + CONS.DB.cols_items[2] + " = '"
 				+ String.valueOf(check_list_id) + "'";
 		
 		// Log
@@ -1278,7 +1278,7 @@ public class DBUtils extends SQLiteOpenHelper{
 		boolean result = DBUtils.isInTable(
 				actv,
 				wdb,
-				MainActv.tableName_check_lists,
+				CONS.DB.tname_Check_Lists,
 				android.provider.BaseColumns._ID,
 				check_list_id);
 		
@@ -1312,7 +1312,7 @@ public class DBUtils extends SQLiteOpenHelper{
 		* Delete: Check list
 		*********************************/
 		String sql = 
-			"DELETE FROM " + MainActv.tableName_check_lists + 
+			"DELETE FROM " + CONS.DB.tname_Check_Lists + 
 			" WHERE " + android.provider.BaseColumns._ID + " = '"
 			+ String.valueOf(check_list_id) + "'";
 		

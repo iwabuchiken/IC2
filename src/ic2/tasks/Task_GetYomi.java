@@ -177,7 +177,7 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 	//REF {@literal} http://stackoverflow.com/questions/647195/how-do-you-escape-curly-braces-in-javadoc-inline-tags-such-as-the-code-tag answered Oct 29 '13 at 12:18
 	private List<Word> _doInBackground__GetWordList() {
 		
-		DBUtils dbu = new DBUtils(actv, CONS.DBAdmin.dbName);
+		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
 		
 		SQLiteDatabase rdb = dbu.getReadableDatabase();
 		
@@ -187,9 +187,9 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 		// Log
 		Log.d("Task_GetYomi.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ "]", "tableName=" + CONS.DBAdmin.tname_CheckLists);
+				+ "]", "tableName=" + CONS.DB.tname_Check_Lists);
 		
-		boolean res = dbu.tableExists(rdb, CONS.DBAdmin.tname_CheckLists);
+		boolean res = dbu.tableExists(rdb, CONS.DB.tname_Check_Lists);
 		
 		if (res == false) {
 			
@@ -198,7 +198,7 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]",
 					"Table doesn't exist: "
-							+ CONS.DBAdmin.tname_CheckLists);
+							+ CONS.DB.tname_Check_Lists);
 			
 			rdb.close();
 			
@@ -213,12 +213,12 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 			----------------------------*/
 		//REF http://stackoverflow.com/questions/4757263/how-to-pass-two-or-more-selection-argument-in-query-method answered Jan 21 '11 at 9:55
 		//REF is null // http://stackoverflow.com/questions/3620828/sqlite-select-where-empty answered Sep 1 '10 at 18:06
-		String tname	= CONS.DBAdmin.tname_CheckLists;
-		String fields[]	= CONS.DBAdmin.cols_check_lists_FULL;
+		String tname	= CONS.DB.tname_Check_Lists;
+		String fields[]	= CONS.DB.cols_check_lists_FULL;
 		String where	= 
-					CONS.DBAdmin.cols_check_lists_FULL[
+					CONS.DB.cols_check_lists_FULL[
 					     Methods.getArrayIndex(
-					    		 CONS.DBAdmin.cols_check_lists_FULL,
+					    		 CONS.DB.cols_check_lists_FULL,
 					    		 "yomi")]
 					+ " is null";
 //		+ " = "
@@ -232,7 +232,7 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 		};
 		
 		//
-		String sql = "SELECT * FROM " + CONS.DBAdmin.tname_CheckLists;
+		String sql = "SELECT * FROM " + CONS.DB.tname_Check_Lists;
 		
 		Cursor c = null;
 		
@@ -286,7 +286,7 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 		
 		c.moveToFirst();
 		
-		int numOfSamples = CONS.DBAdmin.GetYomi_ChunkNum;
+		int numOfSamples = CONS.DB.GetYomi_ChunkNum;
 //		int numOfSamples = 5;
 //		int numOfSamples = 10;
 		
@@ -310,12 +310,12 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 			
 			String name = c.getString(
 								Methods.getArrayIndex(
-									CONS.DBAdmin.cols_check_lists_FULL,
+									CONS.DB.cols_check_lists_FULL,
 									"name"));
 			
 			String yomi = c.getString(
 								Methods.getArrayIndex(
-									CONS.DBAdmin.cols_check_lists_FULL,
+									CONS.DB.cols_check_lists_FULL,
 									"yomi"));
 		
 			long itemId = c.getLong(0);
@@ -538,7 +538,7 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 		/***************************************
 		 * Setup
 		 ***************************************/
-		DBUtils dbu = new DBUtils(actv, CONS.DBAdmin.dbName);
+		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
 		
 		SQLiteDatabase wdb = dbu.getWritableDatabase();
 		
@@ -559,9 +559,9 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 //			long dbId = wordList.get(i).getId();
 			long dbId = word.getId();
 			
-			String colYomi = CONS.DBAdmin.cols_check_lists[
+			String colYomi = CONS.DB.cols_check_lists[
 	                    Methods.getArrayIndex(
-	                    		CONS.DBAdmin.cols_check_lists,
+	                    		CONS.DB.cols_check_lists,
 	                    		"yomi")
 	        ];
 			
@@ -573,7 +573,7 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 			int res = dbu.updateData_CheckList(
 							actv,
 							wdb,
-							CONS.DBAdmin.tname_CheckLists,
+							CONS.DB.tname_Check_Lists,
 							dbId,
 							colYomi, yomi);
 

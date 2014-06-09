@@ -2,7 +2,7 @@
 <resources>
 
     <string name="hello">Hello World, IC!</string>
-    <string name="app_name">IC</string>
+    <string name="app_name">IC2</string>
 
     <!-- Generic items -->
 	    <string name="generic_bt_ok">OK</string>

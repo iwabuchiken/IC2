@@ -50,26 +50,26 @@ public class MainActv extends ListActivity {
 	/********************************
 	 * DB
 	 ********************************/
-	public static String dbName = "ic.db";
+//	public static String dbName = "ic.db";
 	
 	// check_lists
-	public static String tableName_check_lists = "check_lists";
-
-	public static String[] cols_check_lists =			{"name",	"genre_id"};
-	
-	public static String[] col_types_check_lists = 	{"TEXT", 	"INTEGER"};
+//	public static String tableName_check_lists = "check_lists";
+//
+//	public static String[] cols_check_lists =			{"name",	"genre_id"};
+//	
+//	public static String[] col_types_check_lists = 	{"TEXT", 	"INTEGER"};
 
 	// items
-	public static String tableName_items = "items";
-	
-//	public static String[] cols_items =			{"text", "serial_num",	"list_id"};
-	
-	public static String[] cols_items =
-					// Array  0		1				2		3
-					// Total  3		4				5		6
-						{"text", "serial_num",	"list_id", "status"};
-	
-	public static String[] col_types_items = {"TEXT", 	 "INTEGER",		"INTEGER"};
+//	public static String tableName_items = "items";
+//	
+////	public static String[] cols_items =			{"text", "serial_num",	"list_id"};
+//	
+//	public static String[] cols_items =
+//					// Array  0		1				2		3
+//					// Total  3		4				5		6
+//						{"text", "serial_num",	"list_id", "status"};
+//	
+//	public static String[] col_types_items = {"TEXT", 	 "INTEGER",		"INTEGER"};
 
 	// genres
 	public static String tableName_genres = "genres";
@@ -78,16 +78,16 @@ public class MainActv extends ListActivity {
 	
 	public static String[] col_types_genres = 	{"TEXT"};
 
-	// Backup
-	public static String dirPath_db = "/data/data/ic.main/databases";
-	
-	public static String dirName_ExternalStorage = "/mnt/sdcard-ext";
-	
-	public static String dirPath_db_backup = dirName_ExternalStorage + "/IC_backup";
-	
-	public static String fileName_db_backup_trunk = "ic_backup";
-	
-	public static String fileName_db_backup_ext = ".bk";
+//	// Backup
+//	public static String dirPath_db = "/data/data/ic.main/databases";
+//	
+//	public static String dirName_ExternalStorage = "/mnt/sdcard-ext";
+//	
+//	public static String dirPath_db_backup = dirName_ExternalStorage + "/IC_backup";
+//	
+//	public static String fileName_db_backup_trunk = "ic_backup";
+//	
+//	public static String fileName_db_backup_ext = ".bk";
 	
 	/*********************************
 	 * Intents
@@ -245,10 +245,10 @@ public class MainActv extends ListActivity {
 	private void _debug_D_25_v_2_0() {
 		
 		boolean res = Methods.add_column_to_table(this,
-							CONS.DBAdmin.dbName,
-							CONS.DBAdmin.tname_CheckLists,
-							CONS.DBAdmin.cols_check_lists[2],
-							CONS.DBAdmin.SQLiteDataTypes.TEXT.toString());
+							CONS.DB.dbName,
+							CONS.DB.tname_Check_Lists,
+							CONS.DB.cols_check_lists[2],
+							CONS.DB.SQLiteDataTypes.TEXT.toString());
 		
 		// Log
 		Log.d("[" + "MainActv.java : "
@@ -262,7 +262,7 @@ public class MainActv extends ListActivity {
 
 	private void debug_D_24_v_1_0() {
 		// TODO Auto-generated method stub
-		File f = new File(CONS.DBAdmin.dirPath_db);
+		File f = new File(CONS.DB.dirPath_db);
 		
 		String[] fnames = f.list();
 		
@@ -274,7 +274,7 @@ public class MainActv extends ListActivity {
 					+ +Thread.currentThread().getStackTrace()[2]
 							.getLineNumber() + " : "
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-					+ "]", "No db files (" + CONS.DBAdmin.dirPath_db + ")");
+					+ "]", "No db files (" + CONS.DB.dirPath_db + ")");
 			
 		} else {//if (fnames.length < 1)
 			
@@ -299,9 +299,9 @@ public class MainActv extends ListActivity {
 	private void _debug_D_20_reinstall_app() {
 		
     	String src = "/mnt/sdcard-ext/IC_backup/ic_backup_20130730_092046.bk";
-    	String dst = dirPath_db + "/" + dbName;
+    	String dst = CONS.DB.dirPath_db + "/" + CONS.DB.dbName;
     	
-    	Methods.restore_db(this, dbName, src, dst);
+    	Methods.restore_db(this, CONS.DB.dbName, src, dst);
     	
     	// Log
 		Log.d("[" + "MainActv.java : "
@@ -312,7 +312,7 @@ public class MainActv extends ListActivity {
 
 	private void drop_table(String tableName) {
     	// Setup db
-		DBUtils dbu = new DBUtils(this, MainActv.dbName);
+		DBUtils dbu = new DBUtils(this, CONS.DB.dbName);
 		
 		SQLiteDatabase wdb = dbu.getWritableDatabase();
 		
@@ -353,7 +353,7 @@ public class MainActv extends ListActivity {
 		 * 
 		 * 6. Set adapter to view
 		 ********************************/
-		DBUtils dbu = new DBUtils(this, MainActv.dbName);
+		DBUtils dbu = new DBUtils(this, CONS.DB.dbName);
 		
 		SQLiteDatabase rdb = dbu.getReadableDatabase();
 
@@ -382,12 +382,12 @@ public class MainActv extends ListActivity {
 		
 		if (savedPosition == -1) {
 			
-			sql = "SELECT * FROM " + MainActv.tableName_check_lists;
+			sql = "SELECT * FROM " + CONS.DB.tname_Check_Lists;
 			
 		} else {//if (savedPosition == -1)
 			
-			sql = "SELECT * FROM " + MainActv.tableName_check_lists
-					+ " WHERE " + MainActv.cols_check_lists[1] + "="
+					sql = "SELECT * FROM " + CONS.DB.tname_Check_Lists
+					+ " WHERE " + CONS.DB.cols_check_lists[1] + "="
 					+ savedPosition;
 			
 		}//if (savedPosition == -1)
@@ -581,7 +581,7 @@ public class MainActv extends ListActivity {
 		 * 
 		 * 5. Close db
 		 ********************************/
-		DBUtils dbu = new DBUtils(this, MainActv.dbName);
+		DBUtils dbu = new DBUtils(this, CONS.DB.dbName);
 		
 		SQLiteDatabase wdb = dbu.getWritableDatabase();
 
@@ -590,23 +590,23 @@ public class MainActv extends ListActivity {
 		 *********************************/
 		boolean res = dbu.createTable(
 											wdb, 
-											MainActv.tableName_check_lists, 
-											MainActv.cols_check_lists, 
-											MainActv.col_types_check_lists);
+											CONS.DB.tname_Check_Lists, 
+											CONS.DB.cols_check_lists, 
+											CONS.DB.col_types_Check_Lists);
 		
 		// Log
 		Log.d("MainActv.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ "]", "res(" + MainActv.tableName_check_lists + ": " + res);
+				+ "]", "res(" + CONS.DB.tname_Check_Lists + ": " + res);
 		
 		/*********************************
 		 * 3. items
 		 *********************************/
 		res = dbu.createTable(
 				wdb, 
-				MainActv.tableName_items, 
-				MainActv.cols_items, 
-				MainActv.col_types_items);
+				CONS.DB.tableName_items, 
+				CONS.DB.cols_items, 
+				CONS.DB.col_types_items);
 		
 		/*********************************
 		 * 4. genres
