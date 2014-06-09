@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+	<item 
+	    android:id="@+id/main_opt_menu_register" 
+	    android:title="@string/generic_tv_register" 
+	    android:icon="@android:drawable/ic_input_add">
+	    
+	</item>
+
+	<item 
+	    android:id="@+id/main_opt_menu_db" 
+	    android:title="@string/main_menu_db" 
+	    android:icon="@android:drawable/ic_menu_save">
+	    
+	</item>
+
+	<item 
+	    android:id="@+id/main_opt_menu_filter_by_genre" 
+	    android:title="@string/main_menu_filter_by_genre" 
+	    android:icon="@android:drawable/ic_menu_edit">
+	    
+	</item>
+		
+	<item 
+	    android:id="@+id/main_opt_menu_sort_list" 
+	    android:title="@string/main_menu_sort_list" 
+	    android:icon="@android:drawable/ic_menu_sort_alphabetically">
+	    
+	</item>
+		
+	<item 
+	    android:id="@+id/main_opt_menu_see_log" 
+	    android:title="@string/main_menu_see_log" 
+	    android:icon="@android:drawable/ic_dialog_info">
+	    
+	</item>
+		
+	<item 
+	    android:id="@+id/main_opt_menu_settings" 
+	    android:title="@string/main_menu_settings" 
+	    android:icon="@android:drawable/ic_menu_preferences">
+	    
+	</item>
+		
+</menu>
