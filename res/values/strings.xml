@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, IC!</string>
+    <string name="app_name">IC</string>
+
+    <!-- Generic items -->
+	    <string name="generic_bt_ok">OK</string>
+	    <string name="generic_bt_cancel">キャンセル</string>
+	    
+	    <string name="generic_tv_confirm">確認</string>
+	    <string name="generic_tv_menu">メニュー</string>
+	    <string name="generic_tv_register">登録</string>
+	    <string name="generic_tv_edit">編集</string>
+	    <string name="generic_tv_delete">削除</string>
+	    <string name="generic_tv_back">戻る</string>
+	    
+	    <string name="generic_label_all">ALL</string>
+
+    <!-- main.xml -->
+    	<string name="main_title">チェック・リスト</string>
+
+    <!-- main_menu.xml -->
+    	<string name="main_menu_register_list">リスト</string>
+    	<string name="main_menu_register_genre">ジャンル</string>
+    	<string name="main_menu_db">DB</string>
+    	<string name="main_menu_filter_by_genre">Filter</string>
+    	<string name="main_menu_sort_list">Sort list</string>
+    	<string name="main_menu_see_log">See log</string>
+    	<string name="main_menu_settings">Settings</string>
+    
+    <!-- dlg_register_genre.xml -->
+    	<string name="dlg_register_genre_title">ジャンル登録</string>
+    	<string name="dlg_register_genre_prompt_genre ">ジャンル名</string>
+
+    <!-- dlg_register_list.xml -->
+    	<string name="dlg_register_list_title">リスト登録</string>
+    	<string name="dlg_register_list_prompt_list ">リスト名</string>
+    	<string name="dlg_register_list_tv_genre ">ジャンル</string>
+    
+    <!-- actv_check.xml -->
+    	<string name="actv_check_bt_top">T</string>
+    	<string name="actv_check_bt_add">Add</string>
+    	<string name="actv_check_bt_bottom">B</string>
+    	
+    <!-- dlg_register_item.xml -->
+    	<string name="dlg_rgstr_item_title">テキスト登録</string>
+    	<string name="dlg_rgstr_item_text">テキスト</string>
+    	<string name="dlg_rgstr_item_order">順番</string>
+    
+    <!-- menu_actv_check.xml -->
+    	<string name="opt_menu_actv_check_clear_status">Clear status</string>
+    	<string name="opt_menu_actv_check_sort_list_by_status">Sort list</string>
+    	<string name="opt_menu_actv_check_save_status_data">Save status</string>
+    	<string name="opt_menu_actv_check_reset_serial_num">Reset serial num</string>
+    	
+    <!-- dlg_checkactv_long_click.xml -->
+    	<string name="dlg_checkactv_long_click_title">アイテム</string>
+    	<string name="dlg_checkactv_long_click_lv_edit">Change text</string>
+    	<string name="dlg_checkactv_long_click_lv_change_serial_num">順番変更</string>
+    	<string name="dlg_checkactv_long_click_lv_delete_item">Delete this item</string>
+    
+    
+    <!-- dlg_checkactv_change_serial_num.xml -->
+    	<string name="dlg_checkactv_change_serial_num_title">順番変更</string>
+    	<string name="dlg_checkactv_change_serial_num_current">現在</string>
+    	<string name="dlg_checkactv_change_serial_num_unit">番</string>
+    	<string name="dlg_checkactv_change_serial_num_new">新</string>
+    	
+    <!-- dlg_checkactv_edit_item_text.xml -->
+    	<string name="dlg_checkactv_edit_item_text_title">本文変更</string>
+    
+    <!-- dlg_filter_by_genre.xml -->
+    	<string name="dlg_filter_by_genre_title">フィルター（ジャンル）</string>
+
+    <!-- dlg_main_actv_long_click.xml -->
+    	<string name="dlg_main_actv_long_click_title">チェック・リスト</string>
+    	<string name="dlg_main_actv_long_click_lv_clear_item_status">すべてのアイテムのステータスをクリアー</string>
+    	<string name="dlg_main_actv_long_click_lv_delete_list">Delete the list</string>
+    	    
+    	
+    <!-- dlg_db_admin.xml -->
+	    <string name="dlg_db_admin_title">DB Admin</string>
+	    <string name="dlg_db_admin_item_backup_db">Backup DB</string>
+	    <string name="dlg_db_admin_item_refresh_db">DBリフレッシュ</string>
+	    <string name="dlg_db_admin_item_refatcor_db">Refactor DB</string>
+	    <string name="dlg_db_admin_item_restore_db">Restore db</string>
+	    <string name="dlg_db_admin_item_get_yomi">Get Yomi data</string>
+	    <string name="dlg_db_admin_item_post_data">Post data</string>
+	    <string name="dlg_db_admin_item_upload_db">Upload db</string>
+    
+	<!-- TaskFTP -->
+		<string name="task_ftp_upload_db">TaskFTP_UploadDb</string>
+		
+	<!-- dlg_sort_list.xml -->
+		<string name="dlg_sort_list_title">Sort by</string>
+		<string name="dlg_sort_list_item_name">Item name</string>
+		<string name="dlg_sort_list_created_at">Created at</string>
+		
+		<string name="dlg_sort_list_genre_item_name">Genre/Item name</string>
+		<string name="dlg_sort_list_store_item_name">Store/Item name</string>
+		<string name="dlg_sort_list_store_genre_item_name">Store/Genre/Item name</string>
+		
+	<!-- preferences.xml -->
+		<!-- ListPreference -->
+		<string name="pref_key_sort_type">pref_IC_sort_type</string>
+		<string name="pref_sort_type_title">Sort type</string>
+		<string name="pref_sort_type_summary">
+		    			Set the sort type for the check list</string>
+		
+</resources>

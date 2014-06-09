@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+	<item 
+	    android:id="@+id/opt_menu_actv_check_clear_status" 
+	    android:title="@string/opt_menu_actv_check_clear_status" 
+	    android:icon="@android:drawable/ic_delete">
+	    
+	</item>
+
+	<item 
+	    android:id="@+id/opt_menu_actv_check_sort_list_by_status" 
+	    android:title="@string/opt_menu_actv_check_sort_list_by_status" 
+	    android:icon="@android:drawable/ic_menu_agenda">
+	    
+	</item>
+
+	<item 
+	    android:id="@+id/opt_menu_actv_check_save_status_data" 
+	    android:title="@string/opt_menu_actv_check_save_status_data" 
+	    android:icon="@android:drawable/ic_menu_save">
+	    
+	</item>
+
+	<item 
+	    android:id="@+id/opt_menu_actv_check_reset_serial_num" 
+	    android:title="@string/opt_menu_actv_check_reset_serial_num" 
+	    android:icon="@android:drawable/ic_menu_call">
+	    
+	</item>
+
+</menu>
