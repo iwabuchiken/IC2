@@ -309,6 +309,11 @@ public class DOI_CL implements OnItemClickListener {
 			
 			dlg_db_admin_item_upload_db();
 			
+		} else if (choice.equals(actv.getString(
+				R.string.dlg_db_admin_item_copy_external_db))) {
+			
+			Methods.copy_External_DB(actv);
+			
 		}//if
 
 		

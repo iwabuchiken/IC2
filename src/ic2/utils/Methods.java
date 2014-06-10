@@ -4109,6 +4109,97 @@ public class Methods {
 		dlg1.dismiss();
 		
 	}//dlg_checkactv_long_click_lv_delte_item
+
+	public static void
+	copy_External_DB(Activity actv) {
+		// TODO Auto-generated method stub
+		
+//		String fPath_DB_Src = "/data/data/ic.main/databases"
+//							+ "/"
+//							+ "ic.db";
+
+		////////////////////////////////
+
+		// File: src
+
+		////////////////////////////////
+		String src_dir = "/mnt/sdcard-ext" + "/IC_backup";
+		
+		File f_dir = new File(src_dir);
+		
+		File[] src_dir_files = f_dir.listFiles();
+		
+		// If no files in the src dir, quit the method
+		if (src_dir_files.length < 1) {
+			
+			// Log
+			Log.d("DialogOnItemClickListener.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "No files in the dir: " + src_dir);
+			
+			return;
+			
+		}//if (src_dir_files.length == condition)
+
+		File f_src_latest = src_dir_files[0];
+		
+		
+		for (File file : src_dir_files) {
+			
+			if (f_src_latest.lastModified() < file.lastModified()) {
+						
+				f_src_latest = file;
+				
+			}//if (variable == condition)
+			
+		}//for (File file : src_dir_files)
+		
+		// Show the path of the latest file
+		// Log
+		Log.d("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", "f_src_latest=" + f_src_latest.getAbsolutePath());
+		
+		String src = f_src_latest.getAbsolutePath();
+
+		////////////////////////////////
+
+		// File: dst
+
+		////////////////////////////////
+		String dst = StringUtils.join(
+				new String[]{
+						CONS.DB.dirPath_db,
+						CONS.DB.dbName},
+				File.separator);		
+
+		////////////////////////////////
+
+		// Restore
+
+		////////////////////////////////
+//		// Log
+//		String msg_Log = "src = " + src
+//						+ " *** "
+//						+ "dst = " + dst;
+//		Log.d("Methods.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ "]", msg_Log);
+		
+		boolean res = Methods.restore_db(actv, 
+									CONS.DB.dbName, 
+									src, 
+									dst);
+		
+		// Log
+		String msg_Log = "res = " + res;
+		Log.d("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+		
+		
+	}//copy_External_DB(Activity actv)
 	
 }//public class Methods
 
