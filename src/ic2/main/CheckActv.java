@@ -11,6 +11,8 @@ import ic2.listeners.CustomOnItemLongClickListener;
 import ic2.listeners.button.BO_CL;
 import ic2.listeners.button.BO_TL;
 import ic2.main.R;
+import ic2.tasks.Task_GetYomi;
+import ic2.tasks.Task_SaveItems;
 import ic2.utils.CONS;
 import ic2.utils.DBUtils;
 import ic2.utils.Methods;
@@ -406,22 +408,26 @@ public class CheckActv extends ListActivity {
 
 	private void opt_menu_actv_check_save_status_data() {
 		
-		boolean result = Methods.update_item_all_status(
-									this, 
-									CONS.DB.dbName,
-									CONS.DB.tname_items);
+		Task_SaveItems task = new Task_SaveItems(this);
 		
-		if (result == true) {
-			
-			// debug
-			Toast.makeText(this, "Status saved", Toast.LENGTH_SHORT).show();
-			
-		} else {//if (result == true)
-			
-			// debug
-			Toast.makeText(this, "Save status => Error occurred (See log)", Toast.LENGTH_SHORT).show();
-			
-		}//if (result == true)
+		task.execute("Start");
+		
+//		boolean result = Methods.update_item_all_status(
+//									this, 
+//									CONS.DB.dbName,
+//									CONS.DB.tname_items);
+//		
+//		if (result == true) {
+//			
+//			// debug
+//			Toast.makeText(this, "Status saved", Toast.LENGTH_SHORT).show();
+//			
+//		} else {//if (result == true)
+//			
+//			// debug
+//			Toast.makeText(this, "Save status => Error occurred (See log)", Toast.LENGTH_SHORT).show();
+//			
+//		}//if (result == true)
 		
 	}//private void opt_menu_actv_check_save_status_data()
 
