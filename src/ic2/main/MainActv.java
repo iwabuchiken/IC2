@@ -604,8 +604,8 @@ public class MainActv extends ListActivity {
 		 *********************************/
 		res = dbu.createTable(
 				wdb, 
-				CONS.DB.tableName_items, 
-				CONS.DB.cols_items, 
+				CONS.DB.tname_items, 
+				CONS.DB.col_name_Items, 
 				CONS.DB.col_types_items);
 		
 		/*********************************

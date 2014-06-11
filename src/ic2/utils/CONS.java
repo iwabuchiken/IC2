@@ -157,11 +157,11 @@ public class CONS {
 		// Table: items
 
 		////////////////////////////////
-		public static String tableName_items = "items";
+		public static String tname_items = "items";
 		
 //		public static String[] cols_items =			{"text", "serial_num",	"list_id"};
 		
-		public static String[] cols_items =
+		public static String[] col_name_Items =
 						// Array  0		1				2		3
 						// Total  3		4				5		6
 							{"text", "serial_num",	"list_id", "status"};

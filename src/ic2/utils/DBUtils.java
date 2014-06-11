@@ -4,6 +4,7 @@ package ic2.utils;
 
 
 import ic2.items.CL;
+import ic2.items.Item;
 import ic2.main.MainActv;
 
 import java.util.ArrayList;
@@ -593,12 +594,12 @@ public class DBUtils extends SQLiteOpenHelper{
 			val.put("created_at", created_at);		// 
 			val.put("modified_at", modified_at);		//
 			
-			val.put(CONS.DB.cols_items[0], (String) data[0]);	// 
-			val.put(CONS.DB.cols_items[1], (Integer) data[1]);	//
-			val.put(CONS.DB.cols_items[2], (Long) data[2]);	//
+			val.put(CONS.DB.col_name_Items[0], (String) data[0]);	// 
+			val.put(CONS.DB.col_name_Items[1], (Integer) data[1]);	//
+			val.put(CONS.DB.col_name_Items[2], (Long) data[2]);	//
 			
 			// Insert data
-			wdb.insert(CONS.DB.tableName_items, null, val);
+			wdb.insert(CONS.DB.tname_items, null, val);
 			
 			// Set as successful
 			wdb.setTransactionSuccessful();
@@ -882,7 +883,7 @@ public class DBUtils extends SQLiteOpenHelper{
 			
 			sb.append("UPDATE " + tableName + " SET ");
 			
-			sb.append(CONS.DB.cols_items[1] + "='" + data.get(k) + "'");
+			sb.append(CONS.DB.col_name_Items[1] + "='" + data.get(k) + "'");
 			
 			sb.append(" WHERE " + android.provider.BaseColumns._ID + "='" + k + "'");
 			
@@ -987,7 +988,7 @@ public class DBUtils extends SQLiteOpenHelper{
 		
 		sb.append("UPDATE " + tableName + " SET ");
 		
-		sb.append(CONS.DB.cols_items[0] + "='" + new_text + "'");
+		sb.append(CONS.DB.col_name_Items[0] + "='" + new_text + "'");
 		
 		sb.append(" WHERE " + android.provider.BaseColumns._ID + "='" + item_id + "'");
 		
@@ -1028,7 +1029,9 @@ public class DBUtils extends SQLiteOpenHelper{
 	}//public static boolean updateData_items_text()
 
 	
-	public static boolean updateData_items_status(Activity actv, String dbName,
+	public static boolean
+	updateData_items_status
+	(Activity actv, String dbName,
 			String tableName, long db_id, int status_num) {
 		/*********************************
 		 * 1. Set up db
@@ -1052,7 +1055,7 @@ public class DBUtils extends SQLiteOpenHelper{
 		
 		sb.append("UPDATE " + tableName + " SET ");
 		
-		sb.append(CONS.DB.cols_items[3] + "='" + status_num + "'");
+		sb.append(CONS.DB.col_name_Items[3] + "='" + status_num + "'");
 		
 		sb.append(" WHERE " + android.provider.BaseColumns._ID + "='" + db_id + "'");
 		
@@ -1084,6 +1087,107 @@ public class DBUtils extends SQLiteOpenHelper{
 		return true;
 		
 	}//public boolean updateData_items_status()
+	
+	public static boolean
+	updateData_Items_Status_All
+	(Activity actv, List<Item> iList) {
+		/*********************************
+		 * 1. Set up db
+		 * 1-2. Build sql
+		 * 
+		 * 2. Exec query
+		 * 
+		 * 3. Close db
+		 * 
+		 * 4. Return
+		 *********************************/
+		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
+		
+		SQLiteDatabase wdb = dbu.getWritableDatabase();
+		
+		/*********************************
+		 * 1-2. Build sql
+		 *********************************/
+		// Sql
+		StringBuilder sb = new StringBuilder();
+		
+		for (Item item : iList) {
+			
+			sb.append("UPDATE " + CONS.DB.tname_items + " SET ");
+			
+			sb.append(CONS.DB.col_name_Items[3] + "='" + item.getStatus() + "'");
+			
+			sb.append(" WHERE "
+						+ android.provider.BaseColumns._ID + "='" 
+						+ item.getDb_id() + "'");
+			
+			try {
+				
+				wdb.execSQL(sb.toString());
+				
+			} catch (SQLException e) {
+				
+				StringBuilder tmp = new StringBuilder();
+				
+				tmp.append("DBUtils.java");
+				tmp.append("[");
+				tmp.append(Thread.currentThread().getStackTrace()[2].getLineNumber());
+				tmp.append("]");
+				
+				Log.e(tmp.toString(), 
+						"Exception => " 
+						+ e.toString() 
+						+ " / " + "sql: " + sb.toString());
+				
+//				wdb.close();
+				
+//				return false;
+				
+			} finally {
+				
+				sb.delete(0, sb.length());
+				
+			}
+			
+		}//for (Item item : iList)
+		
+		wdb.close();
+		
+		
+//		sb.append("UPDATE " + tableName + " SET ");
+		
+//		sb.append(CONS.DB.cols_items[3] + "='" + status_num + "'");
+		
+//		sb.append(" WHERE " + android.provider.BaseColumns._ID + "='" + db_id + "'");
+		
+//		String sql = sb.toString();
+		
+//		// Exec
+//		try {
+//			
+//			wdb.execSQL(sql);
+//			
+////			// Log
+////			Log.d("DBUtils.java" + "["
+////			+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+////			+ "]", "sql => Done: " + sql);
+//			
+//		} catch (SQLException e) {
+//			
+//			Log.e("DBUtils.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", "Exception => " + e.toString() + " / " + "sql: " + sql);
+//			
+//			wdb.close();
+//			
+//			return false;
+//			
+//		}
+		
+		
+		return true;
+		
+	}//public boolean updateData_items_status()
 
 	public static boolean update_items_all_to_zero(Activity actv, String dbName,
 			String tableName, long check_list_id) {
@@ -1098,9 +1202,9 @@ public class DBUtils extends SQLiteOpenHelper{
 		
 		sb.append("UPDATE " + tableName + " SET ");
 		
-		sb.append(CONS.DB.cols_items[3] + "='" + 0 + "'");
+		sb.append(CONS.DB.col_name_Items[3] + "='" + 0 + "'");
 		
-		sb.append(" WHERE " + CONS.DB.cols_items[2] + "='" + check_list_id + "'");
+		sb.append(" WHERE " + CONS.DB.col_name_Items[2] + "='" + check_list_id + "'");
 		
 		String sql = sb.toString();
 		
@@ -1225,8 +1329,8 @@ public class DBUtils extends SQLiteOpenHelper{
 		 * Delete: Items
 		 *********************************/
 		String sql = 
-				"DELETE FROM " + CONS.DB.tableName_items + 
-				" WHERE " + CONS.DB.cols_items[2] + " = '"
+				"DELETE FROM " + CONS.DB.tname_items + 
+				" WHERE " + CONS.DB.col_name_Items[2] + " = '"
 				+ String.valueOf(check_list_id) + "'";
 		
 		// Log

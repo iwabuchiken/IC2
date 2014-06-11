@@ -1684,8 +1684,8 @@ public class Methods {
 		SQLiteDatabase rdb = dbu.getReadableDatabase();
 
 		//=> source: http://stackoverflow.com/questions/4681744/android-get-list-of-tables : "Just had to do the same. This seems to work:"
-		String q = "SELECT * FROM " + CONS.DB.tableName_items +
-				" WHERE " + CONS.DB.cols_items[2] + "='" + list_id + "'";;
+		String q = "SELECT * FROM " + CONS.DB.tname_items +
+				" WHERE " + CONS.DB.col_name_Items[2] + "='" + list_id + "'";;
 		
 		Cursor c = null;
 		
@@ -2021,9 +2021,9 @@ public class Methods {
 		/*********************************
 		 * 2. Query
 		 *********************************/
-		String sql = "SELECT * FROM " + CONS.DB.tableName_items + 
+		String sql = "SELECT * FROM " + CONS.DB.tname_items + 
 //					" WHERE " + CONS.DB.cols_items[5] + "='" + list_id + "'";
-				" WHERE " + CONS.DB.cols_items[2] + "='" + list_id + "'";
+				" WHERE " + CONS.DB.col_name_Items[2] + "='" + list_id + "'";
 
 		Cursor c = null;
 		
@@ -2758,7 +2758,7 @@ public class Methods {
 		}//for (int i = 0; i < CheckActv.iList.size(); i++)
 		
 		boolean res = DBUtils.updateData_items(
-							actv, CONS.DB.dbName, CONS.DB.tableName_items, data);
+							actv, CONS.DB.dbName, CONS.DB.tname_items, data);
 		
 		
 	}//public static void checkactv_change_order()
@@ -3006,7 +3006,7 @@ public class Methods {
 		 *********************************/
 		boolean res = DBUtils.updateData_items_text(
 									actv, CONS.DB.dbName, 
-									CONS.DB.tableName_items, 
+									CONS.DB.tname_items, 
 									item_id, new_text);
 		
 		if (res == true) {
@@ -3047,25 +3047,35 @@ public class Methods {
 	}//public static void update_item_text(Activity actv, Dialog dlg, Dialog dlg2)
 
 	
-	public static boolean update_item_all_status(Activity actv, 
-								String dbName, String tableName) {
+	public static boolean
+	update_item_all_status
+	(Activity actv, String dbName, String tableName) {
 		/*********************************
 		 * 1. Set up db
 		 * 
 		 *********************************/
-		boolean res = true;
+//		boolean res = true;
 		
-		for (Item item : CheckActv.iList) {
-			
-			boolean local_res = DBUtils.updateData_items_status(
-						actv, dbName, tableName, 
-						item.getDb_id(), item.getStatus());
-			
-			if (local_res == false) {
-				
-				res = false;
-			}
-		}//for (Item item : CheckActv.iList)
+		boolean res = 
+				DBUtils.updateData_Items_Status_All(actv, CheckActv.iList);
+		
+//		for (Item item : CheckActv.iList) {
+//			
+//			boolean local_res = DBUtils.updateData_items_status(
+//						actv, dbName, tableName, 
+//						item.getDb_id(), item.getStatus());
+//			
+//			if (local_res == false) {
+//				
+//				res = false;
+//			}
+//		}//for (Item item : CheckActv.iList)
+		
+		// Log
+		String msg_Log = "Update item: res => " + res;
+		Log.d("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
 		
 		return res;
 		
@@ -3339,7 +3349,7 @@ public class Methods {
 				+ "]", "Starts => clear_items_all_to_zero()");
 		
 		boolean res = DBUtils.update_items_all_to_zero(
-					actv, CONS.DB.dbName, CONS.DB.tableName_items, check_list_id);
+					actv, CONS.DB.dbName, CONS.DB.tname_items, check_list_id);
 		
 		if (res == true) {
 			

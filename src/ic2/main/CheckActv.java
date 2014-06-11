@@ -409,7 +409,7 @@ public class CheckActv extends ListActivity {
 		boolean result = Methods.update_item_all_status(
 									this, 
 									CONS.DB.dbName,
-									CONS.DB.tableName_items);
+									CONS.DB.tname_items);
 		
 		if (result == true) {
 			
@@ -431,7 +431,7 @@ public class CheckActv extends ListActivity {
 		 * memo
 		 *********************************/
 		Methods.add_column_to_table(this, 
-						CONS.DB.dbName, CONS.DB.tableName_items, "status", "INTEGER");
+						CONS.DB.dbName, CONS.DB.tname_items, "status", "INTEGER");
 		
 //		DBUtils dbu = new DBUtils(actv, dbName);
 //		
