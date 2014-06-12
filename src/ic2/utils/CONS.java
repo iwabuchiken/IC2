@@ -4,6 +4,7 @@ import java.io.File;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.MediaStore;
+import android.widget.ListView;
 
 public class CONS {
 
@@ -297,4 +298,12 @@ public class CONS {
 			
 		}
 	}
+	
+	public static class MainActv {
+		
+		public static ListView lvMain;
+		
+	}
+
+	
 }//public class CONS

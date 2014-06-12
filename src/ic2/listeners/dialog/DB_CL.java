@@ -157,14 +157,11 @@ public class DB_CL implements OnClickListener {
 			
 			Methods.update_item_text(actv, dlg, dlg2, item_position);
 			
-//			// Log
-//			Log.d("DialogButtonOnClickListener.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ "]", "case dlg_checkactv_edit_item_text_btn_ok");
+			break;
 			
-//			// debug
-//			Toast.makeText(actv, 
-//					"position: " + item_position, Toast.LENGTH_SHORT).show();
+		case dlg_edit_list_title_btn_ok://---------------------------------
+			
+			Methods.edit_List_Title(actv, dlg, dlg2, item_position);
 			
 			break;
 			

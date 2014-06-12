@@ -76,6 +76,9 @@ public class Methods {
 		// dlg_checkactv_edit_item_text_btn_ok.xml
 		dlg_checkactv_edit_item_text_btn_ok,
 		
+		// dlg_Edit_List_Title
+		dlg_edit_list_title_btn_ok,
+		
 	}//public static enum DialogButtonTags
 	
 	public static enum DialogItemTags {
@@ -2395,6 +2398,16 @@ public class Methods {
 				R.id.dlg_main_actv_long_click_bt_cancel,
 				Methods.DialogButtonTags.dlg_generic_dismiss);
 
+		//debug
+		CL list = (CL) CONS.MainActv.lvMain.getItemAtPosition(item_position);
+		
+		// Log
+		String msg_Log = "list.getName() => " + list.getName();
+		Log.d("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+		
 		/*----------------------------
 		 * 2. List view
 		 * 	1. Get view
@@ -2418,9 +2431,11 @@ public class Methods {
 					actv.getString(
 							R.string.dlg_main_actv_long_click_lv_clear_item_status));
 		
-		long_click_items.add(
-				actv.getString(
+		long_click_items.add(actv.getString(
 						R.string.dlg_main_actv_long_click_lv_delete_list));
+		
+		long_click_items.add(actv.getString(
+				R.string.dlg_main_actv_long_click_lv_edit_title));
 		
 		// Setup: Adapter
 		ArrayAdapter<String> adp = new ArrayAdapter<String>(
@@ -4210,6 +4225,56 @@ public class Methods {
 		
 		
 	}//copy_External_DB(Activity actv)
-	
+
+	public static void 
+	edit_List_Title
+	(Activity actv, 
+		Dialog dlg1, Dialog dlg2, int item_position) {
+		// TODO Auto-generated method stub
+		
+		CL list = (CL) CONS.MainActv.lvMain.getItemAtPosition(item_position);
+		
+		// Log
+		String msg_Log = "list.getName() => " + list.getName();
+		Log.d("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+		////////////////////////////////
+
+		// get: new title
+
+		////////////////////////////////
+//		dlg_checkactv_edit_item_text
+		EditText et_Title = 
+				(EditText) dlg2.findViewById(R.id.dlg_checkactv_edit_item_text_et);
+		
+		
+//		String title_New = 
+		
+		////////////////////////////////
+
+		// update: listview
+
+		////////////////////////////////
+		list.setName(et_Title.getText().toString());
+		
+		// Log
+		msg_Log = "New title => set";
+		Log.d("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+		////////////////////////////////
+
+		// notify
+
+		////////////////////////////////
+		MainActv.mlAdp.notifyDataSetChanged();
+		
+		
+		
+	}//edit_List_Title
+
 }//public class Methods
 

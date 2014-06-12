@@ -21,7 +21,8 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-public class CustomOnItemLongClickListener implements OnItemLongClickListener {
+public class Custom_OI_LCL implements OnItemLongClickListener {
+//	public class CustomOnItemLongClickListener implements OnItemLongClickListener {
 
 	Activity actv;
 	static Vibrator vib;
@@ -38,7 +39,7 @@ public class CustomOnItemLongClickListener implements OnItemLongClickListener {
 	/****************************************
 	 * Constructor
 	 ****************************************/
-	public CustomOnItemLongClickListener(Activity actv) {
+	public Custom_OI_LCL(Activity actv) {
 		// 
 		this.actv = actv;
 		vib = (Vibrator) actv.getSystemService(actv.VIBRATOR_SERVICE);
@@ -47,7 +48,7 @@ public class CustomOnItemLongClickListener implements OnItemLongClickListener {
 	/*----------------------------
 	 * Used in => case dir_list_move_files
 		----------------------------*/
-	public CustomOnItemLongClickListener(Activity actv,
+	public Custom_OI_LCL(Activity actv,
 			Dialog dlg, ArrayAdapter<String> dirListAdapter, List<String> fileNameList) {
 		// 
 		this.actv = actv;
@@ -157,6 +158,18 @@ public class CustomOnItemLongClickListener implements OnItemLongClickListener {
 	case_actv_main_lv(AdapterView<?> parent, int position) {
 		// TODO Auto-generated method stub
 		CL check_list = (CL) parent.getItemAtPosition(position);
+		
+//		// Log
+//		String msg_Log = "check_list.getName() => " + check_list.getName();
+//		Log.d("Custom_OI_LCL.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ "]", msg_Log);
+//		
+//		// Log
+//		msg_Log = "parent => " + parent.getClass().getName();
+//		Log.d("Custom_OI_LCL.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ "]", msg_Log);
 		
 		if (check_list == null) {
 			

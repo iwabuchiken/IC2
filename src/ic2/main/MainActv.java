@@ -10,7 +10,7 @@ import java.util.List;
 
 import ic2.adapters.MainListAdapter;
 import ic2.items.CL;
-import ic2.listeners.CustomOnItemLongClickListener;
+import ic2.listeners.Custom_OI_LCL;
 import ic2.main.R;
 import ic2.utils.CONS;
 import ic2.utils.DBUtils;
@@ -50,26 +50,6 @@ public class MainActv extends ListActivity {
 	/********************************
 	 * DB
 	 ********************************/
-//	public static String dbName = "ic.db";
-	
-	// check_lists
-//	public static String tableName_check_lists = "check_lists";
-//
-//	public static String[] cols_check_lists =			{"name",	"genre_id"};
-//	
-//	public static String[] col_types_check_lists = 	{"TEXT", 	"INTEGER"};
-
-	// items
-//	public static String tableName_items = "items";
-//	
-////	public static String[] cols_items =			{"text", "serial_num",	"list_id"};
-//	
-//	public static String[] cols_items =
-//					// Array  0		1				2		3
-//					// Total  3		4				5		6
-//						{"text", "serial_num",	"list_id", "status"};
-//	
-//	public static String[] col_types_items = {"TEXT", 	 "INTEGER",		"INTEGER"};
 
 	// genres
 	public static String tableName_genres = "genres";
@@ -78,16 +58,6 @@ public class MainActv extends ListActivity {
 	
 	public static String[] col_types_genres = 	{"TEXT"};
 
-//	// Backup
-//	public static String dirPath_db = "/data/data/ic.main/databases";
-//	
-//	public static String dirName_ExternalStorage = "/mnt/sdcard-ext";
-//	
-//	public static String dirPath_db_backup = dirName_ExternalStorage + "/IC_backup";
-//	
-//	public static String fileName_db_backup_trunk = "ic_backup";
-//	
-//	public static String fileName_db_backup_ext = ".bk";
 	
 	/*********************************
 	 * Intents
@@ -132,12 +102,15 @@ public class MainActv extends ListActivity {
         /*********************************
 		 * 5. Set listeners
 		 *********************************/
-		ListView lv = this.getListView();
+//		ListView lv = this.getListView();
+		
+		CONS.MainActv.lvMain = this.getListView();
 		
 //		lv.setTag(Methods.ItemTags.dir_list);
-		lv.setTag(Methods.ListTags.actv_main_lv);
+		CONS.MainActv.lvMain.setTag(Methods.ListTags.actv_main_lv);
 		
-		lv.setOnItemLongClickListener(new CustomOnItemLongClickListener(this));
+		CONS.MainActv.lvMain
+					.setOnItemLongClickListener(new Custom_OI_LCL(this));
         
 		/*********************************
 		 * Re-install the app

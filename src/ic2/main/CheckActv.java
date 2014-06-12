@@ -7,7 +7,7 @@ import ic2.adapters.ItemListAdapter;
 import ic2.adapters.MainListAdapter;
 import ic2.items.CL;
 import ic2.items.Item;
-import ic2.listeners.CustomOnItemLongClickListener;
+import ic2.listeners.Custom_OI_LCL;
 import ic2.listeners.button.BO_CL;
 import ic2.listeners.button.BO_TL;
 import ic2.main.R;
@@ -218,7 +218,7 @@ public class CheckActv extends ListActivity {
 		
 		lv.setTag(Methods.ListTags.actv_check_lv);
 		
-		lv.setOnItemLongClickListener(new CustomOnItemLongClickListener(this));
+		lv.setOnItemLongClickListener(new Custom_OI_LCL(this));
 		
 		/*********************************
 		 * 3. Button => "T"

@@ -99,22 +99,6 @@ public class Methods_ic {
 						
 					}
 					
-//					} else {
-//						
-//						// Log
-//						Log.d("["
-//								+ "Methods_ic.java : "
-//								+ +Thread.currentThread().getStackTrace()[2]
-//										.getLineNumber()
-//								+ " : "
-//								+ Thread.currentThread().getStackTrace()[2]
-//										.getMethodName() + "]",
-//						"cl1=" + cl1.getYomi()
-//						+ "/"
-//						+ "cl2=" + cl2.getYomi());
-//						
-//					}
-					
 					return (int)
 						(cl1.getYomi().compareToIgnoreCase(cl2.getYomi()));
 					
@@ -129,15 +113,6 @@ public class Methods_ic {
 								+ "("
 								+ String.valueOf(cl1.getCreated_at() - cl2.getCreated_at())
 								+ ")";
-					
-					
-					Log.d("["
-							+ "Methods_ic.java : "
-							+ +Thread.currentThread().getStackTrace()[2]
-									.getLineNumber()
-							+ " : "
-							+ Thread.currentThread().getStackTrace()[2]
-									.getMethodName() + "]", msg);
 					
 					long diff = (cl1.getCreated_at() - cl2.getCreated_at());
 					

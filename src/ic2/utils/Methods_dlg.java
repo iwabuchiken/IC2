@@ -1,8 +1,10 @@
 package ic2.utils;
 
+import ic2.items.CL;
 import ic2.listeners.dialog.DB_CL;
 import ic2.listeners.dialog.DB_TL;
 import ic2.listeners.dialog.DOI_CL;
+import ic2.main.CheckActv;
 import ic2.main.R;
 import ic2.utils.Tags.DialogTags;
 
@@ -13,6 +15,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 public class Methods_dlg {
@@ -195,5 +198,78 @@ public class Methods_dlg {
 		dlg.show();
 
 	}//public static void dlg_SortList(Activity actv)
+
+	public static void
+	dlg_Edit_List_Title
+	(Activity actv, 
+			long check_list_id, 
+			Dialog dlg1, 
+			CL check_list, 
+			int cl_position) {
+		// TODO Auto-generated method stub
+
+		Dialog dlg2 = new Dialog(actv);
+		
+		//
+		dlg2.setContentView(R.layout.dlg_checkactv_edit_item_text);
+		
+		// Title
+		dlg2.setTitle(R.string.dlg_main_actv_long_click_lv_edit_title);
+
+		/*********************************
+		 * 2. Get views
+		 *********************************/
+		//
+		Button btn_ok = 
+			(Button) dlg2.findViewById(R.id.dlg_checkactv_edit_item_text_btn_ok);
+		
+		Button btn_cancel = 
+				(Button) dlg2.findViewById(R.id.dlg_checkactv_edit_item_text_btn_cancel);
+		
+		/*********************************
+		 * 3. Set tags
+		 *********************************/
+		//
+		btn_ok.setTag(
+				Methods.DialogButtonTags.dlg_edit_list_title_btn_ok);
+		
+		btn_cancel.setTag(
+				Methods.DialogButtonTags.dlg_generic_dismiss_second_dialog);
+		
+		/*********************************
+		 * 3-2. Set current text
+		 *********************************/
+		EditText et = (EditText) dlg2.findViewById(R.id.dlg_checkactv_edit_item_text_et);
+		
+		String text = check_list.getName();
+		
+		et.setText(text);
+		
+//		et.setSelection(0);
+		
+		et.setSelection(text.length());
+		
+		/*********************************
+		 * 4. Add listeners => OnTouch
+		 *********************************/
+		//
+		btn_ok.setOnTouchListener(new DB_TL(actv, dlg2));
+		btn_cancel.setOnTouchListener(new DB_TL(actv, dlg2));
+		
+		/*********************************
+		 * 5. Add listeners => OnClick
+		 *********************************/
+		//
+		btn_ok.setOnClickListener(new DB_CL(actv, dlg1, dlg2, cl_position));
+		btn_cancel.setOnClickListener(
+					new DB_CL(actv, dlg1, dlg2));
+		
+		/*********************************
+		 * 6. Show dialog
+		 *********************************/
+		dlg2.show();
+		
+		
+	}//dlg_Edit_List_Title
 
 }//public class Methods_dlg
