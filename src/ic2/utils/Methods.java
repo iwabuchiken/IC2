@@ -4254,6 +4254,28 @@ public class Methods {
 		
 		////////////////////////////////
 
+		// update: DB
+
+		////////////////////////////////
+//		cols_check_lists
+//		"name",	"genre_id", "yomi"	// 0,1,2
+
+		boolean res = DBUtils.updateData_CheckList(actv, 
+								list.getDb_id(), CONS.DB.cols_check_lists[0], 
+								et_Title.getText().toString());
+		
+		if (res == false) {
+			
+			// debug
+			String msg_Toast = "Update => can't be done";
+			Toast.makeText(actv, msg_Toast, Toast.LENGTH_SHORT).show();
+			
+			return;
+			
+		}
+		
+		////////////////////////////////
+
 		// update: listview
 
 		////////////////////////////////
@@ -4272,7 +4294,13 @@ public class Methods {
 		////////////////////////////////
 		MainActv.mlAdp.notifyDataSetChanged();
 		
-		
+		////////////////////////////////
+
+		// close: dialogues
+
+		////////////////////////////////
+		dlg2.dismiss();
+		dlg1.dismiss();
 		
 	}//edit_List_Title
 
