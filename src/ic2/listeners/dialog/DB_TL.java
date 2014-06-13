@@ -49,6 +49,8 @@ public class DB_TL implements OnTouchListener {
 			case dlg_checkactv_edit_item_text_btn_ok:
 			case dlg_edit_list_title_btn_ok:
 				
+			case dlg_change_genre_btn_ok:
+				
 				//
 				v.setBackgroundColor(Color.GRAY);
 				
@@ -72,6 +74,8 @@ public class DB_TL implements OnTouchListener {
 			case dlg_checkactv_edit_item_text_btn_ok:
 				
 			case dlg_edit_list_title_btn_ok:
+				
+			case dlg_change_genre_btn_ok:
 				
 				//
 				v.setBackgroundColor(Color.WHITE);

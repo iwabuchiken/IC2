@@ -13,10 +13,12 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 public class Methods_dlg {
 
@@ -271,5 +273,90 @@ public class Methods_dlg {
 		
 		
 	}//dlg_Edit_List_Title
+
+	public static void
+	dlg_Change_Genre
+	(Activity actv, 
+			long check_list_id,
+			Dialog dlg1, 
+			CL check_list, 
+			int item_position) {
+		// TODO Auto-generated method stub
+		
+		Dialog dlg2 = new Dialog(actv);
+		
+		//
+		dlg2.setContentView(R.layout.dlg_change_genre);
+		
+		// Title
+		dlg2.setTitle(
+					actv.getString(R.string.dlg_main_actv_long_click_lv_change_genre)
+					+ " : "
+					+ check_list.getName());
+
+		////////////////////////////////
+
+		// spinner
+
+		////////////////////////////////
+		Spinner sp = (Spinner) dlg2.findViewById(R.id.dlg_change_genre_sp);
+		
+		List<String> genreList = Methods.get_genre_list(actv);
+
+		/*********************************
+		 * 4.2. Adapter
+		 *********************************/
+		ArrayAdapter<String> adp = new ArrayAdapter<String>(
+	              actv, android.R.layout.simple_spinner_item, genreList);
+		
+		adp.setDropDownViewResource(
+				android.R.layout.simple_spinner_dropdown_item);
+		
+		/*********************************
+		 * 4.3. Set adapter
+		 *********************************/
+		sp.setAdapter(adp);		
+		/*********************************
+		 * 2. Get views
+		 *********************************/
+		//
+		Button btn_ok = 
+			(Button) dlg2.findViewById(R.id.dlg_change_genre_btn_ok);
+		
+		Button btn_cancel = 
+				(Button) dlg2.findViewById(R.id.dlg_change_genre_btn_cancel);
+		
+		/*********************************
+		 * 3. Set tags
+		 *********************************/
+		//
+		btn_ok.setTag(
+				Methods.DialogButtonTags.dlg_change_genre_btn_ok);
+		
+		btn_cancel.setTag(
+				Methods.DialogButtonTags.dlg_generic_dismiss_second_dialog);
+		
+		/*********************************
+		 * 4. Add listeners => OnTouch
+		 *********************************/
+		//
+		btn_ok.setOnTouchListener(new DB_TL(actv, dlg2));
+		btn_cancel.setOnTouchListener(new DB_TL(actv, dlg2));
+		
+		/*********************************
+		 * 5. Add listeners => OnClick
+		 *********************************/
+		//
+		btn_ok.setOnClickListener(
+					new DB_CL(actv, dlg1, dlg2, item_position));
+		btn_cancel.setOnClickListener(
+					new DB_CL(actv, dlg1, dlg2));
+		
+		/*********************************
+		 * 6. Show dialog
+		 *********************************/
+		dlg2.show();		
+		
+	}//dlg_Change_Genre
 
 }//public class Methods_dlg

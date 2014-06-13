@@ -81,6 +81,8 @@
     	    						Delete the list</string>
     	<string name="dlg_main_actv_long_click_lv_edit_title">
     	    						Edit title</string>
+    	<string name="dlg_main_actv_long_click_lv_change_genre">
+    	    						Change genre</string>
     	    
     	
     <!-- dlg_db_admin.xml -->

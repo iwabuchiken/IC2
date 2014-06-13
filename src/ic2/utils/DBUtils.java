@@ -1537,6 +1537,7 @@ public class DBUtils extends SQLiteOpenHelper{
 					+ "]", "sql => Done: " + sql);
 			
 			//Methods.toastAndLog(actv, "Data updated", 2000);
+			wdb.close();
 			
 			return true;
 			
@@ -1551,12 +1552,72 @@ public class DBUtils extends SQLiteOpenHelper{
 					+ "]",
 					"Exception => " + e.toString() + " / " + "sql: " + sql);
 			
+			wdb.close();
+			
 			return false;
 			
 		}//try
 		
 		
 	}//public int updateData_CheckList
+
+	public static boolean 
+	updateData_CheckList__GenreID
+	(Activity actv, long db_id, int genre_id) {
+		// TODO Auto-generated method stub
+		
+		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
+		
+		SQLiteDatabase wdb = dbu.getWritableDatabase();
+		
+//		cols_check_lists
+//		"name",	"genre_id", "yomi"	// 0,1,2
+		
+		String sql = "UPDATE " + CONS.DB.tname_Check_Lists
+				+ " SET "
+				+ CONS.DB.cols_check_lists[1] + "='"
+				+ genre_id + "'"
+//					+ " WHERE file_id = '" + dbId + "'";
+				+ " WHERE "
+				+ android.provider.BaseColumns._ID + " = '"
+				+ db_id + "'";
+		
+		try {
+			
+			wdb.execSQL(sql);
+			
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "sql => Done: " + sql);
+			
+			//Methods.toastAndLog(actv, "Data updated", 2000);
+			
+			wdb.close();
+			
+			return true;
+			
+			
+		} catch (SQLException e) {
+			
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]",
+					"Exception => " + e.toString() + " / " + "sql: " + sql);
+			
+			wdb.close();
+			
+			return false;
+			
+		}//try
+		
+		
+	}//updateData_CheckList__GenreID
 
 }//public class DBUtils
 

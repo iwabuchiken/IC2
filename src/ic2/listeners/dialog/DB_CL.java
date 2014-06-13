@@ -1,5 +1,6 @@
 package ic2.listeners.dialog;
 
+import ic2.items.CL;
 import ic2.main.R;
 import ic2.utils.Methods;
 import android.app.Activity;
@@ -127,30 +128,6 @@ public class DB_CL implements OnClickListener {
 			
 			dlg_checkactv_change_serial_num_btn_ok();
 			
-//			EditText et = (EditText) dlg2.findViewById(R.id.dlg_checkactv_change_serial_num_et_new);
-//			
-//			// debug
-//			if (et != null) {
-//				
-//				Toast.makeText(actv, 
-//						"New num: " + et.getText().toString(), 
-//						Toast.LENGTH_SHORT).show();
-//				
-////				return;
-//				
-//			} else {//if (et != null)
-//
-//				Toast.makeText(actv, 
-//						"EditText => Null!", 
-//						Toast.LENGTH_SHORT).show();
-//				
-////				return;
-//				
-//			}//if (et != null)
-			
-			
-			
-			
 			break;// case dlg_checkactv_change_serial_num_btn_ok
 			
 		case dlg_checkactv_edit_item_text_btn_ok://---------------------------------
@@ -162,6 +139,12 @@ public class DB_CL implements OnClickListener {
 		case dlg_edit_list_title_btn_ok://---------------------------------
 			
 			Methods.edit_List_Title(actv, dlg, dlg2, item_position);
+			
+			break;
+			
+		case dlg_change_genre_btn_ok://---------------------------------
+			
+			Methods.change_Genre(actv, dlg, dlg2, item_position);
 			
 			break;
 			

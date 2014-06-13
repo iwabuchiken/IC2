@@ -79,6 +79,9 @@ public class Methods {
 		// dlg_Edit_List_Title
 		dlg_edit_list_title_btn_ok,
 		
+		// dlg_change_genre
+		dlg_change_genre_btn_ok,
+		
 	}//public static enum DialogButtonTags
 	
 	public static enum DialogItemTags {
@@ -1392,7 +1395,7 @@ public class Methods {
 		
 	}//public static void dlg_register_item(Activity actv)
 
-	private static List<String> get_genre_list(Activity actv) {
+	static List<String> get_genre_list(Activity actv) {
 		/*********************************
 		 * 1. db
 		 * 2. Query
@@ -2401,6 +2404,11 @@ public class Methods {
 		//debug
 		CL list = (CL) CONS.MainActv.lvMain.getItemAtPosition(item_position);
 		
+		dlg.setTitle(
+				actv.getString(R.string.dlg_main_actv_long_click_title)
+				+ " : "
+				+ list.getName());
+		
 		// Log
 		String msg_Log = "list.getName() => " + list.getName();
 		Log.d("Methods.java" + "["
@@ -2436,6 +2444,9 @@ public class Methods {
 		
 		long_click_items.add(actv.getString(
 				R.string.dlg_main_actv_long_click_lv_edit_title));
+		
+		long_click_items.add(actv.getString(
+				R.string.dlg_main_actv_long_click_lv_change_genre));
 		
 		// Setup: Adapter
 		ArrayAdapter<String> adp = new ArrayAdapter<String>(
@@ -4249,9 +4260,6 @@ public class Methods {
 		EditText et_Title = 
 				(EditText) dlg2.findViewById(R.id.dlg_checkactv_edit_item_text_et);
 		
-		
-//		String title_New = 
-		
 		////////////////////////////////
 
 		// update: DB
@@ -4303,6 +4311,94 @@ public class Methods {
 		dlg1.dismiss();
 		
 	}//edit_List_Title
+
+	public static void
+	change_Genre
+	(Activity actv, Dialog dlg1, Dialog dlg2,
+			int item_position) {
+		// TODO Auto-generated method stub
+		
+		Spinner sp = (Spinner) dlg2.findViewById(R.id.dlg_change_genre_sp);
+		
+		String genre_name = (String) sp.getSelectedItem();
+
+		// Log
+		Log.d("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", "genre_name: " + genre_name);
+		
+		int genre_id = Methods.get_genre_id_from_genre_name(actv, genre_name);
+		
+		if (genre_id < 0) {
+			
+			// Log
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "genre_id: " + genre_id);
+			
+			// debug
+			Toast.makeText(actv, "�ｿｽW�ｿｽ�ｿｽ�ｿｽ�ｿｽ�ｿｽ�ｿｽ�ｿｽ�ｿｽ�ｿｽ謫ｾ�ｿｽﾅゑｿｽ�ｿｽﾜゑｿｽ�ｿｽ�ｿｽ", Toast.LENGTH_SHORT).show();
+			
+		} else {//if (genre_id < 0)
+			
+			// Log
+			String msg_Log = "genre_id = " + genre_id;
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+		}//if (genre_id < 0)
+		
+		////////////////////////////////
+
+		// update: DB
+
+		////////////////////////////////
+		CL list = (CL) CONS.MainActv.lvMain.getItemAtPosition(item_position);
+		
+//		cols_check_lists
+//		"name",	"genre_id", "yomi"	// 0,1,2
+		boolean res = DBUtils.updateData_CheckList__GenreID(
+										actv, 
+										list.getDb_id(), 
+										genre_id);
+		
+		if (res == false) {
+			
+			// debug
+			String msg_Toast = "Update genr id => Can't be done";
+			Toast.makeText(actv, msg_Toast, Toast.LENGTH_SHORT).show();
+			
+			return;
+			
+		}
+		
+		////////////////////////////////
+
+		// update: list
+
+		////////////////////////////////
+		list.setGenre_id(genre_id);
+		
+		MainActv.mlAdp.notifyDataSetChanged();
+		
+		// Log
+		String msg_Log = "MainActv.mlAdp => notified";
+		Log.d("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+		////////////////////////////////
+
+		// dialogues: close
+
+		////////////////////////////////
+		dlg2.dismiss();
+		dlg1.dismiss();
+		
+		
+		
+	}//change_Genre
 
 }//public class Methods
 
