@@ -82,6 +82,10 @@ public class Methods {
 		// dlg_change_genre
 		dlg_change_genre_btn_ok,
 		
+		// dlg_edit_cl.xml
+		dlg_edit_cl_btn_ok, dlg_edit_cl_btn_cancel,
+		
+		
 	}//public static enum DialogButtonTags
 	
 	public static enum DialogItemTags {
@@ -2448,6 +2452,9 @@ public class Methods {
 		long_click_items.add(actv.getString(
 				R.string.dlg_main_actv_long_click_lv_change_genre));
 		
+		long_click_items.add(actv.getString(
+				R.string.dlg_main_actv_long_click_lv_edit_cl));
+		
 		// Setup: Adapter
 		ArrayAdapter<String> adp = new ArrayAdapter<String>(
 		
@@ -4399,6 +4406,136 @@ public class Methods {
 		
 		
 	}//change_Genre
+
+	public static void 
+	edit_CL
+	(Activity actv, 
+			Dialog dlg1, Dialog dlg2,
+			int item_position) {
+		// TODO Auto-generated method stub
+	
+		////////////////////////////////
+
+		// Get: spinner
+
+		////////////////////////////////
+		Spinner sp = (Spinner) dlg2.findViewById(R.id.dlg_edit_cl_sp_genre);
+		
+		String genre_name = (String) sp.getSelectedItem();
+
+		int genre_id = Methods.get_genre_id_from_genre_name(actv, genre_name);
+		
+		if (genre_id < 0) {
+			
+			// Log
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "genre_id: " + genre_id);
+			
+			// debug
+			Toast.makeText(actv, "�ｿｽW�ｿｽ�ｿｽ�ｿｽ�ｿｽ�ｿｽ�ｿｽ�ｿｽ�ｿｽ�ｿｽ謫ｾ�ｿｽﾅゑｿｽ�ｿｽﾜゑｿｽ�ｿｽ�ｿｽ", Toast.LENGTH_SHORT).show();
+			
+		} else {//if (genre_id < 0)
+			
+//			// Log
+//			String msg_Log = "genre_id = " + genre_id;
+//			Log.d("Methods.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", msg_Log);
+			
+		}//if (genre_id < 0)
+		
+		////////////////////////////////
+
+		// title
+
+		////////////////////////////////
+		EditText et_Title = 
+				(EditText) dlg2.findViewById(R.id.dlg_edit_cl_et_title);
+		
+		////////////////////////////////
+
+		// yomi
+
+		////////////////////////////////
+		EditText et_Yomi = 
+				(EditText) dlg2.findViewById(R.id.dlg_edit_cl_et_yomi);
+		
+
+		////////////////////////////////
+
+		// check list
+
+		////////////////////////////////
+		CL list = (CL) CONS.MainActv.lvMain.getItemAtPosition(item_position);
+		
+		////////////////////////////////
+
+		// update: values
+
+		////////////////////////////////
+		list.setYomi(et_Yomi.getText().toString());
+		list.setName(et_Title.getText().toString());
+		list.setGenre_id(genre_id);
+		
+		// Log
+		String msg_Log = "list.getYomi() => " + list.getYomi();
+		Log.d("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+		////////////////////////////////
+
+		// update: DB
+
+		//////////////////////////////////		cols_check_lists
+//		"name",	"genre_id", "yomi"	// 0,1,2
+		boolean res = DBUtils.updateData_CheckList__All(
+										actv, 
+										list
+//										list.getDb_id()
+										);
+//		boolean res = DBUtils.updateData_CheckList__GenreID(
+//				actv, 
+//				list.getDb_id(), 
+//				genre_id);
+		
+		if (res == false) {
+			
+			// debug
+			String msg_Toast = "Update check list => Can't be done";
+			Toast.makeText(actv, msg_Toast, Toast.LENGTH_SHORT).show();
+			
+			return;
+			
+		}
+		
+		////////////////////////////////
+
+		// update: list
+
+		////////////////////////////////
+//		list.setGenre_id(genre_id);
+		
+		MainActv.mlAdp.notifyDataSetChanged();
+		
+		// Log
+		msg_Log = "MainActv.mlAdp => notified";
+		Log.d("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+		////////////////////////////////
+
+		// dialogues: close
+
+		////////////////////////////////
+		dlg2.dismiss();
+		dlg1.dismiss();
+
+		
+		
+	}//edit_CL
 
 }//public class Methods
 

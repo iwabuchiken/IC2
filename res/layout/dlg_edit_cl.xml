@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TableLayout
+        android:id="@+id/dlg_edit_cl_tl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:layout_gravity="center_horizontal">
+
+		<TableRow >
+
+			<TextView
+			    android:id="@+id/dlg_edit_cl_tv_title"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:text="@string/dlg_edit_cl_tv_title"
+			    android:textSize="25sp" />
+	
+	        <EditText
+	            android:id="@+id/dlg_edit_cl_et_title"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:inputType="text"
+	            android:minWidth="200dp"
+	            android:textSize="25sp" />
+
+		</TableRow>
+
+		<TableRow>
+
+		    <TextView
+		        android:id="@+id/dlg_edit_cl_tv_yomi"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/dlg_edit_cl_tv_yomi"
+		        android:textSize="25sp" />
+
+		    <EditText
+		        android:id="@+id/dlg_edit_cl_et_yomi"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="1"
+		        android:inputType="text"
+		        android:minWidth="200dp"
+		        android:textSize="25sp" />
+		</TableRow>
+
+	    <TableRow >	
+
+	        <TextView
+	            android:id="@+id/dlg_edit_cl_tv_genre"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/dlg_edit_cl_tv_genre"
+	            android:textSize="25sp" />
+	
+			<Spinner
+	            android:id="@+id/dlg_edit_cl_sp_genre"
+	            
+	            android:layout_width="0dip"
+	            android:layout_height="wrap_content"
+	            
+	            android:textSize="25sp"
+	            
+	            android:layout_weight="1" 
+	            />
+	
+	    </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/dlg_edit_cl_btn_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:text="@string/generic_bt_ok"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/dlg_edit_cl_btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:text="@string/generic_bt_cancel"
+            android:textColor="@color/red"
+            android:textSize="25sp" />
+
+    </LinearLayout>    
+</LinearLayout>

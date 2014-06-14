@@ -148,6 +148,12 @@ public class DB_CL implements OnClickListener {
 			
 			break;
 			
+		case dlg_edit_cl_btn_ok://---------------------------------
+			
+			Methods.edit_CL(actv, dlg, dlg2, item_position);
+			
+			break;
+			
 		default: // ----------------------------------------------------
 			break;
 		}//switch (tag_name)

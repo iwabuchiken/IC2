@@ -83,6 +83,8 @@
     	    						Edit title</string>
     	<string name="dlg_main_actv_long_click_lv_change_genre">
     	    						Change genre</string>
+    	<string name="dlg_main_actv_long_click_lv_edit_cl">
+    	    						Edit: Check list</string>
     	    
     	
     <!-- dlg_db_admin.xml -->
@@ -114,5 +116,14 @@
 		<string name="pref_sort_type_title">Sort type</string>
 		<string name="pref_sort_type_summary">
 		    			Set the sort type for the check list</string>
+		
+	<!-- dlg_edit_cl_tl.xml -->
+		<string name="dlg_edit_cl_title">Edit check list</string>
+		<string name="dlg_edit_cl_tv_title">Title</string>
+		<string name="dlg_edit_cl_tv_yomi">Yomi</string>
+		<string name="dlg_edit_cl_tv_genre">Genre</string>
+		
+		
+		
 		
 </resources>

@@ -1619,5 +1619,133 @@ public class DBUtils extends SQLiteOpenHelper{
 		
 	}//updateData_CheckList__GenreID
 
+	public static boolean 
+	updateData_CheckList__All
+	(Activity actv, CL list) {
+		// TODO Auto-generated method stub
+		////////////////////////////////
+
+		// check list
+
+		////////////////////////////////
+//		CL cl = Methods.get_clList_from_db_id(actv, list.getDb_id());
+		
+		if (list == null) {
+			
+			// Log
+			String msg_Log = "the parameter check list => null";
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+			return false;
+			
+		}
+		
+		////////////////////////////////
+
+		// sql
+
+		////////////////////////////////
+		String sql = _build_Sql_CL_Full(actv, list);
+		
+		// Log
+		String msg_Log = "sql = " + sql;
+		Log.d("DBUtils.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+		
+//		String sql = "UPDATE " + CONS.DB.tname_Check_Lists
+//				+ " SET "
+//				+ CONS.DB.cols_check_lists[1] + "='"
+//				+ genre_id + "'"
+////					+ " WHERE file_id = '" + dbId + "'";
+//				+ " WHERE "
+//				+ android.provider.BaseColumns._ID + " = '"
+//				+ db_id + "'";
+
+		////////////////////////////////
+
+		// db
+
+		////////////////////////////////
+		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
+		
+		SQLiteDatabase wdb = dbu.getWritableDatabase();
+
+		try {
+			
+			wdb.execSQL(sql);
+			
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "sql => Done: " + sql);
+			
+			//Methods.toastAndLog(actv, "Data updated", 2000);
+			
+			wdb.close();
+			
+			return true;
+			
+			
+		} catch (SQLException e) {
+			
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]",
+					"Exception => " + e.toString() + " / " + "sql: " + sql);
+			
+			wdb.close();
+			
+			return false;
+			
+		}//try
+		
+	}//updateData_CheckList__All
+
+	private static String
+	_build_Sql_CL_Full
+	(Activity actv, CL cl) {
+		// TODO Auto-generated method stub
+//		"name",	"genre_id", "yomi"	// 0,1,2
+		StringBuilder sb= new StringBuilder();
+		
+		sb.append("UPDATE ");
+		sb.append(CONS.DB.tname_Check_Lists);
+		sb.append(" SET ");
+		
+		sb.append(CONS.DB.cols_check_lists[1]);
+		sb.append(" = '");
+		sb.append(cl.getGenre_id());
+		sb.append("' , ");
+		
+		sb.append(CONS.DB.cols_check_lists[0]);
+		sb.append(" = '");
+		sb.append(cl.getName());
+		sb.append("' , ");
+		
+		sb.append(CONS.DB.cols_check_lists[2]);
+		sb.append(" = '");
+		sb.append(cl.getYomi());
+		sb.append("'");
+		
+		
+		sb.append(" WHERE ");
+		sb.append(android.provider.BaseColumns._ID);
+		sb.append(" = ");
+		sb.append(cl.getDb_id());
+
+		
+		return sb.toString();
+		
+	}//_build_Sql_CL_Full
+
 }//public class DBUtils
 

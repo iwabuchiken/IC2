@@ -9,6 +9,7 @@ import ic2.main.R;
 import ic2.utils.Tags.DialogTags;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import android.app.Activity;
@@ -303,6 +304,8 @@ public class Methods_dlg {
 		
 		List<String> genreList = Methods.get_genre_list(actv);
 
+		Collections.sort(genreList);
+		
 		/*********************************
 		 * 4.2. Adapter
 		 *********************************/
@@ -358,5 +361,147 @@ public class Methods_dlg {
 		dlg2.show();		
 		
 	}//dlg_Change_Genre
+
+	public static void
+	dlg_Edit_CL
+	(Activity actv,
+			long check_list_id,
+			Dialog dlg1, 
+			CL check_list, 
+			int item_position) {
+		// TODO Auto-generated method stub
+		
+		Dialog dlg2 = new Dialog(actv);
+		
+		//
+		dlg2.setContentView(R.layout.dlg_edit_cl);
+		
+		// Title
+		dlg2.setTitle(R.string.dlg_edit_cl_title);
+
+		/*********************************
+		 * 2. Get views
+		 *********************************/
+		//
+		Button btn_ok = 
+			(Button) dlg2.findViewById(R.id.dlg_edit_cl_btn_ok);
+		
+		Button btn_cancel = 
+				(Button) dlg2.findViewById(R.id.dlg_edit_cl_btn_cancel);
+		
+		/*********************************
+		 * 3. Set tags
+		 *********************************/
+		//
+		btn_ok.setTag(
+				Methods.DialogButtonTags.dlg_edit_cl_btn_ok);
+		
+		btn_cancel.setTag(
+				Methods.DialogButtonTags.dlg_generic_dismiss_second_dialog);
+		
+		/*********************************
+		 * 3-2. Set current text
+		 *********************************/
+		////////////////////////////////
+
+		// set: title
+
+		////////////////////////////////
+		EditText et_Title = 
+				(EditText) dlg2.findViewById(R.id.dlg_edit_cl_et_title);
+		
+		String text = check_list.getName();
+		
+		et_Title.setText(text);
+		
+//		et.setSelection(0);
+		
+		et_Title.setSelection(text.length());
+
+		////////////////////////////////
+
+		// set: genre
+
+		////////////////////////////////
+		EditText et_Yomi = 
+				(EditText) dlg2.findViewById(R.id.dlg_edit_cl_et_yomi);
+		
+//		String yomi = check_list.getName();
+		
+		et_Yomi.setText(check_list.getYomi());
+
+		////////////////////////////////
+
+		// spinner
+
+		////////////////////////////////
+		Spinner sp = (Spinner) dlg2.findViewById(R.id.dlg_edit_cl_sp_genre);
+		
+		List<String> genreList = Methods.get_genre_list(actv);
+
+		Collections.sort(genreList);
+		
+		/*********************************
+		 * 4.2. Adapter
+		 *********************************/
+		ArrayAdapter<String> adp = new ArrayAdapter<String>(
+	              actv, android.R.layout.simple_spinner_item, genreList);
+		
+		adp.setDropDownViewResource(
+				android.R.layout.simple_spinner_dropdown_item);
+		
+		/*********************************
+		 * 4.3. Set adapter
+		 *********************************/
+		sp.setAdapter(adp);		
+		
+		////////////////////////////////
+
+		// spinner: set selection
+
+		////////////////////////////////
+		int num = 0;
+		
+		for (int i = 0; i < adp.getCount(); i++) {
+			
+			String genreName = adp.getItem(i);
+	
+			if (genreName.equals(
+					Methods.get_genre_name_from_genre_id(
+							actv, check_list.getGenre_id()))) {
+//				actv.getString(R.string.generic_label_all))) {
+				
+				num = i;
+				
+				break;
+				
+			}//if (si.getName() == condition)
+			
+		}//for (int i = 0; i < adapter.getCount(); i++)
+
+		sp.setSelection(num);
+		
+		/*********************************
+		 * 4. Add listeners => OnTouch
+		 *********************************/
+		//
+		btn_ok.setOnTouchListener(new DB_TL(actv, dlg2));
+		btn_cancel.setOnTouchListener(new DB_TL(actv, dlg2));
+		
+		/*********************************
+		 * 5. Add listeners => OnClick
+		 *********************************/
+		//
+		btn_ok.setOnClickListener(new DB_CL(actv, dlg1, dlg2, item_position));
+		btn_cancel.setOnClickListener(
+					new DB_CL(actv, dlg1, dlg2));
+		
+		/*********************************
+		 * 6. Show dialog
+		 *********************************/
+		dlg2.show();		
+		
+		
+	}//dlg_Edit_CL
 
 }//public class Methods_dlg

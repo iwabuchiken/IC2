@@ -364,6 +364,13 @@ public class DOI_CL implements OnItemClickListener {
 					actv, check_list_id, dlg1, check_list, item_position);
 //			actv, check_list_id, dlg1, check_list, position);
 			
+		} else if (item.equals(actv.getString(
+				R.string.dlg_main_actv_long_click_lv_edit_cl))) {
+			
+			Methods_dlg.dlg_Edit_CL(
+					actv, check_list_id, dlg1, check_list, item_position);
+//			actv, check_list_id, dlg1, check_list, position);
+			
 		} else {//if (item == condition)
 			
 			// Log
