@@ -60,93 +60,96 @@ public class Methods_ic {
 		
 		CONS.Admin.sortType = type;
 		
-		Collections.sort(MainActv.CLList, new Comparator<CL>(){
-			
-			public int compare(CL cl1, CL cl2) {
-				// TODO Auto-generated method stub
-				
-				switch(CONS.Admin.sortType) {
-				
-				case SortBy_Yomi:
-					
-					if (cl1.getYomi() == null) {
-						
-						// Log
-						Log.d("["
-								+ "Methods_ic.java : "
-								+ +Thread.currentThread().getStackTrace()[2]
-										.getLineNumber()
-								+ " : "
-								+ Thread.currentThread().getStackTrace()[2]
-										.getMethodName() + "]",
-						"cl1.getYomi => null");
-						
-						return 1;
-						
-					} else	if (cl2.getYomi() == null) {
-						
-						// Log
-						Log.d("["
-								+ "Methods_ic.java : "
-								+ +Thread.currentThread().getStackTrace()[2]
-										.getLineNumber()
-										+ " : "
-										+ Thread.currentThread().getStackTrace()[2]
-												.getMethodName() + "]",
-								"cl2.getYomi => null");
-							
-						return 1;
-						
-					}
-					
-					return (int)
-						(cl1.getYomi().compareToIgnoreCase(cl2.getYomi()));
-					
-				case SortBy_CreatedAt:
-					
-					// Log
-					String msg = "cl1 created_at="
-								+ String.valueOf(cl1.getCreated_at())
-								+ "/"
-								+ "cl2 created_at="
-								+ String.valueOf(cl2.getCreated_at())
-								+ "("
-								+ String.valueOf(cl1.getCreated_at() - cl2.getCreated_at())
-								+ ")";
-					
-					long diff = (cl1.getCreated_at() - cl2.getCreated_at());
-					
-					if (diff > 0) {
-						
-						return 1;
-						
-					} else if (diff < 0){//if (diff > 0)
-						
-						return -1;
-						
-					} else {//if (diff > 0)
-						
-						return 0;
-						
-					}//if (diff > 0)
-					
-					
+		Comp_CL cmp = new Comp_CL(CONS.Admin.sortType);
+		
+		Collections.sort(MainActv.CLList, cmp);
+//		Collections.sort(MainActv.CLList, new Comparator<CL>(){
+//			
+//			public int compare(CL cl1, CL cl2) {
+//				// TODO Auto-generated method stub
+//				
+//				switch(CONS.Admin.sortType) {
+//				
+//				case SortBy_Yomi:
+//					
+//					if (cl1.getYomi() == null) {
+//						
+//						// Log
+//						Log.d("["
+//								+ "Methods_ic.java : "
+//								+ +Thread.currentThread().getStackTrace()[2]
+//										.getLineNumber()
+//								+ " : "
+//								+ Thread.currentThread().getStackTrace()[2]
+//										.getMethodName() + "]",
+//						"cl1.getYomi => null");
+//						
+//						return 1;
+//						
+//					} else	if (cl2.getYomi() == null) {
+//						
+//						// Log
+//						Log.d("["
+//								+ "Methods_ic.java : "
+//								+ +Thread.currentThread().getStackTrace()[2]
+//										.getLineNumber()
+//										+ " : "
+//										+ Thread.currentThread().getStackTrace()[2]
+//												.getMethodName() + "]",
+//								"cl2.getYomi => null");
+//							
+//						return 1;
+//						
+//					}
+//					
 //					return (int)
-////							(cl2.getCreated_at() - cl1.getCreated_at());
-//							(cl1.getCreated_at() - cl2.getCreated_at());
-					
-				default:
-					
-					return (int)
-							(cl1.getYomi().compareToIgnoreCase(cl2.getYomi()));
-					
-				}//switch(CONS.Admin.sortType) {
-				
-//				return (int) (cl1.getName().compareToIgnoreCase(cl2.getName()));
-				
-			}//public int compare(CL cl1, CL cl2)
-			
-		});//Collections.sort()
+//						(cl1.getYomi().compareToIgnoreCase(cl2.getYomi()));
+//					
+//				case SortBy_CreatedAt:
+//					
+//					// Log
+//					String msg = "cl1 created_at="
+//								+ String.valueOf(cl1.getCreated_at())
+//								+ "/"
+//								+ "cl2 created_at="
+//								+ String.valueOf(cl2.getCreated_at())
+//								+ "("
+//								+ String.valueOf(cl1.getCreated_at() - cl2.getCreated_at())
+//								+ ")";
+//					
+//					long diff = (cl1.getCreated_at() - cl2.getCreated_at());
+//					
+//					if (diff > 0) {
+//						
+//						return 1;
+//						
+//					} else if (diff < 0){//if (diff > 0)
+//						
+//						return -1;
+//						
+//					} else {//if (diff > 0)
+//						
+//						return 0;
+//						
+//					}//if (diff > 0)
+//					
+//					
+////					return (int)
+//////							(cl2.getCreated_at() - cl1.getCreated_at());
+////							(cl1.getCreated_at() - cl2.getCreated_at());
+//					
+//				default:
+//					
+//					return (int)
+//							(cl1.getYomi().compareToIgnoreCase(cl2.getYomi()));
+//					
+//				}//switch(CONS.Admin.sortType) {
+//				
+////				return (int) (cl1.getName().compareToIgnoreCase(cl2.getName()));
+//				
+//			}//public int compare(CL cl1, CL cl2)
+//			
+//		});//Collections.sort()
 		
 		return true;
 		

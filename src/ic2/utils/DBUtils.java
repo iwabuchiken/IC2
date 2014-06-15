@@ -1721,6 +1721,7 @@ public class DBUtils extends SQLiteOpenHelper{
 		sb.append(CONS.DB.tname_Check_Lists);
 		sb.append(" SET ");
 		
+		//REF "," http://stackoverflow.com/questions/808418/sqliite-update-two-columns answered Apr 30 '09 at 18:36
 		sb.append(CONS.DB.cols_check_lists[1]);
 		sb.append(" = '");
 		sb.append(cl.getGenre_id());
