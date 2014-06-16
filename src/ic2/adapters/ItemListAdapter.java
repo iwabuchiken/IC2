@@ -5,8 +5,10 @@ import ic2.main.R;
 
 
 
+
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -80,7 +82,7 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
 		TextView tv_text =
 				(TextView) v.findViewById(R.id.list_row_item_list_tv_text);
 		
-		TextView tv_status =
+		TextView tv_Status =
 				(TextView) v.findViewById(R.id.list_row_log_line_tv_meta);
 		
 		TextView tv_serial_num = 
@@ -99,7 +101,7 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
 			tv_text.setText(item.getText());
 
 //			tv_status.setText(String.valueOf(item.getCreated_at()));
-			tv_status.setText(String.valueOf(item.getStatus()));
+			tv_Status.setText(String.valueOf(item.getStatus()));
 			
 			tv_serial_num.setText(String.valueOf(item.getSerial_num()));
 			
@@ -116,6 +118,43 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
 		/*----------------------------
 		 * 4. Set bg color
 			----------------------------*/
+		////////////////////////////////
+
+		// Set bg color
+
+		////////////////////////////////
+		int status = item.getStatus();
+		
+		if (status == 0) {
+			
+			tv_Status.setBackgroundColor(
+						((Activity)con)
+						.getResources()
+						.getColor(R.color.black));
+			
+		} else if (status != 0 && status != 2) {
+			
+			tv_Status.setBackgroundColor(
+						((Activity)con)
+						.getResources()
+						.getColor(R.color.blue1));
+
+		} else if (status == 2) {
+			
+			tv_Status.setBackgroundColor(
+					((Activity)con)
+					.getResources()
+					.getColor(R.color.yello));
+			
+		} else {
+			
+			tv_Status.setBackgroundColor(
+					((Activity)con)
+					.getResources()
+					.getColor(R.color.black));
+			
+		}
+		
 		
 //    	return null;
 		return v;
