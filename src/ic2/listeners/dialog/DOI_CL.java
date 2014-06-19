@@ -198,9 +198,10 @@ public class DOI_CL implements OnItemClickListener {
 			
 			break;// case dlg_filter_by_genre_lv
 
-		case dlg_main_actv_long_click_lv://-------------------------------
+		case DLG_MAINACTV_LONGCLICK_LV://-------------------------------
 			
-			case_dlg_main_actv_long_click_lv(parent, position);
+//			case_dlg_main_actv_long_click_lv(parent, position);
+			case_Dlg_MainActv_LongClick_lv(parent, position);
 			
 			break;// case dlg_main_actv_long_click_lv
 		
@@ -335,7 +336,7 @@ public class DOI_CL implements OnItemClickListener {
 	}//private void dlg_db_admin_item_upload_db()
 
 	private void
-	case_dlg_main_actv_long_click_lv
+	case_Dlg_MainActv_LongClick_lv
 	(AdapterView<?> parent, int position) {
 		// TODO Auto-generated method stub
 		String item = (String) parent.getItemAtPosition(position);
@@ -350,19 +351,19 @@ public class DOI_CL implements OnItemClickListener {
 
 			Methods.delete_list(actv, check_list_id, dlg1, check_list);
 			
-		} else if (item.equals(actv.getString(
-				R.string.dlg_main_actv_long_click_lv_edit_title))) {
-			
-			Methods_dlg.dlg_Edit_List_Title(
-					actv, check_list_id, dlg1, check_list, item_position);
-//			actv, check_list_id, dlg1, check_list, position);
-			
-		} else if (item.equals(actv.getString(
-				R.string.dlg_main_actv_long_click_lv_change_genre))) {
-			
-			Methods_dlg.dlg_Change_Genre(
-					actv, check_list_id, dlg1, check_list, item_position);
-//			actv, check_list_id, dlg1, check_list, position);
+//		} else if (item.equals(actv.getString(
+//				R.string.dlg_main_actv_long_click_lv_edit_title))) {
+//			
+//			Methods_dlg.dlg_Edit_List_Title(
+//					actv, check_list_id, dlg1, check_list, item_position);
+////			actv, check_list_id, dlg1, check_list, position);
+//			
+//		} else if (item.equals(actv.getString(
+//				R.string.dlg_main_actv_long_click_lv_change_genre))) {
+//			
+//			Methods_dlg.dlg_Change_Genre(
+//					actv, check_list_id, dlg1, check_list, item_position);
+////			actv, check_list_id, dlg1, check_list, position);
 			
 		} else if (item.equals(actv.getString(
 				R.string.dlg_main_actv_long_click_lv_edit_cl))) {

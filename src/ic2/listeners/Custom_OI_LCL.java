@@ -110,7 +110,7 @@ public class Custom_OI_LCL implements OnItemLongClickListener {
 
 		case actv_main_lv://-----------------------------------------
 			
-			boolean result = case_actv_main_lv(parent, position);
+			boolean result = case_MainActv_LV(parent, position);
 			
 			if (result == false) {
 				
@@ -118,32 +118,6 @@ public class Custom_OI_LCL implements OnItemLongClickListener {
 				
 			}//if (result == false)
 			
-//			CL check_list = (CL) parent.getItemAtPosition(position);
-//			
-//			if (check_list == null) {
-//				
-//				// debug
-//				Toast.makeText(actv, "Check list is null", Toast.LENGTH_SHORT).show();
-//				
-//				return false;
-//				
-//			}//if (check_list == null)
-//			
-//			long check_list_id = check_list.getDb_id();
-//			
-//			
-//			Methods.dlg_main_actv_long_click(actv, position, check_list_id);
-//			
-//			// Log
-//			Log.d("Methods.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ "]", "position: " + position);
-//			
-//			// Log
-//			Log.d("CustomOnItemLongClickListener.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ "]", "check_list.getName()=" + check_list.getName());
-
 			break;// case actv_main_lv
 
 		}//switch (tag)
@@ -155,21 +129,9 @@ public class Custom_OI_LCL implements OnItemLongClickListener {
 	}//public boolean onItemLongClick()
 
 	private boolean
-	case_actv_main_lv(AdapterView<?> parent, int position) {
+	case_MainActv_LV(AdapterView<?> parent, int position) {
 		// TODO Auto-generated method stub
 		CL check_list = (CL) parent.getItemAtPosition(position);
-		
-//		// Log
-//		String msg_Log = "check_list.getName() => " + check_list.getName();
-//		Log.d("Custom_OI_LCL.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ "]", msg_Log);
-//		
-//		// Log
-//		msg_Log = "parent => " + parent.getClass().getName();
-//		Log.d("Custom_OI_LCL.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ "]", msg_Log);
 		
 		if (check_list == null) {
 			
@@ -182,7 +144,7 @@ public class Custom_OI_LCL implements OnItemLongClickListener {
 		
 		long check_list_id = check_list.getDb_id();
 		
-		Methods.dlg_main_actv_long_click(actv, position, check_list_id, check_list);
+		Methods.dlg_MainActv_LongClick(actv, position, check_list_id, check_list);
 		
 		return true;
 		

@@ -99,7 +99,7 @@ public class Methods {
 		dlg_filter_by_genre_lv,
 		
 		// dlg_main_actv_long_click.xml
-		dlg_main_actv_long_click_lv,
+		DLG_MAINACTV_LONGCLICK_LV,
 		
 		dlg_db_admin_lv,
 		
@@ -2393,7 +2393,7 @@ public class Methods {
 	}//dlg_checkactv_long_click
 
 	public static void
-	dlg_main_actv_long_click
+	dlg_MainActv_LongClick
 	(Activity actv, int item_position, long check_list_id, CL check_list) {
 		/*********************************
 		 * 1. Dialog
@@ -2401,7 +2401,9 @@ public class Methods {
 		 * 3. Show dialog
 		 *********************************/
 		Dialog dlg = dlg_template_cancel(actv, 
-				R.layout.dlg_main_actv_long_click, R.string.dlg_main_actv_long_click_title,
+				R.layout.dlg_main_actv_long_click, 
+				R.string.dlg_main_actv_long_click_title,
+				
 				R.id.dlg_main_actv_long_click_bt_cancel,
 				Methods.DialogButtonTags.dlg_generic_dismiss);
 
@@ -2431,7 +2433,8 @@ public class Methods {
 			----------------------------*/
 		ListView lv = (ListView) dlg.findViewById(R.id.dlg_main_actv_long_click_lv);
 		
-		lv.setTag(Methods.DialogItemTags.dlg_main_actv_long_click_lv);
+//		lv.setTag(Methods.DialogItemTags.dlg_main_actv_long_click_lv);
+		lv.setTag(Methods.DialogItemTags.DLG_MAINACTV_LONGCLICK_LV);
 		
 		/*----------------------------
 		 * 2.2. Prepare list data
@@ -2446,11 +2449,11 @@ public class Methods {
 		long_click_items.add(actv.getString(
 						R.string.dlg_main_actv_long_click_lv_delete_list));
 		
-		long_click_items.add(actv.getString(
-				R.string.dlg_main_actv_long_click_lv_edit_title));
-		
-		long_click_items.add(actv.getString(
-				R.string.dlg_main_actv_long_click_lv_change_genre));
+//		long_click_items.add(actv.getString(
+//				R.string.dlg_main_actv_long_click_lv_edit_title));
+//		
+//		long_click_items.add(actv.getString(
+//				R.string.dlg_main_actv_long_click_lv_change_genre));
 		
 		long_click_items.add(actv.getString(
 				R.string.dlg_main_actv_long_click_lv_edit_cl));
