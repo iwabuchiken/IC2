@@ -269,7 +269,7 @@ public class DOI_CL implements OnItemClickListener {
 		Methods_ic.sort_CheckList(actv, type);
 //		Methods_ic.sort_CheckList_ItemName(actv);
 		
-		MainActv.mlAdp.notifyDataSetChanged();
+		CONS.MainActv.mlAdp.notifyDataSetChanged();
 		
 		dlg1.dismiss();
 
@@ -369,6 +369,13 @@ public class DOI_CL implements OnItemClickListener {
 				R.string.dlg_main_actv_long_click_lv_edit_cl))) {
 			
 			Methods_dlg.dlg_Edit_CL(
+					actv, check_list_id, dlg1, check_list, item_position);
+//			actv, check_list_id, dlg1, check_list, position);
+			
+		} else if (item.equals(actv.getString(
+				R.string.dlg_main_actv_long_click_lv_dup_cl))) {
+			
+			Methods_dlg.dlg_Conf_Dup_CL(
 					actv, check_list_id, dlg1, check_list, item_position);
 //			actv, check_list_id, dlg1, check_list, position);
 			
@@ -475,14 +482,14 @@ public class DOI_CL implements OnItemClickListener {
 		 *********************************/
 		c.moveToFirst();
 		
-		MainActv.CLList.clear();
+		CONS.MainActv.CLList.clear();
 
-		MainActv.CLList.addAll(Methods_ic.build_CL(actv, c));
+		CONS.MainActv.CLList.addAll(Methods_ic.build_CL(actv, c));
 		
 		// Log
 		Log.d("MainActv.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ "]", "CLList.size(): " + MainActv.CLList.size());
+				+ "]", "CLList.size(): " + CONS.MainActv.CLList.size());
 
 		/*********************************
 		 * Close db
@@ -503,7 +510,7 @@ public class DOI_CL implements OnItemClickListener {
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", "res: " + res);
 		
-		MainActv.mlAdp.notifyDataSetChanged();
+		CONS.MainActv.mlAdp.notifyDataSetChanged();
 
 		/*********************************
 		 * Set: Preference

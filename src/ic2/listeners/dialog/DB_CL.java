@@ -3,6 +3,7 @@ package ic2.listeners.dialog;
 import ic2.items.CL;
 import ic2.main.R;
 import ic2.utils.Methods;
+import ic2.utils.Tags;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Vibrator;
@@ -79,7 +80,8 @@ public class DB_CL implements OnClickListener {
 	//	@Override
 	public void onClick(View v) {
 		//
-		Methods.DialogButtonTags tag_name = (Methods.DialogButtonTags) v.getTag();
+		Tags.DialogButtonTags tag_name = (Tags.DialogButtonTags) v.getTag();
+//		Methods.DialogButtonTags tag_name = (Methods.DialogButtonTags) v.getTag();
 
 		//
 		switch (tag_name) {
@@ -92,7 +94,7 @@ public class DB_CL implements OnClickListener {
 			
 			break;
 			
-		case dlg_generic_dismiss_second_dialog://------------------------------------------------
+		case DLG_GENERIC_DISMISS_SECOND_DIALOG://------------------------------------------------
 			
 			vib.vibrate(Methods.vibLength_click);
 			
@@ -151,6 +153,12 @@ public class DB_CL implements OnClickListener {
 		case dlg_edit_cl_btn_ok://---------------------------------
 			
 			Methods.edit_CL(actv, dlg, dlg2, item_position);
+			
+			break;
+			
+		case DLG_CONF_DUPLIST_OK://---------------------------------
+			
+			Methods.dup_CL(actv, dlg, dlg2, item_position);
 			
 			break;
 			

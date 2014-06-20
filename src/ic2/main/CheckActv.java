@@ -185,6 +185,42 @@ public class CheckActv extends ListActivity {
 		 *********************************/
 		setListAdapter(ilAdp);
 		
+//		////////////////////////////////
+//
+//		// set: title
+//
+//		////////////////////////////////
+//		String title = this.getClass().getName()
+//						+ "("
+//						+ iList.size()
+//						+ ")"
+//						;
+//		this.setTitle(title);
+		
+		////////////////////////////////
+
+		// title
+
+		////////////////////////////////
+		TextView tv_title = (TextView) findViewById(R.id.actv_check_tv);
+
+		String title = clList.getName()
+						+ " ("
+						+ iList.size()
+						+ ")"
+						;
+		
+		if (title.equals("")) {
+			
+			tv_title.setText("No list name data");
+			
+		} else {
+			
+			tv_title.setText(title);
+			
+		}
+
+		
 		/*********************************
 		 * 4. Return
 		 *********************************/
@@ -292,6 +328,22 @@ public class CheckActv extends ListActivity {
 		 * 3. Get list object
 		 *********************************/
 		clList = Methods.get_clList_from_db_id(this, list_id);
+		
+		if (clList == null) {
+			
+			// Log
+			String msg_Log = "clList => null";
+			Log.d("CheckActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+			// debug
+			String msg_Toast = "Check list => can't build: id = " + list_id;
+			Toast.makeText(this, msg_Toast, Toast.LENGTH_SHORT).show();
+			
+			return;
+			
+		}
 		
 		// Log
 		Log.d("CheckActv.java" + "["

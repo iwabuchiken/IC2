@@ -5,6 +5,7 @@ package ic2.utils;
 
 import ic2.items.CL;
 import ic2.items.Item;
+import ic2.items.Word;
 import ic2.main.MainActv;
 
 import java.util.ArrayList;
@@ -522,7 +523,9 @@ public class DBUtils extends SQLiteOpenHelper{
 		
 	}//public boolean insertData_genre
 
-	public boolean insertData_list(SQLiteDatabase wdb, String list_name, int genre_id) {
+	public boolean 
+	insertData_list
+	(SQLiteDatabase wdb, String list_name, int genre_id) {
 		/*----------------------------
 		* 1. Insert data
 		----------------------------*/
@@ -565,6 +568,63 @@ public class DBUtils extends SQLiteOpenHelper{
 			Log.e("DBUtils.java" + "["
 			+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 			+ "]", "Exception! => " + e.toString());
+			
+			return false;
+		}//try
+		
+		////debug
+		//return false;
+		
+	}//public boolean insertData_list
+	
+	public boolean 
+	insertData_list
+	(SQLiteDatabase wdb, String list_name, int genre_id, String yomi) {
+		/*----------------------------
+		 * 1. Insert data
+		----------------------------*/
+		long created_at = Methods.getMillSeconds_now();
+		long modified_at = Methods.getMillSeconds_now();
+		
+		try {
+			// Start transaction
+			wdb.beginTransaction();
+			
+			// ContentValues
+			ContentValues val = new ContentValues();
+			
+//			"name",	"genre_id", "yomi"	// 0,1,2
+			
+			// Put values
+			val.put("created_at", created_at);		// 
+			val.put("modified_at", modified_at);		//
+			
+			val.put(CONS.DB.cols_check_lists[0], list_name);		// 
+			val.put(CONS.DB.cols_check_lists[1], genre_id);		//
+			val.put(CONS.DB.cols_check_lists[2], yomi);		//
+			
+			// Insert data
+			wdb.insert(CONS.DB.tname_Check_Lists, null, val);
+			
+			// Set as successful
+			wdb.setTransactionSuccessful();
+			
+			// End transaction
+			wdb.endTransaction();
+			
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "Transaction => Ends");
+			
+			
+			return true;
+			
+		} catch (Exception e) {
+			// Log
+			Log.e("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "Exception! => " + e.toString());
 			
 			return false;
 		}//try
@@ -1288,7 +1348,7 @@ public class DBUtils extends SQLiteOpenHelper{
 		/*********************************
 		 * Delete: Item in CLList
 		 *********************************/
-		result = MainActv.CLList.remove(check_list);
+		result = CONS.MainActv.CLList.remove(check_list);
 		
 		if (result == false) {
 			
@@ -1307,7 +1367,7 @@ public class DBUtils extends SQLiteOpenHelper{
 		/*********************************
 		 * Notify the adapter
 		 *********************************/
-		MainActv.mlAdp.notifyDataSetChanged();
+		CONS.MainActv.mlAdp.notifyDataSetChanged();
 		
 		/*********************************
 		 * Return
@@ -1747,6 +1807,274 @@ public class DBUtils extends SQLiteOpenHelper{
 		return sb.toString();
 		
 	}//_build_Sql_CL_Full
+
+	public static List<Item> 
+	get_Items_from_CL
+	(Activity actv, long cl_DbId) {
+		// TODO Auto-generated method stub
+		
+		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
+		
+		SQLiteDatabase rdb = dbu.getReadableDatabase();
+		
+//		String tname	= CONS.DB.tname_Check_Lists;
+//		String fields[]	= CONS.DB.cols_check_lists_FULL;
+//		String where	= 
+//					CONS.DB.cols_check_lists_FULL[
+//					     Methods.getArrayIndex(
+//					    		 CONS.DB.cols_check_lists_FULL,
+//					    		 "yomi")]
+//					+ " is null";
+////		+ " = "
+////		+ "?";
+//		
+//		String args[]	= new String[]{
+//				
+////				"null"
+////				null
+//				""
+//		};
+		
+		//
+//		String sql = "SELECT * FROM " + CONS.DB.tname_Check_Lists;
+		
+//		"text", "serial_num",			// 0,1
+//		"list_id", "status"				// 2,3
+
+		String where = CONS.DB.col_name_Items[2]
+						+ " = ?";
+//		+ " = "
+//		+ cl_DbId;
+		
+		String[] params = new String[]{
+				
+				String.valueOf(cl_DbId)
+				
+		};
+		
+		Cursor c = null;
+		
+		try {
+			
+//			c = rdb.rawQuery(sql, null);
+			c = rdb.query(
+						CONS.DB.tname_items, 
+						CONS.DB.col_name_Items_full, 
+						where, 
+						params, 
+//						null, 
+						null, null, null);
+//			c = rdb.query(tname, fields, where, args, null, null, null);
+		
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "c.getCount()=" + c.getCount());
+			
+		} catch (Exception e) {
+			// Log
+			Log.e("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "Exception => " + e.toString());
+			
+			rdb.close();
+			
+			return null;
+		}
+	
+		/*********************************
+		 * Query => No records?
+		 *********************************/
+		if (c.getCount() < 1) {
+			
+			// Log
+			Log.d("["
+					+ "DBUtils.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Query => No records");
+			
+			return null;
+			
+		}
+		
+		/*********************************
+		 * Get names
+		 *********************************/
+//		List<String> itemNames = new ArrayList<String>();
+//		
+//		List<Long> itemIds = new ArrayList<Long>();
+		
+		List<Item> itemList = new ArrayList<Item>();
+		
+		c.moveToFirst();
+		
+//		int numOfSamples = CONS.DB.GetYomi_ChunkNum;
+//		int numOfSamples = 5;
+//		int numOfSamples = 10;
+		
+		/***************************************
+		 * Counter: Count 1 each time when a new entry 
+		 * 				is made into wordList
+		 ***************************************/
+		int counter = 0;
+//		int numOfSamples = c.getCount();
+
+//		"INTEGER", 				// 0
+//		"INTEGER", "INTEGER",	// 1,2
+//		
+//		"TEXT", "INTEGER",		// 3,4
+//		"INTEGER", "INTEGER"	// 5,6
+		for (int i = 0; i < c.getCount(); i++) {
+
+			Item item = new Item.Builder()
+						.setDb_id(c.getLong(0))
+						.setCreated_at(c.getLong(1))
+						.setModified_at(c.getLong(2))
+						.setText(c.getString(3))
+						.setSerial_num(c.getInt(4))
+						.setList_id(c.getInt(5))
+						.setStatus(c.getInt(6))
+						.build();
+			
+			itemList.add(item);
+			
+			/*********************************
+			 * Next row in the cursor
+			 *********************************/
+			c.moveToNext();
+			
+		}//for (int i = 0; i < 10; i++)
+		
+		
+//		// Log
+//		Log.d("DBUtils.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "itemList.size()=" + itemList.size());
+		
+		rdb.close();		
+		
+		return itemList;
+		
+	}//get_Items_from_CL
+
+	public static CL 
+	get_CL_from_Name
+	(Activity actv, String listName_new) {
+		// TODO Auto-generated method stub
+		
+		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
+		
+		SQLiteDatabase rdb = dbu.getReadableDatabase();
+		
+//		public static String[] cols_check_lists_FULL = {
+//			
+//			android.provider.BaseColumns._ID,	// 0
+//			"created_at", "modified_at",		// 1,2
+//			"name",	"genre_id", "yomi"			// 3,4,5
+//		};
+
+		
+		String where = CONS.DB.cols_check_lists_FULL[3]
+				+ " = ?";
+		//+ " = "
+		//+ cl_DbId;
+		
+		String[] params = new String[]{
+				
+				listName_new
+				
+		};
+		
+		Cursor c = null;
+		
+		try {
+			
+		//	c = rdb.rawQuery(sql, null);
+			c = rdb.query(
+						CONS.DB.tname_Check_Lists, 
+						CONS.DB.cols_check_lists_FULL, 
+						where, 
+						params, 
+		//				null, 
+						null, null, null);
+		//	c = rdb.query(tname, fields, where, args, null, null, null);
+		
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "c.getCount()=" + c.getCount());
+			
+		} catch (Exception e) {
+			// Log
+			Log.e("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "Exception => " + e.toString());
+			
+			rdb.close();
+			
+			return null;
+		}
+		
+		/*********************************
+		 * Query => No records?
+		 *********************************/
+		if (c.getCount() < 1) {
+			
+			// Log
+			Log.d("["
+					+ "DBUtils.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Query => No records");
+			
+			return null;
+			
+		}
+		
+		/*********************************
+		 * Get names
+		 *********************************/
+		c.moveToFirst();
+		
+		/***************************************
+		 * Counter: Count 1 each time when a new entry 
+		 * 				is made into wordList
+		 ***************************************/
+//		public static String[] cols_check_lists_FULL = {
+//		
+//		android.provider.BaseColumns._ID,	// 0
+//		"created_at", "modified_at",		// 1,2
+//		"name",	"genre_id", "yomi"			// 3,4,5
+//	};
+		
+		CL cl = new CL.Builder()
+				.setDb_id(c.getLong(0))
+				.setCreated_at(c.getLong(1))
+				.setModified_at(c.getLong(2))
+				.setName(c.getString(3))
+				.setGenre_id(c.getInt(4))
+				.setYomi(c.getString(5))
+				.build();
+		
+		
+		
+		//// Log
+		//Log.d("DBUtils.java" + "["
+		//		+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+		//		+ ":"
+		//		+ Thread.currentThread().getStackTrace()[2].getMethodName()
+		//		+ "]", "itemList.size()=" + itemList.size());
+		
+		rdb.close();	
+		
+		return cl;
+		
+	}//get_CL_from_Name
 
 }//public class DBUtils
 

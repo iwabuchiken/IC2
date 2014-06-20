@@ -5,7 +5,7 @@ public class Tags {
 	public static enum DialogTags {
 		// dlg_generic
 		dlg_generic_cancel, dlg_generic_dismiss,
-		dlg_generic_dismiss_second_dialog,
+		DLG_GENERIC_DISMISS_SECOND_DIALOG,
 		dlg_generic_dismiss_third_dialog,
 		
 		// dlg_register_store.xml
@@ -66,6 +66,10 @@ public class Tags {
 		// dlg_item_list_long_click
 		dlg_item_list_long_click,
 		
+		// duplicate list
+//		dlg_conf_dup_list_ok,
+		DLG_CONF_DUPLIST_OK,
+		
 	}//public static enum DialogTags
 	
 	public static enum ButtonTags {
@@ -111,5 +115,39 @@ public class Tags {
 		dlg_db_admin_lv,
 		
 	}
+
+	public static enum DialogButtonTags {
+		// Generics
+		dlg_generic_dismiss, DLG_GENERIC_DISMISS_SECOND_DIALOG, dlg_generic_dismiss_third_dialog,
+
+		// dlg_register_genre.xml
+		dlg_register_genre_bt_ok,
+
+		// dlg_register_list.xml
+		dlg_register_list_bt_ok,
+		
+		// dlg_register_item.xml
+		dlg_rgstr_item_bt_ok,
+
+		// dlg_checkactv_change_serial_num_btn_ok.xml
+		dlg_checkactv_change_serial_num_btn_ok,
+		
+		// dlg_checkactv_edit_item_text_btn_ok.xml
+		dlg_checkactv_edit_item_text_btn_ok,
+		
+		// dlg_Edit_List_Title
+		dlg_edit_list_title_btn_ok,
+		
+		// dlg_change_genre
+		dlg_change_genre_btn_ok,
+		
+		// dlg_edit_cl.xml
+		dlg_edit_cl_btn_ok, dlg_edit_cl_btn_cancel,
+		
+		// duplicate list
+//		dlg_conf_dup_list_ok,
+		DLG_CONF_DUPLIST_OK,
+		
+	}//public static enum DialogButtonTags
 
 }//public class Tags

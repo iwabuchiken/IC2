@@ -85,6 +85,8 @@
     	    						Change genre</string>
     	<string name="dlg_main_actv_long_click_lv_edit_cl">
     	    						Edit: Check list</string>
+    	<string name="dlg_main_actv_long_click_lv_dup_cl">
+    	    						Duplicate check list</string>
     	    
     	
     <!-- dlg_db_admin.xml -->
@@ -123,7 +125,7 @@
 		<string name="dlg_edit_cl_tv_yomi">Yomi</string>
 		<string name="dlg_edit_cl_tv_genre">Genre</string>
 		
-		
-		
+	<!-- dlg: duplicate list -->
+		<string name="dlg_dup_checklist_message">Duplicate the list?</string>
 		
 </resources>

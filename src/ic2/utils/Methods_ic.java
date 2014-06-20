@@ -39,7 +39,7 @@ public class Methods_ic {
 	public static boolean
 	sort_CheckList_ItemName(Activity actv) {
 		// TODO Auto-generated method stub
-		Collections.sort(MainActv.CLList, new Comparator<CL>(){
+		Collections.sort(CONS.MainActv.CLList, new Comparator<CL>(){
 
 			public int compare(CL cl1, CL cl2) {
 				// TODO Auto-generated method stub
@@ -62,7 +62,7 @@ public class Methods_ic {
 		
 		Comp_CL cmp = new Comp_CL(CONS.Admin.sortType);
 		
-		Collections.sort(MainActv.CLList, cmp);
+		Collections.sort(CONS.MainActv.CLList, cmp);
 //		Collections.sort(MainActv.CLList, new Comparator<CL>(){
 //			
 //			public int compare(CL cl1, CL cl2) {

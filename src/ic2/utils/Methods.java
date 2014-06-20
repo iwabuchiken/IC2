@@ -910,7 +910,7 @@ public class Methods {
 	}//public static boolean set_pref(String pref_name, String value)
 
 	public static Dialog dlg_template_cancel(Activity actv, int layoutId, int titleStringId,
-			int cancelButtonId, DialogButtonTags cancelTag) {
+			int cancelButtonId, Tags.DialogButtonTags cancelTag) {
 		/*----------------------------
 		* Steps
 		* 1. Set up
@@ -955,7 +955,7 @@ public class Methods {
 	public static Dialog
 	dlg_template_cancel
 	(Activity actv, int layoutId, String titleStringId,
-			int cancelButtonId, DialogButtonTags cancelTag) {
+			int cancelButtonId, Tags.DialogButtonTags cancelTag) {
 		/*----------------------------
 		 * Steps
 		 * 1. Set up
@@ -998,7 +998,7 @@ public class Methods {
 	}//dlg_template_cancel
 
 	public static Dialog dlg_template_okCancel(Activity actv, int layoutId, int titleStringId,
-			int okButtonId, int cancelButtonId, DialogButtonTags okTag, DialogButtonTags cancelTag) {
+			int okButtonId, int cancelButtonId, Tags.DialogButtonTags dlgRgstrItemBtOk, ic2.utils.Tags.DialogButtonTags dlgGenericDismiss) {
 		/*----------------------------
 		* Steps
 		* 1. Set up
@@ -1023,8 +1023,8 @@ public class Methods {
 		Button btn_cancel = (Button) dlg.findViewById(cancelButtonId);
 		
 		//
-		btn_ok.setTag(okTag);
-		btn_cancel.setTag(cancelTag);
+		btn_ok.setTag(dlgRgstrItemBtOk);
+		btn_cancel.setTag(dlgGenericDismiss);
 		
 		//
 		btn_ok.setOnTouchListener(new DB_TL(actv, dlg));
@@ -1186,7 +1186,7 @@ public class Methods {
 		Dialog dlg = dlg_template_cancel(actv, 
 				R.layout.dlg_register, R.string.generic_tv_register,
 				R.id.dlg_register_btn_cancel,
-				Methods.DialogButtonTags.dlg_generic_dismiss);
+				Tags.DialogButtonTags.dlg_generic_dismiss);
 		
 		/*----------------------------
 		 * 2. List view
@@ -1264,8 +1264,8 @@ public class Methods {
 		Button btn_cancel = (Button) dlg2.findViewById(R.id.dlg_register_genre_btn_cancel);
 		
 		//
-		btn_ok.setTag(DialogButtonTags.dlg_register_genre_bt_ok);
-		btn_cancel.setTag(DialogButtonTags.dlg_generic_dismiss_second_dialog);
+		btn_ok.setTag(Tags.DialogButtonTags.dlg_register_genre_bt_ok);
+		btn_cancel.setTag(Tags.DialogButtonTags.DLG_GENERIC_DISMISS_SECOND_DIALOG);
 		
 		//
 		btn_ok.setOnTouchListener(new DB_TL(actv, dlg2));
@@ -1313,8 +1313,8 @@ public class Methods {
 		Button btn_cancel = (Button) dlg2.findViewById(R.id.dlg_register_list_btn_cancel);
 		
 		//
-		btn_ok.setTag(DialogButtonTags.dlg_register_list_bt_ok);
-		btn_cancel.setTag(DialogButtonTags.dlg_generic_dismiss_second_dialog);
+		btn_ok.setTag(Tags.DialogButtonTags.dlg_register_list_bt_ok);
+		btn_cancel.setTag(Tags.DialogButtonTags.DLG_GENERIC_DISMISS_SECOND_DIALOG);
 		
 		//
 		btn_ok.setOnTouchListener(new DB_TL(actv, dlg2));
@@ -1379,8 +1379,8 @@ public class Methods {
 						R.id.dlg_rgstr_item_btn_ok,
 						R.id.dlg_rgstr_item_btn_cancel,
 						
-						Methods.DialogButtonTags.dlg_rgstr_item_bt_ok,
-						Methods.DialogButtonTags.dlg_generic_dismiss
+						Tags.DialogButtonTags.dlg_rgstr_item_bt_ok,
+						Tags.DialogButtonTags.dlg_generic_dismiss
 						);
 		
 		/*----------------------------
@@ -2231,7 +2231,7 @@ public class Methods {
 				R.string.dlg_checkactv_long_click_title,
 				
 				R.id.dlg_checkactv_long_click_bt_cancel,
-				Methods.DialogButtonTags.dlg_generic_dismiss);
+				Tags.DialogButtonTags.dlg_generic_dismiss);
 
 		/*----------------------------
 		 * 2. List view
@@ -2330,7 +2330,7 @@ public class Methods {
 				dlgTitle,
 				
 				R.id.dlg_checkactv_long_click_bt_cancel,
-				Methods.DialogButtonTags.dlg_generic_dismiss);
+				Tags.DialogButtonTags.dlg_generic_dismiss);
 		
 		/*----------------------------
 		 * 2. List view
@@ -2405,7 +2405,7 @@ public class Methods {
 				R.string.dlg_main_actv_long_click_title,
 				
 				R.id.dlg_main_actv_long_click_bt_cancel,
-				Methods.DialogButtonTags.dlg_generic_dismiss);
+				Tags.DialogButtonTags.dlg_generic_dismiss);
 
 		//debug
 		CL list = (CL) CONS.MainActv.lvMain.getItemAtPosition(item_position);
@@ -2457,6 +2457,9 @@ public class Methods {
 		
 		long_click_items.add(actv.getString(
 				R.string.dlg_main_actv_long_click_lv_edit_cl));
+		
+		long_click_items.add(actv.getString(
+				R.string.dlg_main_actv_long_click_lv_dup_cl));
 		
 		// Setup: Adapter
 		ArrayAdapter<String> adp = new ArrayAdapter<String>(
@@ -2526,10 +2529,10 @@ public class Methods {
 		 *********************************/
 		//
 		btn_ok.setTag(
-				Methods.DialogButtonTags.dlg_checkactv_change_serial_num_btn_ok);
+				Tags.DialogButtonTags.dlg_checkactv_change_serial_num_btn_ok);
 		
 		btn_cancel.setTag(
-				Methods.DialogButtonTags.dlg_generic_dismiss_second_dialog);
+				Tags.DialogButtonTags.DLG_GENERIC_DISMISS_SECOND_DIALOG);
 		
 		/*----------------------------
 		* 2. Add listeners => OnTouch
@@ -2939,10 +2942,10 @@ public class Methods {
 		 *********************************/
 		//
 		btn_ok.setTag(
-				Methods.DialogButtonTags.dlg_checkactv_edit_item_text_btn_ok);
+				Tags.DialogButtonTags.dlg_checkactv_edit_item_text_btn_ok);
 		
 		btn_cancel.setTag(
-				Methods.DialogButtonTags.dlg_generic_dismiss_second_dialog);
+				Tags.DialogButtonTags.DLG_GENERIC_DISMISS_SECOND_DIALOG);
 		
 		/*********************************
 		 * 3-2. Set current text
@@ -3258,7 +3261,7 @@ public class Methods {
 		Dialog dlg = dlg_template_cancel(actv, 
 				R.layout.dlg_filter_by_genre, R.string.dlg_filter_by_genre_title,
 				R.id.dlg_filter_by_genre_btn_cancel,
-				Methods.DialogButtonTags.dlg_generic_dismiss);
+				Tags.DialogButtonTags.dlg_generic_dismiss);
 
 		/*********************************
 		 * 3. Get view
@@ -3473,11 +3476,11 @@ public class Methods {
 		c.moveToNext();
 		
 //		MainActv.CLList = new ArrayList<CL>();
-		MainActv.CLList.clear();
+		CONS.MainActv.CLList.clear();
 
 		for (int i = 0; i < c.getCount(); i++) {
 			
-			MainActv.CLList.add(new CL(
+			CONS.MainActv.CLList.add(new CL(
 					c.getString(3),
 					c.getInt(4),
 					
@@ -3493,14 +3496,14 @@ public class Methods {
 		// Log
 		Log.d("MainActv.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ "]", "MainActv.CLList.size(): " + MainActv.CLList.size());
+				+ "]", "CONS.MainActv.CLList.size(): " + CONS.MainActv.CLList.size());
 		
 		rdb.close();
 		
 		/*********************************
 		 * 4-2. Sort list
 		 *********************************/
-		boolean res = Methods.sort_list_CLList(actv, MainActv.CLList);
+		boolean res = Methods.sort_list_CLList(actv, CONS.MainActv.CLList);
 		
 		// Log
 		Log.d("MainActv.java" + "["
@@ -3510,7 +3513,7 @@ public class Methods {
 		/********************************
 		 * 5. Set list to adapter
 		 ********************************/
-		MainActv.mlAdp.notifyDataSetChanged();
+		CONS.MainActv.mlAdp.notifyDataSetChanged();
 		
 //		mlAdp = new MainListAdapter(
 //				this,
@@ -4310,7 +4313,7 @@ public class Methods {
 		// notify
 
 		////////////////////////////////
-		MainActv.mlAdp.notifyDataSetChanged();
+		CONS.MainActv.mlAdp.notifyDataSetChanged();
 		
 		////////////////////////////////
 
@@ -4390,10 +4393,10 @@ public class Methods {
 		////////////////////////////////
 		list.setGenre_id(genre_id);
 		
-		MainActv.mlAdp.notifyDataSetChanged();
+		CONS.MainActv.mlAdp.notifyDataSetChanged();
 		
 		// Log
-		String msg_Log = "MainActv.mlAdp => notified";
+		String msg_Log = "CONS.MainActv.mlAdp => notified";
 		Log.d("Methods.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", msg_Log);
@@ -4520,10 +4523,10 @@ public class Methods {
 		////////////////////////////////
 //		list.setGenre_id(genre_id);
 		
-		MainActv.mlAdp.notifyDataSetChanged();
+		CONS.MainActv.mlAdp.notifyDataSetChanged();
 		
 		// Log
-		msg_Log = "MainActv.mlAdp => notified";
+		msg_Log = "CONS.MainActv.mlAdp => notified";
 		Log.d("Methods.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", msg_Log);
@@ -4539,6 +4542,209 @@ public class Methods {
 		
 		
 	}//edit_CL
+
+	public static void 
+	dup_CL
+	(Activity actv, 
+			Dialog dlg1, Dialog dlg2,
+			int item_position) {
+		// TODO Auto-generated method stub
+		
+		////////////////////////////////
+
+		// get: cl
+
+		////////////////////////////////
+		CL cl = (CL) CONS.MainActv.lvMain.getItemAtPosition(item_position);
+		
+//		_debug_D_2_V_1_1(item_position);
+		
+		////////////////////////////////
+
+		// get: items
+
+		////////////////////////////////
+		String msg_Log;
+		
+		List<Item> items = DBUtils.get_Items_from_CL(actv, cl.getDb_id());
+		
+		// Log
+		if (items == null) {
+			
+			// Log
+			msg_Log = "items => null";
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+		} else {
+
+			msg_Log = "items.size() = " + items.size();
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+		}
+		
+		////////////////////////////////
+
+		// create: check list
+
+		////////////////////////////////
+		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
+		
+		SQLiteDatabase wdb = dbu.getWritableDatabase();
+		
+		String listName_new = cl.getName() + "(2)";
+		
+		// Log
+		msg_Log = "cl.getYomi() => " + cl.getYomi();
+		Log.d("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+		
+		boolean res = dbu.insertData_list(
+							wdb, 
+							listName_new, 
+							cl.getGenre_id(),
+							cl.getYomi() + "(2)");
+//		boolean res = dbu.insertData_list(wdb, listName_new, cl.getGenre_id());
+		
+		if (res == false) {
+			
+			// Log
+			msg_Log = "can't create check list: " + listName_new;
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+			// debug
+			Toast.makeText(actv, msg_Log, Toast.LENGTH_SHORT).show();
+			
+			return;
+			
+		}
+		
+		wdb.close();
+		
+		////////////////////////////////
+
+		// get: newly created check list
+
+		////////////////////////////////
+		CL cl_New = DBUtils.get_CL_from_Name(actv, listName_new);
+		
+		// Log
+		msg_Log = "cl.getDb_id() = " + cl.getDb_id()
+					+ " / "
+					+ "cl_New.getDb_id() = "
+					+ cl_New.getDb_id()
+				;
+		Log.d("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+		////////////////////////////////
+
+		// create: items
+
+		////////////////////////////////
+		wdb = dbu.getWritableDatabase();
+		
+		int tmp_Count = 0;
+		
+		for (Item item : items) {
+
+			Object[] data = {
+					
+					item.getText(), 
+					item.getSerial_num(),
+//					item.getList_id(),
+					cl_New.getDb_id()
+//					CheckActv.clList.getDb_id()
+			};
+			
+			res = dbu.insertData_item(wdb, data);
+			
+			if (res == true) {
+				
+				tmp_Count ++;
+				
+			}
+			
+		}
+		
+		// Log
+		msg_Log = "items => inserted: " + tmp_Count;
+		Log.d("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+		wdb.close();
+		
+		////////////////////////////////
+
+		// rebuild: check list in MainActv
+
+		////////////////////////////////
+		
+		
+		////////////////////////////////
+
+		// notify: adapter
+
+		////////////////////////////////
+		
+		////////////////////////////////
+
+		// dismiss dialogues
+
+		////////////////////////////////
+		dlg2.dismiss();
+		dlg1.dismiss();
+		
+		////////////////////////////////
+
+		// report
+
+		////////////////////////////////
+		// debug
+		String msg_Toast = "Check list => duplicated";
+		Toast.makeText(actv, msg_Toast, Toast.LENGTH_SHORT).show();
+		
+		
+	}//dup_CL
+
+	private static void _debug_D_2_V_1_1(int item_position) {
+		// TODO Auto-generated method stub
+		
+		// Log
+		String msg_Log;
+		
+		msg_Log = "item_position = " + item_position;
+		Log.d("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+		
+		for (int i = 0; i < CONS.MainActv.lvMain.getChildCount(); i++) {
+			
+			CL cl = (CL) CONS.MainActv.lvMain.getItemAtPosition(i);
+			
+			// Log
+			msg_Log = "message" + cl.getName()
+							+ " / "
+							+ "id = " + i
+							;
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+			
+		}
+		
+	}
 
 }//public class Methods
 

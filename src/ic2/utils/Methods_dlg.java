@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class Methods_dlg {
 
@@ -38,7 +39,7 @@ public class Methods_dlg {
 									R.layout.dlg_db_admin, 
 									R.string.dlg_db_admin_title, 
 									R.id.dlg_db_admin_bt_cancel, 
-									Methods.DialogButtonTags.dlg_generic_dismiss);
+									Tags.DialogButtonTags.dlg_generic_dismiss);
 		
 		/*----------------------------
 		 * 2. Prep => List
@@ -102,7 +103,7 @@ public class Methods_dlg {
 			
 			int layoutId, int titleStringId,
 			
-			int cancelButtonId, Methods.DialogButtonTags cancelTag) {
+			int cancelButtonId, Tags.DialogButtonTags cancelTag) {
 		/*----------------------------
 		* Steps
 		* 1. Set up
@@ -152,7 +153,7 @@ public class Methods_dlg {
 				R.layout.dlg_db_admin, 
 				R.string.dlg_sort_list_title, 
 				R.id.dlg_db_admin_bt_cancel, 
-				Methods.DialogButtonTags.dlg_generic_dismiss);
+				Tags.DialogButtonTags.dlg_generic_dismiss);
 
 		/*----------------------------
 		* 2. Prep => List
@@ -234,10 +235,10 @@ public class Methods_dlg {
 		 *********************************/
 		//
 		btn_ok.setTag(
-				Methods.DialogButtonTags.dlg_edit_list_title_btn_ok);
+				Tags.DialogButtonTags.dlg_edit_list_title_btn_ok);
 		
 		btn_cancel.setTag(
-				Methods.DialogButtonTags.dlg_generic_dismiss_second_dialog);
+				Tags.DialogButtonTags.DLG_GENERIC_DISMISS_SECOND_DIALOG);
 		
 		/*********************************
 		 * 3-2. Set current text
@@ -334,10 +335,10 @@ public class Methods_dlg {
 		 *********************************/
 		//
 		btn_ok.setTag(
-				Methods.DialogButtonTags.dlg_change_genre_btn_ok);
+				Tags.DialogButtonTags.dlg_change_genre_btn_ok);
 		
 		btn_cancel.setTag(
-				Methods.DialogButtonTags.dlg_generic_dismiss_second_dialog);
+				Tags.DialogButtonTags.DLG_GENERIC_DISMISS_SECOND_DIALOG);
 		
 		/*********************************
 		 * 4. Add listeners => OnTouch
@@ -394,10 +395,11 @@ public class Methods_dlg {
 		 *********************************/
 		//
 		btn_ok.setTag(
-				Methods.DialogButtonTags.dlg_edit_cl_btn_ok);
+				Tags.DialogButtonTags.dlg_edit_cl_btn_ok);
 		
 		btn_cancel.setTag(
-				Methods.DialogButtonTags.dlg_generic_dismiss_second_dialog);
+				Tags.DialogButtonTags.DLG_GENERIC_DISMISS_SECOND_DIALOG);
+//		Tags.DialogButtonTags.dlg_generic_dismiss_second_dialog);
 		
 		/*********************************
 		 * 3-2. Set current text
@@ -503,5 +505,162 @@ public class Methods_dlg {
 		
 		
 	}//dlg_Edit_CL
+
+	public static void
+	dlg_Conf_Dup_CL
+	(Activity actv, 
+			long check_list_id,
+			Dialog dlg1, CL check_list, int item_position) {
+		// TODO Auto-generated method stub
+		
+		Dialog dlg2 = Methods_dlg.dlg_Tmpl_OkCancel_SecondDialog(
+					actv, 
+					R.layout.dlg_tmpl_confirm_simple, 
+					actv.getString(R.string.generic_tv_confirm), 
+					
+					R.id.dlg_tmpl_confirm_simple_btn_ok, 
+					R.id.dlg_tmpl_confirm_simple_btn_cancel, 
+					
+					Tags.DialogButtonTags.DLG_CONF_DUPLIST_OK, 
+//					Tags.DialogTags.dlg_generic_dismiss_second_dialog, 
+					Tags.DialogButtonTags.DLG_GENERIC_DISMISS_SECOND_DIALOG, 
+					dlg1, item_position);
+//		dlg1, item_position);
+		
+		////////////////////////////////
+
+		// set: texts
+
+		////////////////////////////////
+		TextView tv_Message = 
+				(TextView) dlg2.findViewById(
+						R.id.dlg_tmpl_confirm_simple_tv_message);
+		
+		TextView tv_ItemName = 
+				(TextView) dlg2.findViewById(
+						R.id.dlg_tmpl_confirm_simple_tv_item_name);
+		
+		tv_Message.setText(actv.getString(R.string.dlg_dup_checklist_message));
+		tv_ItemName.setText(check_list.getName());
+		
+		dlg2.show();
+		
+		
+		
+	}//dlg_Conf_Dup_CL
+
+	public static
+	Dialog dlg_Tmpl_OkCancel_SecondDialog
+	(Activity actv, 
+			int layoutId, String title,
+			int okButtonId, int cancelButtonId,
+			
+			Tags.DialogButtonTags okTag, 
+			Tags.DialogButtonTags cancelTag,
+			
+			Dialog dlg1) {
+		/****************************
+		 * Steps
+		 * 1. Set up
+		 * 2. Add listeners => OnTouch
+		 * 3. Add listeners => OnClick
+		 ****************************/
+		
+		// 
+		Dialog dlg2 = new Dialog(actv);
+		
+		//
+		dlg2.setContentView(layoutId);
+		
+		// Title
+		dlg2.setTitle(title);
+//		dlg2.setTitle(titleStringId);
+		
+		/****************************
+		 * 2. Add listeners => OnTouch
+		 ****************************/
+		//
+		Button btn_ok = (Button) dlg2.findViewById(okButtonId);
+		Button btn_cancel = (Button) dlg2.findViewById(cancelButtonId);
+		
+		//
+		btn_ok.setTag(okTag);
+		btn_cancel.setTag(cancelTag);
+		
+		//
+		btn_ok.setOnTouchListener(new DB_TL(actv, dlg2));
+		btn_cancel.setOnTouchListener(new DB_TL(actv, dlg2));
+		
+		/****************************
+		 * 3. Add listeners => OnClick
+		 ****************************/
+		//
+		btn_ok.setOnClickListener(new DB_CL(actv, dlg1, dlg2));
+		btn_cancel.setOnClickListener(new DB_CL(actv, dlg1, dlg2));
+		
+		//
+		//dlg2.show();
+		
+		return dlg2;
+		
+	}//public static Dialog dlg_template_okCancel_SecondDialog()
+	
+	public static
+	Dialog dlg_Tmpl_OkCancel_SecondDialog
+	(Activity actv, 
+			int layoutId, String title,
+			int okButtonId, int cancelButtonId,
+			
+			Tags.DialogButtonTags okTag, 
+			Tags.DialogButtonTags cancelTag,
+			
+			Dialog dlg1, int item_Position_inList) {
+		/****************************
+		 * Steps
+		 * 1. Set up
+		 * 2. Add listeners => OnTouch
+		 * 3. Add listeners => OnClick
+		 ****************************/
+		
+		// 
+		Dialog dlg2 = new Dialog(actv);
+		
+		//
+		dlg2.setContentView(layoutId);
+		
+		// Title
+		dlg2.setTitle(title);
+//		dlg2.setTitle(titleStringId);
+		
+		/****************************
+		 * 2. Add listeners => OnTouch
+		 ****************************/
+		//
+		Button btn_ok = (Button) dlg2.findViewById(okButtonId);
+		Button btn_cancel = (Button) dlg2.findViewById(cancelButtonId);
+		
+		//
+		btn_ok.setTag(okTag);
+		btn_cancel.setTag(cancelTag);
+		
+		//
+		btn_ok.setOnTouchListener(new DB_TL(actv, dlg2));
+		btn_cancel.setOnTouchListener(new DB_TL(actv, dlg2));
+		
+		/****************************
+		 * 3. Add listeners => OnClick
+		 ****************************/
+		//
+		btn_ok.setOnClickListener(
+				new DB_CL(actv, dlg1, dlg2, item_Position_inList));
+//		btn_ok.setOnClickListener(new DB_CL(actv, dlg1, dlg2));
+		btn_cancel.setOnClickListener(new DB_CL(actv, dlg1, dlg2));
+		
+		//
+		//dlg2.show();
+		
+		return dlg2;
+		
+	}//public static Dialog dlg_template_okCancel_SecondDialog()
 
 }//public class Methods_dlg

@@ -42,7 +42,7 @@ public class MainActv extends ListActivity {
 	/********************************
 	 * Lists
 	 ********************************/
-	public static List<CL> CLList;
+//	public static List<CL> CLList;
 	public static MainListAdapter mlAdp;
 	
 	/********************************
@@ -225,12 +225,13 @@ public class MainActv extends ListActivity {
 
 		c.moveToNext();
 
-		CLList = Methods_ic.build_CL(this, c);
+		CONS.MainActv.CLList = Methods_ic.build_CL(this, c);
+//		CLList = Methods_ic.build_CL(this, c);
 		
 		// Log
 		Log.d("MainActv.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ "]", "CLList.size(): " + CLList.size());
+				+ "]", "CONS.MainActv.CLList.size(): " + CONS.MainActv.CLList.size());
 		
 		rdb.close();
 		
@@ -294,16 +295,16 @@ public class MainActv extends ListActivity {
 		/********************************
 		 * 5. Set list to adapter
 		 ********************************/
-		mlAdp = new MainListAdapter(
+		CONS.MainActv.mlAdp = new MainListAdapter(
 				this,
 				R.layout.list_row_main,
-				CLList
+				CONS.MainActv.CLList
 				);
 		
 		/********************************
 		 * 6. Set adapter to view
 		 ********************************/
-		setListAdapter(mlAdp);
+		setListAdapter(CONS.MainActv.mlAdp);
 		
 		//debug
 		do_debugs();
@@ -400,14 +401,14 @@ public class MainActv extends ListActivity {
 		/*********************************
 		 * Fields
 		 *********************************/
-		CLList = null;
+		CONS.MainActv.CLList = null;
 		
 		// Log
 		Log.d("[" + "MainActv.java : "
 				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ " : "
 				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-				+ "]", "CLList => null");
+				+ "]", "CONS.MainActv.CLList => null");
 		
 		
 	}//protected void onDestroy()

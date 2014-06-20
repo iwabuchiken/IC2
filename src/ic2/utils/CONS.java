@@ -1,6 +1,10 @@
 package ic2.utils;
 
+import ic2.adapters.MainListAdapter;
+import ic2.items.CL;
+
 import java.io.File;
+import java.util.List;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.MediaStore;
@@ -162,15 +166,42 @@ public class CONS {
 		
 //		public static String[] cols_items =			{"text", "serial_num",	"list_id"};
 		
-		public static String[] col_name_Items =
-						// Array  0		1				2		3
-						// Total  3		4				5		6
-							{"text", "serial_num",	"list_id", "status"};
-		
-		public static String[] col_types_items = {
+		// Array  0		1				2		3
+		// Total  3		4				5		6
+		public static String[] col_name_Items = {
+			
+					"text", "serial_num",			// 0,1
+					"list_id", "status"				// 2,3
 					
-					"TEXT", "INTEGER", "INTEGER"	// 0,1,2
 		};
+		
+		public static String[] col_types_Items = {
+			
+					"TEXT", "INTEGER",		// 0,1
+					"INTEGER", "INTEGER"	// 2,3
+			
+		};
+		
+		// Array  0		1				2		3
+		// Total  3		4				5		6
+		public static String[] col_name_Items_full = {
+					android.provider.BaseColumns._ID,	// 0
+					"created_at", "modified_at",		// 1, 2
+
+					"text", "serial_num",				// 3,4
+					"list_id", "status"					// 5,6
+		};
+		
+		public static String[] col_types_Items_full = {
+			
+					"INTEGER", 				// 0
+					"INTEGER", "INTEGER",	// 1,2
+					
+					"TEXT", "INTEGER",		// 3,4
+					"INTEGER", "INTEGER"	// 5,6
+					
+		};
+		
 
 		////////////////////////////////
 
@@ -302,6 +333,10 @@ public class CONS {
 	public static class MainActv {
 		
 		public static ListView lvMain;
+		
+		public static List<CL> CLList;
+		
+		public static MainListAdapter mlAdp;
 		
 	}
 
