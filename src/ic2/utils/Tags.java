@@ -148,6 +148,10 @@ public class Tags {
 //		dlg_conf_dup_list_ok,
 		DLG_CONF_DUPLIST_OK,
 		
+		// delete check list
+		DLG_CONF_DELETE_CL_OK,
+		
+		
 	}//public static enum DialogButtonTags
 
 }//public class Tags

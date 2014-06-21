@@ -34,7 +34,7 @@ public class DOI_CL implements OnItemClickListener {
 	Dialog dlg1;
 	Dialog dlg2;
 	
-	int item_position;
+	int pos_InAdapter;
 	
 	long check_list_id;
 	
@@ -62,7 +62,7 @@ public class DOI_CL implements OnItemClickListener {
 		this.actv = actv;
 		this.dlg1 = dlg;
 		
-		this.item_position = item_position;
+		this.pos_InAdapter = item_position;
 		
 		vib = (Vibrator) actv.getSystemService(Context.VIBRATOR_SERVICE);
 		
@@ -79,7 +79,7 @@ public class DOI_CL implements OnItemClickListener {
 		this.actv = actv;
 		this.dlg1 = dlg;
 		
-		this.item_position = item_position;
+		this.pos_InAdapter = item_position;
 		
 		this.check_list_id = check_list_id;
 		
@@ -96,7 +96,7 @@ public class DOI_CL implements OnItemClickListener {
 		this.actv = actv;
 		this.dlg1 = dlg;
 		
-		this.item_position = item_position;
+		this.pos_InAdapter = item_position;
 		
 		this.check_list_id = check_list_id;
 		
@@ -107,12 +107,12 @@ public class DOI_CL implements OnItemClickListener {
 	public DOI_CL
 	(Activity actv,
 			Dialog dlg1,
-			int item_position, Item item) {
+			int position_InList, Item item) {
 		// TODO Auto-generated constructor stub
 		this.actv	= actv;
 		this.dlg1	= dlg1;
 		
-		this.item_position = item_position;
+		this.pos_InAdapter = position_InList;
 		
 		this.item	= item;
 
@@ -120,7 +120,24 @@ public class DOI_CL implements OnItemClickListener {
 		
 	}
 
-	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+	public DOI_CL
+	(Activity actv, Dialog dlg, int position_InList, CL check_list) {
+		// TODO Auto-generated constructor stub
+		
+		this.actv	= actv;
+		this.dlg1	= dlg;
+		
+		this.pos_InAdapter = position_InList;
+		
+		this.check_list	= check_list;
+
+		vib = (Vibrator) actv.getSystemService(Context.VIBRATOR_SERVICE);
+
+	}
+
+	public void 
+	onItemClick
+	(AdapterView<?> parent, View v, int position, long id) {
 		/*----------------------------
 		 * Steps
 		 * 1. Get tag
@@ -161,7 +178,7 @@ public class DOI_CL implements OnItemClickListener {
 			// Log
 			Log.d("Methods.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", "item_position: " + item_position);
+					+ "]", "item_position: " + pos_InAdapter);
 
 			/*********************************
 			 * 2. Switching
@@ -170,13 +187,13 @@ public class DOI_CL implements OnItemClickListener {
 					R.string.dlg_checkactv_long_click_lv_edit))) {
 
 				Methods.dlg_checkactv_long_click_lv_edit_item_text(
-								actv, dlg1, item_position);
+								actv, dlg1, pos_InAdapter);
 				
 			} else if (item.equals(actv.getString(
 					R.string.dlg_checkactv_long_click_lv_change_serial_num))) {
 			
 				Methods.dlg_checkactv_long_click_lv_change_serial_num(
-								actv, dlg1, item_position);
+								actv, dlg1, pos_InAdapter);
 				
 			} else if (item.equals(actv.getString(
 					R.string.dlg_checkactv_long_click_lv_delete_item))) {
@@ -184,7 +201,7 @@ public class DOI_CL implements OnItemClickListener {
 //				Item item_CheckActv = (Item) parent.getItemAtPosition(position);
 				
 				Methods.dlg_checkactv_long_click_lv_delete_item(
-						actv, dlg1, item_position, this.item);
+						actv, dlg1, pos_InAdapter, this.item);
 				
 			}//if (item.equals(actv.getString(R.string.dlg_checkactv_long_click_lv_edit)))
 			
@@ -349,7 +366,8 @@ public class DOI_CL implements OnItemClickListener {
 		} else if (item.equals(actv.getString(
 				R.string.dlg_main_actv_long_click_lv_delete_list))) {
 
-			Methods.delete_list(actv, check_list_id, dlg1, check_list);
+			Methods_dlg.dlg_Conf_Delete_CL(actv, dlg1, pos_InAdapter);
+//			Methods.delete_list(actv, check_list_id, dlg1, check_list);
 			
 //		} else if (item.equals(actv.getString(
 //				R.string.dlg_main_actv_long_click_lv_edit_title))) {
@@ -369,14 +387,14 @@ public class DOI_CL implements OnItemClickListener {
 				R.string.dlg_main_actv_long_click_lv_edit_cl))) {
 			
 			Methods_dlg.dlg_Edit_CL(
-					actv, check_list_id, dlg1, check_list, item_position);
+					actv, check_list_id, dlg1, check_list, pos_InAdapter);
 //			actv, check_list_id, dlg1, check_list, position);
 			
 		} else if (item.equals(actv.getString(
 				R.string.dlg_main_actv_long_click_lv_dup_cl))) {
 			
 			Methods_dlg.dlg_Conf_Dup_CL(
-					actv, check_list_id, dlg1, check_list, item_position);
+					actv, check_list_id, dlg1, check_list, pos_InAdapter);
 //			actv, check_list_id, dlg1, check_list, position);
 			
 		} else {//if (item == condition)

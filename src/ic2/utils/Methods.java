@@ -2394,7 +2394,8 @@ public class Methods {
 
 	public static void
 	dlg_MainActv_LongClick
-	(Activity actv, int item_position, long check_list_id, CL check_list) {
+	(Activity actv, int pos_InAdapter, CL cl) {
+//		(Activity actv, int item_position, long check_list_id, CL check_list) {
 		/*********************************
 		 * 1. Dialog
 		 * 2. List view
@@ -2408,7 +2409,7 @@ public class Methods {
 				Tags.DialogButtonTags.dlg_generic_dismiss);
 
 		//debug
-		CL list = (CL) CONS.MainActv.lvMain.getItemAtPosition(item_position);
+		CL list = (CL) CONS.MainActv.lvMain.getItemAtPosition(pos_InAdapter);
 		
 		dlg.setTitle(
 				actv.getString(R.string.dlg_main_actv_long_click_title)
@@ -2480,13 +2481,14 @@ public class Methods {
 		// Log
 		Log.d("Methods.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ "]", "item_position: " + item_position);
+				+ "]", "item_position: " + pos_InAdapter);
 
 		
 		lv.setOnItemClickListener(
 						new DOI_CL(
 								actv, 
-								dlg, item_position, check_list_id, check_list));
+								dlg, pos_InAdapter, cl));
+//		dlg, position_InLV, check_list_id, check_list));
 		
 		/*********************************
 		 * 3. Show dialog
@@ -4745,6 +4747,66 @@ public class Methods {
 		}
 		
 	}
+
+	public static void 
+	delete_list
+	(Activity actv, 
+			Dialog dlg1, Dialog dlg2,
+			int pos_InAdapter) {
+		// TODO Auto-generated method stub
+		////////////////////////////////
+
+		// get: check list
+
+		////////////////////////////////
+		CL cl = (CL) CONS.MainActv.mlAdp.getItem(pos_InAdapter);
+		
+		////////////////////////////////
+
+		// delete: DB
+
+		////////////////////////////////
+		boolean res = DBUtils.delete_list(actv, cl.getDb_id(), cl);
+		
+		/******************************
+			validate
+		 ******************************/
+		if (res == false) {
+			
+			// Log
+			String msg_Log = "Check list => can't be removed from DB";
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+			// debug
+			Toast.makeText(actv, msg_Log, Toast.LENGTH_SHORT).show();
+			
+			return;
+			
+		}
+		
+		////////////////////////////////
+
+		// delete: from: adapter
+
+		////////////////////////////////
+		CONS.MainActv.mlAdp.remove(cl);
+		
+		CONS.MainActv.mlAdp.notifyDataSetChanged();
+			
+//			Methods.refresh_list_check_list(actv);
+		
+		////////////////////////////////
+
+		// dialog: dismiss
+
+		////////////////////////////////
+		dlg2.dismiss();
+		dlg1.dismiss();
+			
+			
+	}//delete_list
 
 }//public class Methods
 

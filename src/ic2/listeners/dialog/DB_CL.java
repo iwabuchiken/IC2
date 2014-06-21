@@ -22,7 +22,7 @@ public class DB_CL implements OnClickListener {
 	Dialog dlg;
 	Dialog dlg2;		//=> Used in dlg_input_empty_btn_XXX
 
-	int item_position;
+	int pos_InList;
 	//
 	Vibrator vib;
 	
@@ -64,13 +64,13 @@ public class DB_CL implements OnClickListener {
 	}//public DialogButtonOnClickListener(Activity actv, Dialog dlg, long file_id, String tableName)
 
 	public DB_CL(Activity actv, Dialog dlg,
-			Dialog dlg2, int item_position) {
+			Dialog dlg2, int pos_InList) {
 		
 		this.actv = actv;
 		this.dlg = dlg;
 		this.dlg2 = dlg2;
 		
-		this.item_position = item_position;
+		this.pos_InList = pos_InList;
 		
 		//
 		vib = (Vibrator) actv.getSystemService(actv.VIBRATOR_SERVICE);
@@ -125,7 +125,7 @@ public class DB_CL implements OnClickListener {
 			// Log
 			Log.d("DialogButtonOnClickListener.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", "item_position: " + item_position);
+					+ "]", "item_position: " + pos_InList);
 
 			
 			dlg_checkactv_change_serial_num_btn_ok();
@@ -134,37 +134,56 @@ public class DB_CL implements OnClickListener {
 			
 		case dlg_checkactv_edit_item_text_btn_ok://---------------------------------
 			
-			Methods.update_item_text(actv, dlg, dlg2, item_position);
+			Methods.update_item_text(actv, dlg, dlg2, pos_InList);
 			
 			break;
 			
 		case dlg_edit_list_title_btn_ok://---------------------------------
 			
-			Methods.edit_List_Title(actv, dlg, dlg2, item_position);
+			Methods.edit_List_Title(actv, dlg, dlg2, pos_InList);
 			
 			break;
 			
 		case dlg_change_genre_btn_ok://---------------------------------
 			
-			Methods.change_Genre(actv, dlg, dlg2, item_position);
+			Methods.change_Genre(actv, dlg, dlg2, pos_InList);
 			
 			break;
 			
 		case dlg_edit_cl_btn_ok://---------------------------------
 			
-			Methods.edit_CL(actv, dlg, dlg2, item_position);
+			Methods.edit_CL(actv, dlg, dlg2, pos_InList);
 			
 			break;
 			
 		case DLG_CONF_DUPLIST_OK://---------------------------------
 			
-			Methods.dup_CL(actv, dlg, dlg2, item_position);
+			Methods.dup_CL(actv, dlg, dlg2, pos_InList);
+			
+			break;
+			
+		case DLG_CONF_DELETE_CL_OK://---------------------------------
+			
+			int pos_InAdapter = pos_InList;
+			
+			case_Dlg_Conf_Delete_CL_Ok(pos_InAdapter);
+			
+//			Methods.dup_CL(actv, dlg, dlg2, pos_InAdapter);
 			
 			break;
 			
 		default: // ----------------------------------------------------
 			break;
 		}//switch (tag_name)
+	}
+
+	private void 
+	case_Dlg_Conf_Delete_CL_Ok
+	(int pos_InAdapter) {
+		// TODO Auto-generated method stub
+		
+		Methods.delete_list(actv, dlg, dlg2, pos_InAdapter);
+		
 	}
 
 	private void dlg_checkactv_change_serial_num_btn_ok() {
@@ -230,7 +249,7 @@ public class DB_CL implements OnClickListener {
 		/*********************************
 		 * 5. Change order
 		 *********************************/
-		Methods.checkactv_change_order(actv, dlg, dlg2, item_position);
+		Methods.checkactv_change_order(actv, dlg, dlg2, pos_InList);
 			
 //		// debug
 //		if (et != null) {

@@ -100,15 +100,16 @@ public class MainActv extends ListActivity {
         /*********************************
 		 * 5. Set listeners
 		 *********************************/
+        _onCreate__SetListeners();
 //		ListView lv = this.getListView();
 		
-		CONS.MainActv.lvMain = this.getListView();
-		
-//		lv.setTag(Methods.ItemTags.dir_list);
-		CONS.MainActv.lvMain.setTag(Methods.ListTags.actv_main_lv);
-		
-		CONS.MainActv.lvMain
-					.setOnItemLongClickListener(new Custom_OI_LCL(this));
+//		CONS.MainActv.lvMain = this.getListView();
+//		
+////		lv.setTag(Methods.ItemTags.dir_list);
+//		CONS.MainActv.lvMain.setTag(Methods.ListTags.actv_main_lv);
+//		
+//		CONS.MainActv.lvMain
+//					.setOnItemLongClickListener(new Custom_OI_LCL(this));
         
 		/*********************************
 		 * Re-install the app
@@ -117,7 +118,20 @@ public class MainActv extends ListActivity {
 		
     }//public void onCreate(Bundle savedInstanceState)
 
-    private void do_debugs() {
+    private void _onCreate__SetListeners() {
+		// TODO Auto-generated method stub
+    	
+		CONS.MainActv.lvMain = this.getListView();
+		
+//		lv.setTag(Methods.ItemTags.dir_list);
+		CONS.MainActv.lvMain.setTag(Methods.ListTags.actv_main_lv);
+		
+		CONS.MainActv.lvMain
+					.setOnItemLongClickListener(new Custom_OI_LCL(this));
+
+	}
+
+	private void do_debugs() {
     	
 //    	_debug_SEG_5_v_0_1();
     	

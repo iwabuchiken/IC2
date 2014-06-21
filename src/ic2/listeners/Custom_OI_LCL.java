@@ -129,11 +129,11 @@ public class Custom_OI_LCL implements OnItemLongClickListener {
 	}//public boolean onItemLongClick()
 
 	private boolean
-	case_MainActv_LV(AdapterView<?> parent, int position) {
+	case_MainActv_LV(AdapterView<?> parent, int pos_InAdapter) {
 		// TODO Auto-generated method stub
-		CL check_list = (CL) parent.getItemAtPosition(position);
+		CL cl = (CL) parent.getItemAtPosition(pos_InAdapter);
 		
-		if (check_list == null) {
+		if (cl == null) {
 			
 			// debug
 			Toast.makeText(actv, "Check list is null", Toast.LENGTH_SHORT).show();
@@ -142,9 +142,11 @@ public class Custom_OI_LCL implements OnItemLongClickListener {
 			
 		}//if (check_list == null)
 		
-		long check_list_id = check_list.getDb_id();
+//		long check_list_id = check_list.getDb_id();
 		
-		Methods.dlg_MainActv_LongClick(actv, position, check_list_id, check_list);
+		Methods.dlg_MainActv_LongClick(
+					actv, pos_InAdapter, cl);
+//		actv, position_InList, check_list_id, check_list);
 		
 		return true;
 		

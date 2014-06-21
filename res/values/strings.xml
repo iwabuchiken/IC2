@@ -128,4 +128,7 @@
 	<!-- dlg: duplicate list -->
 		<string name="dlg_dup_checklist_message">Duplicate the list?</string>
 		
+	<!-- dlg: delete check list -->
+		<string name="dlg_delete_checklist_message">Delete the list?</string>
+		
 </resources>

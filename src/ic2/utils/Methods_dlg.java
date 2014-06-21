@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Methods_dlg {
 
@@ -614,7 +615,7 @@ public class Methods_dlg {
 			Tags.DialogButtonTags okTag, 
 			Tags.DialogButtonTags cancelTag,
 			
-			Dialog dlg1, int item_Position_inList) {
+			Dialog dlg1, int pos_InList) {
 		/****************************
 		 * Steps
 		 * 1. Set up
@@ -652,7 +653,7 @@ public class Methods_dlg {
 		 ****************************/
 		//
 		btn_ok.setOnClickListener(
-				new DB_CL(actv, dlg1, dlg2, item_Position_inList));
+				new DB_CL(actv, dlg1, dlg2, pos_InList));
 //		btn_ok.setOnClickListener(new DB_CL(actv, dlg1, dlg2));
 		btn_cancel.setOnClickListener(new DB_CL(actv, dlg1, dlg2));
 		
@@ -662,5 +663,65 @@ public class Methods_dlg {
 		return dlg2;
 		
 	}//public static Dialog dlg_template_okCancel_SecondDialog()
+
+	public static void 
+	dlg_Conf_Delete_CL
+	(Activity actv, Dialog dlg1, int pos_InAdapter) {
+		// TODO Auto-generated method stub
+
+		Dialog dlg2 = Methods_dlg.dlg_Tmpl_OkCancel_SecondDialog(
+				actv, 
+				R.layout.dlg_tmpl_confirm_simple, 
+				actv.getString(R.string.generic_tv_confirm), 
+				
+				R.id.dlg_tmpl_confirm_simple_btn_ok, 
+				R.id.dlg_tmpl_confirm_simple_btn_cancel, 
+				
+				Tags.DialogButtonTags.DLG_CONF_DELETE_CL_OK, 
+//				Tags.DialogTags.dlg_generic_dismiss_second_dialog, 
+				Tags.DialogButtonTags.DLG_GENERIC_DISMISS_SECOND_DIALOG, 
+				dlg1, pos_InAdapter);
+	//	dlg1, item_position);
+		
+		////////////////////////////////
+
+		// get: check list from adapter
+
+		////////////////////////////////
+		if (CONS.MainActv.mlAdp == null) {
+			
+			// Log
+			String msg_Log = "CONS.MainActv.mlAdp => null";
+			Log.d("Methods_dlg.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+			// debug
+			Toast.makeText(actv, msg_Log, Toast.LENGTH_SHORT).show();
+			
+			return;
+			
+		}
+		
+		CL cl = (CL) CONS.MainActv.mlAdp.getItem(pos_InAdapter);
+		
+		////////////////////////////////
+	
+		// set: texts
+	
+		////////////////////////////////
+		TextView tv_Message = 
+				(TextView) dlg2.findViewById(
+						R.id.dlg_tmpl_confirm_simple_tv_message);
+		
+		TextView tv_ItemName = 
+				(TextView) dlg2.findViewById(
+						R.id.dlg_tmpl_confirm_simple_tv_item_name);
+		
+		tv_Message.setText(actv.getString(R.string.dlg_delete_checklist_message));
+		tv_ItemName.setText(cl.getName());
+		
+		dlg2.show();
+	}
 
 }//public class Methods_dlg
