@@ -207,7 +207,7 @@ public class DOI_CL implements OnItemClickListener {
 			
 			break;// case dlg_checkactv_long_click_lv
 			
-		case dlg_filter_by_genre_lv://-------------------------------
+		case DLG_FILTER_BY_GENRE_LV://-------------------------------
 			
 			item = (String) parent.getItemAtPosition(position);
 			

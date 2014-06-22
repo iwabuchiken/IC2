@@ -96,7 +96,7 @@ public class Methods {
 		dlg_checkactv_long_click_lv,
 		
 		// dlg_filter_by_genre.xml
-		dlg_filter_by_genre_lv,
+		DLG_FILTER_BY_GENRE_LV,
 		
 		// dlg_main_actv_long_click.xml
 		DLG_MAINACTV_LONGCLICK_LV,
@@ -3273,7 +3273,8 @@ public class Methods {
 		 *********************************/
 		ListView lv = (ListView) dlg.findViewById(R.id.dlg_filter_by_genre_lv);
 		
-		lv.setTag(Methods.DialogItemTags.dlg_filter_by_genre_lv);
+//		lv.setTag(Methods.DialogItemTags.dlg_filter_by_genre_lv);
+		lv.setTag(Methods.DialogItemTags.DLG_FILTER_BY_GENRE_LV);
 		
 		/*********************************
 		 * 5. Set up adapter
@@ -3399,7 +3400,8 @@ public class Methods {
 			 *********************************/
 			dlg.dismiss();
 			
-			Methods.refresh_list_check_list(actv);
+//			Methods.refresh_list_check_list(actv);
+			CONS.MainActv.mlAdp.notifyDataSetChanged();
 			
 			
 		}//if (res == true)
@@ -3408,6 +3410,8 @@ public class Methods {
 		Log.d("Methods.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", "res=" + res);
+		
+		
 		
 	}//public static void clear_items_all_to_zero(Activity actv, long check_list_id)
 
