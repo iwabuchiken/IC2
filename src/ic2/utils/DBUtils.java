@@ -2076,5 +2076,40 @@ public class DBUtils extends SQLiteOpenHelper{
 		
 	}//get_CL_from_Name
 
+	public static int 
+	delete_Items
+	(Activity actv, long db_id) {
+		// TODO Auto-generated method stub
+		
+		DBUtils dbu = new DBUtils(actv, CONS.DB.dbName);
+		
+		SQLiteDatabase wdb = dbu.getWritableDatabase();		
+		
+//		col_name_Items
+//		"text", "serial_num",			// 0,1
+//		"list_id", "status"				// 2,3
+		
+		String where = CONS.DB.col_name_Items[2]
+						+ " = ?"
+						;
+		String[] args = new String[]{
+				
+					String.valueOf(db_id)
+					
+		};
+		
+		int res = wdb.delete(CONS.DB.tname_items, where, args);
+		
+		// Log
+		String msg_Log = "Deleted => " + res + " items";
+		Log.d("DBUtils.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+		wdb.close();
+		
+		return res;
+	}//delete_Items
+
 }//public class DBUtils
 

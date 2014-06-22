@@ -3615,7 +3615,10 @@ public class Methods {
 	}//private boolean restore_db()
 
 	public static void
-	delete_list(Activity actv, long check_list_id, Dialog dlg, CL check_list) {
+	delete_list
+	(Activity actv, 
+			long check_list_id, Dialog dlg, 
+			CL check_list) {
 		
 		boolean res = DBUtils.delete_list(actv, check_list_id, check_list);
 		
@@ -4796,6 +4799,17 @@ public class Methods {
 		CONS.MainActv.mlAdp.notifyDataSetChanged();
 			
 //			Methods.refresh_list_check_list(actv);
+		
+//		////////////////////////////////
+//
+//		// delete: items
+//
+//		////////////////////////////////
+//		int res_i = DBUtils.delete_Items(actv, cl.getDb_id());
+//
+//		// debug
+//		String msg_Toast = res_i + " items => deleted";
+//		Toast.makeText(actv, msg_Toast, Toast.LENGTH_SHORT).show();
 		
 		////////////////////////////////
 
