@@ -1249,11 +1249,26 @@ public class DBUtils extends SQLiteOpenHelper{
 		
 	}//public boolean updateData_items_status()
 
-	public static boolean update_items_all_to_zero(Activity actv, String dbName,
-			String tableName, long check_list_id) {
+	public static boolean 
+	update_items_all_to_zero
+	(Activity actv, String dbName,
+			String tableName, long pos_InAdapter) {
 		/*********************************
 		 * memo
 		 *********************************/
+		// Log
+		String msg_Log = "check_list_id = " + pos_InAdapter;
+		Log.d("DBUtils.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+		
+		CL cl = (CL) CONS.MainActv.mlAdp.getItem((int)pos_InAdapter);
+		
+//		col_name_Items
+//		"text", "serial_num",			// 0,1
+//		"list_id", "status"				// 2,3
+		
 		DBUtils dbu = new DBUtils(actv, dbName);
 		
 		SQLiteDatabase wdb = dbu.getWritableDatabase();
@@ -1264,7 +1279,10 @@ public class DBUtils extends SQLiteOpenHelper{
 		
 		sb.append(CONS.DB.col_name_Items[3] + "='" + 0 + "'");
 		
-		sb.append(" WHERE " + CONS.DB.col_name_Items[2] + "='" + check_list_id + "'");
+		sb.append(" WHERE " 
+					+ CONS.DB.col_name_Items[2] 
+					+ "='" 
+					+ cl.getDb_id() + "'");
 		
 		String sql = sb.toString();
 		

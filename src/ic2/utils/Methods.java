@@ -2401,6 +2401,14 @@ public class Methods {
 		 * 2. List view
 		 * 3. Show dialog
 		 *********************************/
+		// Log
+		String msg_Log = "pos_InAdapter = " + pos_InAdapter;
+		Log.d("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+		
+		
 		Dialog dlg = dlg_template_cancel(actv, 
 				R.layout.dlg_main_actv_long_click, 
 				R.string.dlg_main_actv_long_click_title,
@@ -2417,7 +2425,7 @@ public class Methods {
 				+ list.getName());
 		
 		// Log
-		String msg_Log = "list.getName() => " + list.getName();
+		msg_Log = "list.getName() => " + list.getName();
 		Log.d("Methods.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", msg_Log);
@@ -2478,11 +2486,6 @@ public class Methods {
 		/*----------------------------
 		 * 3. Set listener => list
 			----------------------------*/
-		// Log
-		Log.d("Methods.java" + "["
-				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ "]", "item_position: " + pos_InAdapter);
-
 		
 		lv.setOnItemClickListener(
 						new DOI_CL(
@@ -3377,20 +3380,17 @@ public class Methods {
 	}//private static List<String> get_all_data_genres(Activity actv)
 
 	
-	public static void clear_items_all_to_zero(Activity actv, long check_list_id, Dialog dlg) {
+	public static void 
+	clear_Items_AllToZero
+	(Activity actv, long pos_InAdapter, Dialog dlg) {
 		/*********************************
 		 * 1. Update data
 		 * 2. If successfull
 		 * 	1. Dismiss dialog
 		 * 	2. Refresh list 
 		 *********************************/
-		// Log
-		Log.d("Methods.java" + "["
-				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ "]", "Starts => clear_items_all_to_zero()");
-		
 		boolean res = DBUtils.update_items_all_to_zero(
-					actv, CONS.DB.dbName, CONS.DB.tname_items, check_list_id);
+					actv, CONS.DB.dbName, CONS.DB.tname_items, pos_InAdapter);
 		
 		if (res == true) {
 			

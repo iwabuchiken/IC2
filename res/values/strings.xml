@@ -76,7 +76,7 @@
     <!-- dlg_main_actv_long_click.xml -->
     	<string name="dlg_main_actv_long_click_title">Check list</string>
     	<string name="dlg_main_actv_long_click_lv_clear_item_status">
-    	    						Clear the staus of the items</string>
+    	    						Clear the status of the items</string>
     	<string name="dlg_main_actv_long_click_lv_delete_list">
     	    						Delete the list</string>
     	<string name="dlg_main_actv_long_click_lv_edit_title">

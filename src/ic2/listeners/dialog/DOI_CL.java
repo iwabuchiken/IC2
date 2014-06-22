@@ -361,7 +361,8 @@ public class DOI_CL implements OnItemClickListener {
 		if (item.equals(actv.getString(
 				R.string.dlg_main_actv_long_click_lv_clear_item_status))) {
 			
-			Methods.clear_items_all_to_zero(actv, check_list_id, dlg1);
+			Methods.clear_Items_AllToZero(actv, pos_InAdapter, dlg1);
+//			Methods.clear_Items_AllToZero(actv, check_list_id, dlg1);
 			
 		} else if (item.equals(actv.getString(
 				R.string.dlg_main_actv_long_click_lv_delete_list))) {
