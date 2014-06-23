@@ -549,18 +549,37 @@ public class DOI_CL implements OnItemClickListener {
 		
 		SharedPreferences prefs = actv
 						.getSharedPreferences(
-							CONS.Prefs.prefName,
+							CONS.Prefs.pname_IC,
 							Context.MODE_PRIVATE);
 		
 		SharedPreferences.Editor editor = prefs.edit();
 		
-		editor.putInt(CONS.Prefs.prefKey_genreId, genreId);
+		editor.putInt(CONS.Prefs.pkey_GenreId, genreId);
 		editor.commit();
 
 		// Log
 		Log.d("[" + "MainActv.java : "
 				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", "Prefs saved => Genre id = " + genreId);
+		
+		////////////////////////////////
+
+		// reset: last visible position
+
+		////////////////////////////////
+		Methods.set_Pref_Int(
+				actv, 
+				CONS.Prefs.pname_IC, 
+				CONS.Prefs.pkey_LastVisiblePosition_MainActv, 
+				CONS.Prefs.dflt_IntExtra_value);
+
+		// Log
+		String msg_Log = "pkey_LastVisiblePosition_MainActv => set to : "
+						+ CONS.Prefs.dflt_IntExtra_value;
+		Log.d("DOI_CL.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
 		
 		/*********************************
 		 * 5. Dismiss dlg

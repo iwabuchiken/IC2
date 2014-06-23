@@ -89,7 +89,7 @@ public class MainActv extends ListActivity {
         this.setTitle(this.getClass().getName());
     
         //debug
-        do_debugs();
+//        do_debugs();
 //        create_tables();
         
         /*********************************
@@ -142,7 +142,8 @@ public class MainActv extends ListActivity {
 //		debug_D_24_v_1_0();
 	}//private void do_debugs()
 
-	private void show_list() {
+	private void 
+	_onStart_ShowList() {
 		/********************************
 		 * 1. Set up db
 		 * 2. Query
@@ -165,25 +166,25 @@ public class MainActv extends ListActivity {
 		 *********************************/
 		SharedPreferences prefs = this
 				.getSharedPreferences(
-						CONS.Prefs.prefName,
+						CONS.Prefs.pname_IC,
 						Context.MODE_PRIVATE);
 		
-		int savedPosition = prefs.getInt(
-				CONS.Prefs.prefKey_genreId,
+		int pref_GenreId = prefs.getInt(
+				CONS.Prefs.pkey_GenreId,
 
-				CONS.Prefs.prefKey_genreId_intValue);
+				CONS.Prefs.pkey_GenreId_IntValue);
 		
 		// Log
 		Log.d("[" + "MainActv.java : "
 				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ "]", "savedPosition=" + savedPosition);
+				+ "]", "pref_GenreId = " + pref_GenreId);
 		
 		/********************************
 		 * 2. Query
 		 ********************************/
 		String sql;
 		
-		if (savedPosition == -1) {
+		if (pref_GenreId == -1) {
 			
 			sql = "SELECT * FROM " + CONS.DB.tname_Check_Lists;
 			
@@ -191,7 +192,7 @@ public class MainActv extends ListActivity {
 			
 					sql = "SELECT * FROM " + CONS.DB.tname_Check_Lists
 					+ " WHERE " + CONS.DB.cols_check_lists[1] + "="
-					+ savedPosition;
+					+ pref_GenreId;
 			
 		}//if (savedPosition == -1)
 		
@@ -321,9 +322,9 @@ public class MainActv extends ListActivity {
 		setListAdapter(CONS.MainActv.mlAdp);
 		
 		//debug
-		do_debugs();
+//		do_debugs();
 		
-	}//private void show_list()
+	}//_onStart_ShowList()
 
 	@Override
 	protected void onListItemClick(
@@ -334,25 +335,47 @@ public class MainActv extends ListActivity {
 		 * 
 		 * 3. Start
 		 *********************************/
-		CL clList = (CL) l.getItemAtPosition(position);
+		////////////////////////////////
+
+		// set: pref
+
+		////////////////////////////////
+		Methods.set_Pref_Int(
+						this, 
+						CONS.Prefs.pname_IC, 
+						CONS.Prefs.pkey_LastVisiblePosition_MainActv, 
+						l.getLastVisiblePosition());
 		
-//		/*********************************
-//		 * Register: Genre id
-//		 *********************************/
-//		SharedPreferences prefs = this
-//						.getSharedPreferences(
-//							CONS.Prefs.prefName,
-//							Context.MODE_PRIVATE);
-//		
-//		SharedPreferences.Editor editor = prefs.edit();
-//		
-//		editor.putInt(CONS.Prefs.prefKey_genreId, clList.getGenre_id());
-//		editor.commit();
-//
-//		// Log
-//		Log.d("[" + "MainActv.java : "
-//				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ "]", "Prefs saved => Genre id = " + clList.getGenre_id());
+		// Log
+		String msg_Log = "Pref.lastvisible: set to => " 
+						+ l.getLastVisiblePosition();
+		
+		Log.d("MainActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+		// reset default child count
+		if (l.getChildCount() > 0) {
+			
+			CONS.Admin.dflt_ChildCount = l.getChildCount() - 1;
+//			CONS.Admin.dflt_ChildCount = l.getChildCount();
+			
+			// Log
+			msg_Log = "CONS.Admin.dflt_ChildCount = " 
+							+ CONS.Admin.dflt_ChildCount;
+			Log.d("MainActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+					
+		}
+		
+		////////////////////////////////
+
+		// get: CL
+
+		////////////////////////////////
+		CL clList = (CL) l.getItemAtPosition(position);
 		
 		/*********************************
 		 * 2. Set up for intent
@@ -395,14 +418,14 @@ public class MainActv extends ListActivity {
 		 *********************************/
 		SharedPreferences prefs = this
 						.getSharedPreferences(
-							CONS.Prefs.prefName,
+							CONS.Prefs.pname_IC,
 							Context.MODE_PRIVATE);
 
 		SharedPreferences.Editor editor = prefs.edit();
 		
 		editor.putInt(
-					CONS.Prefs.prefKey_genreId,
-					CONS.Prefs.prefKey_genreId_intValue);
+					CONS.Prefs.pkey_GenreId,
+					CONS.Prefs.pkey_GenreId_IntValue);
 		
 		editor.commit();
 		
@@ -410,7 +433,7 @@ public class MainActv extends ListActivity {
 		Log.d("[" + "MainActv.java : "
 			+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
 			+ "]",
-			"Prefs: Genre id => Reset to  " + CONS.Prefs.prefKey_genreId_intValue);
+			"Prefs: Genre id => Reset to  " + CONS.Prefs.pkey_GenreId_IntValue);
 		
 		/*********************************
 		 * Fields
@@ -526,11 +549,48 @@ public class MainActv extends ListActivity {
 //		/*********************************
 //		 * 1. Show list
 //		 *********************************/
-		show_list();
+		_onStart_ShowList();
+		
+		_onStart_SetSelection();
 		
 		super.onStart();
 		
 	}//protected void onStart()
+
+	private void 
+	_onStart_SetSelection() {
+		// TODO Auto-generated method stub
+		////////////////////////////////
+
+		// set: selection
+
+		////////////////////////////////
+		int last_Position = Methods.get_Pref_Int(
+						this, 
+						CONS.Prefs.pname_IC, 
+						CONS.Prefs.pkey_LastVisiblePosition_MainActv, 
+						CONS.Prefs.dflt_IntExtra_value);
+		
+		// Log
+		String msg_Log = "last_Position = " + last_Position;
+		Log.d("MainActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+		
+		if (last_Position != CONS.Prefs.dflt_IntExtra_value) {
+			
+			ListView lv = this.getListView();
+			
+			int num = last_Position - CONS.Admin.dflt_ChildCount;
+			
+			if (num < 0) num = 0;
+			
+			lv.setSelection(num);
+			
+		}
+
+	}//_onStart_SetSelection
 
 	@Override
 	protected void onStop() {

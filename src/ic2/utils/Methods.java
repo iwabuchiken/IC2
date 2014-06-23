@@ -33,6 +33,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -4825,6 +4827,57 @@ public class Methods {
 			
 			
 	}//delete_list
+
+	public static int get_Pref_Int
+	(Activity actv, String pref_name, String pref_key, int defValue) {
+		
+		SharedPreferences prefs = 
+				actv.getSharedPreferences(pref_name, Context.MODE_PRIVATE);
+
+		/****************************
+		 * Return
+			****************************/
+		return prefs.getInt(pref_key, defValue);
+
+	}//public static boolean set_pref(String pref_name, String value)
+
+	/******************************
+	@return true => pref set
+	 ******************************/
+	public static boolean
+	set_Pref_Int
+	(Activity actv, 
+			String pref_name, String pref_key, int value) {
+		
+		SharedPreferences prefs = 
+				actv.getSharedPreferences(pref_name, Context.MODE_PRIVATE);
+	
+		/****************************
+		 * 2. Get editor
+			****************************/
+		SharedPreferences.Editor editor = prefs.edit();
+	
+		/****************************
+		 * 3. Set value
+			****************************/
+		editor.putInt(pref_key, value);
+		
+		try {
+			editor.commit();
+			
+			return true;
+			
+		} catch (Exception e) {
+			
+			// Log
+			Log.e("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "Excption: " + e.toString());
+			
+			return false;
+		}
+	
+	}//set_Pref_Int
 
 }//public class Methods
 

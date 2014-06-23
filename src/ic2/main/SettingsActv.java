@@ -24,7 +24,7 @@ public class SettingsActv extends PreferenceActivity {
 		setContentView(R.layout.pref_main);
 		
 		getPreferenceManager()
-			.setSharedPreferencesName(CONS.Prefs.prefName);
+			.setSharedPreferencesName(CONS.Prefs.pname_IC);
 		
 		addPreferencesFromResource(R.xml.preferences);
 		
@@ -72,7 +72,7 @@ public class SettingsActv extends PreferenceActivity {
 		
 		SharedPreferences prefs = this
 				.getSharedPreferences(
-						CONS.Prefs.prefName,
+						CONS.Prefs.pname_IC,
 						Context.MODE_PRIVATE);
 		
 		String res = sharedPrefs.getString(

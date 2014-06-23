@@ -13,12 +13,28 @@ import android.widget.ListView;
 public class CONS {
 
 	public static class Prefs {
+		////////////////////////////////
+
+		// Commons
+
+		////////////////////////////////
+		public static long dflt_LongExtra_value = -1;
 		
-		public static String prefName = "pref_ic";
+		public static int dflt_IntExtra_value = -1;
 		
-		public static String prefKey_genreId = "genre_id";
+		////////////////////////////////
+
+		// MainActv
+
+		////////////////////////////////
+		public static String pname_IC = "pref_ic";
 		
-		public static int prefKey_genreId_intValue = -1;
+		public static String pkey_GenreId = "genre_id";
+		
+		public static int pkey_GenreId_IntValue = -1;
+		
+		public static String pkey_LastVisiblePosition_MainActv
+							= "pkey_LastVisiblePosition_MainActv";
 		
 	}
 	
@@ -308,6 +324,10 @@ public class CONS {
 			public static final int DialogTitleLength = 10;
 			
 		}
+		
+		public static int dflt_ChildCount = 4;
+//		public static final int dflt_ChildCount = 4;
+		
 	}//public static class Admin
 	
 	public static class FTPData {

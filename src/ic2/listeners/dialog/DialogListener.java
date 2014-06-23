@@ -37,12 +37,12 @@ public class DialogListener implements OnClickListener {
 			 *********************************/
 			SharedPreferences prefs = actv
 								.getSharedPreferences(
-									CONS.Prefs.prefName,
+									CONS.Prefs.pname_IC,
 									Context.MODE_PRIVATE);
 
 			SharedPreferences.Editor editor = prefs.edit();
 			
-			editor.putInt(CONS.Prefs.prefKey_genreId, -1);
+			editor.putInt(CONS.Prefs.pkey_GenreId, -1);
 			
 			editor.commit();
 			

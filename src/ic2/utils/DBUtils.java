@@ -2116,6 +2116,7 @@ public class DBUtils extends SQLiteOpenHelper{
 					
 		};
 		
+		//REF http://stackoverflow.com/questions/7510219/deleting-row-in-sqlite-in-android answered Sep 22 '11 at 6:21
 		int res = wdb.delete(CONS.DB.tname_items, where, args);
 		
 		// Log
