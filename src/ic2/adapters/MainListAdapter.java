@@ -82,7 +82,9 @@ public class MainListAdapter extends ArrayAdapter<CL> {
 	 * Methods
 		----------------------------********************/
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View 
+    getView
+    (int position, View convertView, ViewGroup parent) {
     	/*******************************
 		 * Steps
 		 * 1. Set up
@@ -96,10 +98,6 @@ public class MainListAdapter extends ArrayAdapter<CL> {
 		 * 
 		 * 4. Set bg color
 			********************/
-//    	// Log
-//		Log.d("MainListAdapter.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ "]", "Starts => getView()");
     	/*******************************
 		 * 1. Set up
 			********************/
@@ -116,12 +114,7 @@ public class MainListAdapter extends ArrayAdapter<CL> {
     	/*******************************
 		 * 2. Get view
 			********************/
-//		TextView tv_list_name = (TextView) v.findViewById(R.id.list_row_main_tv_list_name);
-    	tv_list_name = (TextView) v.findViewById(R.id.list_row_main_tv_list_name);
-    	
-		tv_created_at = (TextView) v.findViewById(R.id.list_row_main_tv_created_at);
-		
-		tv_genre = (TextView) v.findViewById(R.id.list_row_main_tv_genre);
+    	getView__GetView(v);
 
 		/*******************************
 		 * 3. Get item
@@ -131,58 +124,51 @@ public class MainListAdapter extends ArrayAdapter<CL> {
 		/*********************************
 		 * 3-1. All clear?
 		 *********************************/
-		CheckActv.iList = Methods.get_item_list_from_check_list(
-								(Activity) con,
-								clList.getDb_id());
-
-//		boolean all_checked = true;
-		
-		int num_of_checked_items = 0;
-
-		if (CheckActv.iList != null) {
-			
-			for (Item item : CheckActv.iList) {
-				
-	//			if (item.getStatus() == 0) {
-				if (item.getStatus() > 0) {
-					
-	//				all_checked = false;
-					num_of_checked_items += 1;
-					
-	//				break;
-					
-				}//if (item.getStatus() == condition)
-				
-			}//for (Item item : CheckActv.iList)
-			
-		}//if (CheckActv.iList == null)
-//			for (Item item : CheckActv.iList) {
-//				
-//	//			if (item.getStatus() == 0) {
-//				if (item.getStatus() > 0) {
-//					
-//	//				all_checked = false;
-//					num_of_checked_items += 1;
-//					
-//	//				break;
-//					
-//				}//if (item.getStatus() == condition)
-//				
-//			}//for (Item item : CheckActv.iList)
+		int num_of_checked_items = getView__GetNumOfCheckedItems(clList);
 		
 		/*********************************
 		 * 3-1-1. If all clear, set background black
 		 *********************************/
-//		// Log
-//		Log.d("MainListAdapter.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ "]", "all_checked=" + all_checked);
+		getView__SetColor(num_of_checked_items);
 		
-//		if (all_checked == true) {
+		/*********************************
+		 * 3-2. Set value to views
+		 *********************************/
+		getView__SetValues(clList);
+		
+		/*******************************
+		 * 4. Set bg color
+			********************/
+		
+		return v;
+		
+    }//public View getView(int position, View convertView, ViewGroup parent)
+
+
+	private void 
+	getView__SetValues(CL clList) {
+		// TODO Auto-generated method stub
+		tv_list_name.setText(clList.getName());
+		
+//		tv_created_at.setText(String.valueOf(item.getCreated_at()));
+		tv_created_at.setText(
+				Methods.convert_millSec_to_DateLabel(clList.getCreated_at()));
+		
+		tv_genre.setText(
+				Methods.get_genre_name_from_genre_id((Activity) con,
+				clList.getGenre_id()));
+
+	}//getView__SetValues(CL clList)
+
+
+	private void 
+	getView__SetColor
+	(int num_of_checked_items) {
+		// TODO Auto-generated method stub
 		if (num_of_checked_items == 0) {
 			
-			tv_list_name.setBackgroundColor(Color.BLACK);
-			tv_list_name.setTextColor(Color.WHITE);
+			tv_list_name.setBackgroundColor(Color.WHITE);
+			tv_list_name.setTextColor(Color.BLACK);
 			
 		} else if (num_of_checked_items < CheckActv.iList.size()) {//if (all_clear == true)
 
@@ -197,63 +183,50 @@ public class MainListAdapter extends ArrayAdapter<CL> {
 		} else {
 			
 		}
-		
-//		// Log
-//		if (CheckActv.iList != null) {
-//
-//			Log.d("MainListAdapter.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ "]", "CheckActv.iList.size()=" + CheckActv.iList.size());
-//
-//		}//if (CheckActv.iList == condition)
 
-//		CheckActv.clList = Methods.get_clList_from_db_id((Activity) con, item.getDb_id());
-//		
-//		boolean all_clear = true;
-//		
-//		for (elemType item : CheckActv.clList) {
-//			
-//		}//for (elemType item : CheckActv.clList)
+	}//getView__SetColor_CheckedItems
+	
+
+
+	private int 
+	getView__GetNumOfCheckedItems(CL clList) {
+		// TODO Auto-generated method stub
+		CheckActv.iList = Methods.get_item_list_from_check_list(
+				(Activity) con,
+				clList.getDb_id());
+
+		//boolean all_checked = true;
 		
-		/*********************************
-		 * 3-2. Set value to views
-		 *********************************/
-		tv_list_name.setText(clList.getName());
+		int num_of_checked_items = 0;
 		
-//		tv_created_at.setText(String.valueOf(item.getCreated_at()));
-		tv_created_at.setText(Methods.convert_millSec_to_DateLabel(clList.getCreated_at()));
+		if (CheckActv.iList != null) {
 		
-		tv_genre.setText(
-							Methods.get_genre_name_from_genre_id((Activity) con,
-							clList.getGenre_id()));
+			for (Item item : CheckActv.iList) {
+			
+				if (item.getStatus() > 0) {
+					
+					num_of_checked_items += 1;
+					
+				}//if (item.getStatus() == condition)
+			
+			}//for (Item item : CheckActv.iList)
 		
-		/*******************************
-		 * 4. Set bg color
-			********************/
-//		set_bg_color(item);
-//		String genre_name = Methods.get_genre_name_from_genre_id(
-//								(Activity) con,
-//								item.getGenre_id());
-//		
-//		if (genre_name.equals("Daily")) {
-//			
-////			tv_genre.setBackgroundResource(colors[0]);
-//			tv_genre.setBackgroundColor(Color.GREEN);
-//			tv_genre.setTextColor(Color.WHITE);
-//			
-//			
-//		} else if (genre_name.equals("JOB")) {
-//		} else if (genre_name.equals("Meals")) {
-//		} else if (genre_name.equals("Works")) {
-//			
-//		} else {//if (genre_name.equals("Daily"))
-//			
-//		}//if (genre_name.equals("Daily"))
+		}//if (CheckActv.iList == null)
 		
+		return num_of_checked_items;
 		
-//    	return null;
-		return v;
-    }//public View getView(int position, View convertView, ViewGroup parent)
+	}//getView__GetNumOfCheckedItems(CL clList)
+
+
+	private void getView__GetView(View v) {
+		// TODO Auto-generated method stub
+    	tv_list_name = (TextView) v.findViewById(R.id.list_row_main_tv_list_name);
+    	
+		tv_created_at = (TextView) v.findViewById(R.id.list_row_main_tv_created_at);
+		
+		tv_genre = (TextView) v.findViewById(R.id.list_row_main_tv_genre);
+
+	}
 
 
 	private void set_bg_color(CL clList) {
