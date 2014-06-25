@@ -1,1 +1,4 @@
 1	proj_icon_64x64.png	1402374387_physics.png	https://www.iconfinder.com/search/?q=physics&price=free
+2	cl_icon_meal_summer.png	oie_oie_canvas.png	http://www.online-image-editor.com/
+3	cl_icon_job.png	oie_oie_canvas (1).png	http://www.online-image-editor.com/
+4	cl_icon_daily.png	oie_oie_canvas.green.png	*

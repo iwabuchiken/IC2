@@ -41,7 +41,9 @@ public class MainListAdapter extends ArrayAdapter<CL> {
 	// Views
 	TextView tv_list_name;
 	TextView tv_created_at;
-	TextView tv_genre;	
+	TextView tv_genre;
+	
+	ImageView iv;
 
 	// Colors
 	int[] colors = {R.color.green4, R.color.blue1, R.color.gold2};
@@ -135,14 +137,67 @@ public class MainListAdapter extends ArrayAdapter<CL> {
 		 * 3-2. Set value to views
 		 *********************************/
 		getView__SetValues(clList);
-		
-		/*******************************
-		 * 4. Set bg color
-			********************/
+
+		////////////////////////////////
+
+		// ImageView
+
+		////////////////////////////////
+		getView__SetIcon(clList);
 		
 		return v;
 		
     }//public View getView(int position, View convertView, ViewGroup parent)
+
+
+	private void 
+	getView__SetIcon(CL clList) {
+		// TODO Auto-generated method stub
+	
+		int genre_Id = clList.getGenre_id();
+		
+		switch(genre_Id) {
+		
+		case 1:	// JOB
+			
+			iv.setBackgroundDrawable(
+					((Activity)con)
+						.getResources()
+						.getDrawable(R.drawable.cl_icon_job));
+			
+			break;
+			
+		case 2:	// JOB
+			
+			iv.setBackgroundDrawable(
+					((Activity)con)
+					.getResources()
+					.getDrawable(R.drawable.cl_icon_daily));
+			
+			break;
+			
+		case 5:	// Meal_Summer
+			
+			iv.setBackgroundDrawable(
+					((Activity)con)
+					.getResources()
+					.getDrawable(R.drawable.cl_icon_meal_summer));
+			
+			break;
+			
+		default:
+			
+			iv.setBackgroundDrawable(
+					((Activity)con)
+						.getResources()
+						.getDrawable(R.drawable.ic_launcher));
+			
+			break;
+		
+		}
+		
+	}//getView__SetIcon(CL clList)
+	
 
 
 	private void 
@@ -225,6 +280,8 @@ public class MainListAdapter extends ArrayAdapter<CL> {
 		tv_created_at = (TextView) v.findViewById(R.id.list_row_main_tv_created_at);
 		
 		tv_genre = (TextView) v.findViewById(R.id.list_row_main_tv_genre);
+		
+		iv = (ImageView) v.findViewById(R.id.list_row_main_iv);
 
 	}
 

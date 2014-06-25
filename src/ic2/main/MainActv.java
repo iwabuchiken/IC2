@@ -4,6 +4,7 @@
  *********************************/
 package ic2.main;
 
+import java.io.File;
 import java.util.List;
 
 import ic2.adapters.MainListAdapter;
@@ -115,10 +116,37 @@ public class MainActv extends ListActivity {
 		 * Re-install the app
 		 *********************************/
 //		_debug_D_20_reinstall_app();
+        
+        do_debug();
 		
     }//public void onCreate(Bundle savedInstanceState)
 
-    private void _onCreate__SetListeners() {
+    private void do_debug() {
+		// TODO Auto-generated method stub
+		_debug_D_12_V_1_0();
+		
+	}
+
+	private void _debug_D_12_V_1_0() {
+		// TODO Auto-generated method stub
+		File f = new File(CONS.DB.dirPath_db);
+		
+		String[] list = f.list();
+		
+		for (String name : list) {
+			
+			// Log
+			String msg_Log = "name = " + name;
+			Log.d("MainActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+		}
+		
+		
+	}
+
+	private void _onCreate__SetListeners() {
 		// TODO Auto-generated method stub
     	
 		CONS.MainActv.lvMain = this.getListView();
@@ -184,7 +212,8 @@ public class MainActv extends ListActivity {
 		 ********************************/
 		String sql;
 		
-		if (pref_GenreId == -1) {
+		if (pref_GenreId == -1 || pref_GenreId == 0) {
+//			if (pref_GenreId == -1) {
 			
 			sql = "SELECT * FROM " + CONS.DB.tname_Check_Lists;
 			
