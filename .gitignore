@@ -5,5 +5,5 @@
 *.dex
 *.*.class
 bin/*
-gen/*
+#gen/*
 Test.java

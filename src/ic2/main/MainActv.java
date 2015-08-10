@@ -102,22 +102,22 @@ public class MainActv extends ListActivity {
 		 * 5. Set listeners
 		 *********************************/
         _onCreate__SetListeners();
-//		ListView lv = this.getListView();
+		ListView lv = this.getListView();
 		
-//		CONS.MainActv.lvMain = this.getListView();
-//		
-////		lv.setTag(Methods.ItemTags.dir_list);
-//		CONS.MainActv.lvMain.setTag(Methods.ListTags.actv_main_lv);
-//		
-//		CONS.MainActv.lvMain
-//					.setOnItemLongClickListener(new Custom_OI_LCL(this));
+		CONS.MainActv.lvMain = this.getListView();
+		
+//		lv.setTag(Methods.ItemTags.dir_list);
+		CONS.MainActv.lvMain.setTag(Methods.ListTags.actv_main_lv);
+		
+		CONS.MainActv.lvMain
+					.setOnItemLongClickListener(new Custom_OI_LCL(this));
         
 		/*********************************
 		 * Re-install the app
 		 *********************************/
 //		_debug_D_20_reinstall_app();
         
-        do_debug();
+//        do_debug();
 		
     }//public void onCreate(Bundle savedInstanceState)
 
